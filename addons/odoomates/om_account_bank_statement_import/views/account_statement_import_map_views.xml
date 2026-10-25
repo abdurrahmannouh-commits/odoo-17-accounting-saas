@@ -6,15 +6,14 @@
             <field name="name">account.statement.import.map.list</field>
             <field name="model">account.statement.import.map</field>
             <field name="arch" type="xml">
-                <tree string="Bank Statement File Maps">
-                    <field name="company_id" invisible="1"/>
+                <list string="Bank Statement File Maps">
                     <field name="name"/>
                     <field name="date_format"/>
                     <field name="delimiter" optional="show"/>
                     <field name="decimal_separator" optional="show"/>
                     <field name="has_header" optional="hide"/>
                     <field name="company_id" groups="base.group_multi_company" optional="show"/>
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -23,7 +22,6 @@
             <field name="model">account.statement.import.map</field>
             <field name="arch" type="xml">
                 <form string="Bank Statement File Map">
-                    <field name="company_id" invisible="1"/>
                     <sheet>
                         <div class="oe_title">
                             <label for="name"/>
@@ -96,7 +94,7 @@
         <record id="action_account_statement_import_map" model="ir.actions.act_window">
             <field name="name">Bank Statement File Maps</field>
             <field name="res_model">account.statement.import.map</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">Describe the file of your bank</p>
                 <p>

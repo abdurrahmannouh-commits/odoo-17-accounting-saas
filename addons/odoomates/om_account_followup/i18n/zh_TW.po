@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0-20231105\n"
+"Project-Id-Version: Odoo Server 18.0-20231105\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-11-23 21:31+0000\n"
 "PO-Revision-Date: 2023-11-24 06:22+0800\n"
@@ -1344,8 +1344,8 @@ msgstr "或"
 #: model:mail.template,subject:om_account_followup.email_template_om_account_followup_level0
 #: model:mail.template,subject:om_account_followup.email_template_om_account_followup_level1
 #: model:mail.template,subject:om_account_followup.email_template_om_account_followup_level2
-msgid "{{ user.env.company.name }} Payment Reminder"
-msgstr "{{ user.env.company.name }} 付款提醒"
+msgid "{{ env.company.name }} Payment Reminder"
+msgstr "{{ env.company.name }} 付款提醒"
 
 #. module: om_account_followup
 #: model_terms:ir.ui.view,arch_db:om_account_followup.view_partner_inherit_followup_form

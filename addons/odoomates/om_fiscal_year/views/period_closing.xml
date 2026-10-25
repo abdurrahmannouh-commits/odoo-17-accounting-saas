@@ -5,7 +5,7 @@
         <field name="name">account.period.closing.list</field>
         <field name="model">account.period.closing</field>
         <field name="arch" type="xml">
-            <tree decoration-muted="state == 'closed'">
+            <list decoration-muted="state == 'closed'">
                 <field name="name"/>
                 <field name="date_from"/>
                 <field name="date_to"/>
@@ -15,7 +15,7 @@
                 <field name="task_todo_count" string="Tasks To Do" optional="show"/>
                 <field name="closed_by_id" optional="hide"/>
                 <field name="state" widget="badge" decoration-success="state == 'closed'" decoration-info="state == 'open'"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -56,7 +56,7 @@
                     <notebook>
                         <page string="Checklist" name="checklist">
                             <field name="check_ids" readonly="state == 'closed'">
-                                <tree create="0" delete="0" editable="bottom"
+                                <list create="0" delete="0" editable="bottom"
                                       decoration-danger="status == 'blocking'" decoration-warning="status == 'warning'"
                                       decoration-muted="status in ('ok', 'done')">
                                     <field name="is_manual" column_invisible="1"/>
@@ -76,7 +76,7 @@
                                             invisible="not is_manual or status == 'done'"/>
                                     <button name="action_mark_todo" type="object" string="Undo" icon="fa-undo"
                                             invisible="not is_manual or status != 'done'"/>
-                                </tree>
+                                </list>
                             </field>
                             <p class="text-muted">
                                 Blocking points prevent the closing. The tasks come from the closing tasks set in the
@@ -85,10 +85,7 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids"/>
-                    <field name="message_ids"/>
-                </div>
+                <chatter/>
             </form>
         </field>
     </record>
@@ -108,7 +105,7 @@
     <record id="action_account_period_closing" model="ir.actions.act_window">
         <field name="name">Period Closing</field>
         <field name="res_model">account.period.closing</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="search_view_id" ref="view_account_period_closing_search"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Close a month</p>
@@ -120,20 +117,20 @@
         <field name="name">account.period.closing.task.list</field>
         <field name="model">account.period.closing.task</field>
         <field name="arch" type="xml">
-            <tree editable="bottom">
+            <list editable="bottom">
                 <field name="sequence" widget="handle"/>
                 <field name="name"/>
                 <field name="responsible_id"/>
                 <field name="note" optional="show"/>
                 <field name="company_id" groups="base.group_multi_company" optional="show"/>
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="action_account_period_closing_task" model="ir.actions.act_window">
         <field name="name">Closing Tasks</field>
         <field name="res_model">account.period.closing.task</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">list</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Add the tasks of each closing</p>
             <p>e.g. accrue the electricity, review the payroll: they are added to the checklist of each new closing.</p>
@@ -143,7 +140,7 @@
     <menuitem id="menu_account_period_closing"
               name="Period Closing"
               sequence="5"
-              parent="menu_account_closing"
+              parent="account.account_closing_menu"
               action="action_account_period_closing"
               groups="account.group_account_user,account.group_account_manager"/>
 

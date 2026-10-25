@@ -13,8 +13,9 @@
 #                 applied after the apps, for what an app level cannot know
 #   fields        [(model, field, mode)], mode as om.access.profile.field
 #   switches      {profile field: value}
-from odoo.tools.translate import _lt
+from odoo.tools.translate import LazyTranslate
 
+_lt = LazyTranslate(__name__)
 
 TEMPLATES = [
     {

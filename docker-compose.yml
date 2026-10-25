@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   web:
-    image: odoo:17.0
+    image: odoo:19.0
     container_name: odoo_saas_web
     depends_on:
       - db
@@ -30,6 +30,22 @@ services:
       - odoo-db-data:/var/lib/postgresql/data
     restart: unless-stopped
 
+  caddy:
+    image: caddy:alpine
+    container_name: odoo_saas_caddy
+    depends_on:
+      - web
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy-data:/data
+      - caddy-config:/config
+    restart: unless-stopped
+
 volumes:
   odoo-web-data:
   odoo-db-data:
+  caddy-data:
+  caddy-config:

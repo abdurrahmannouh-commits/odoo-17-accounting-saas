@@ -1,5 +1,4 @@
 from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError
 
 
 class IrActionsServer(models.Model):
@@ -17,6 +16,15 @@ class IrActionsServer(models.Model):
         'om.whatsapp.account', 'WhatsApp Account', ondelete='set null',
         help="The account to send from. Empty: the one of the template, else the one of the user who triggers it.")
 
+    def _name_depends(self):
+        return [*super()._name_depends(), 'om_whatsapp_template_id']
+
+    def _generate_action_name(self):
+        self.ensure_one()
+        if self.state == 'om_whatsapp' and self.om_whatsapp_template_id:
+            return _('Send WhatsApp %(template_name)s', template_name=self.om_whatsapp_template_id.name)
+        return super()._generate_action_name()
+
     @api.depends('state')
     def _compute_available_model_ids(self):
         whatsapp = self.filtered(lambda action: action.state == 'om_whatsapp')
@@ -32,13 +40,19 @@ class IrActionsServer(models.Model):
             lambda a: a.state != 'om_whatsapp' or a.model_id != a.om_whatsapp_template_id.model_id
         ).om_whatsapp_template_id = False
 
-    @api.constrains('state', 'model_id', 'om_whatsapp_template_id')
-    def _check_om_whatsapp_model(self):
-        for action in self.filtered(lambda a: a.state == 'om_whatsapp'):
-            if action.model_id.transient or not action.model_id.is_mail_thread:
-                raise ValidationError(_("A WhatsApp is sent from a document with a chatter."))
-            if action.om_whatsapp_template_id and action.om_whatsapp_template_id.model_id != action.model_id:
-                raise ValidationError(_("The WhatsApp template of %(action)s is not for this model.", action=action.name))
+    @api.model
+    def _warning_depends(self):
+        return super()._warning_depends() + ['om_whatsapp_template_id']
+
+    def _get_warning_messages(self):
+        self.ensure_one()
+        warnings = super()._get_warning_messages()
+        if self.state == 'om_whatsapp':
+            if self.model_id.transient or not self.model_id.is_mail_thread:
+                warnings.append(_("A WhatsApp is sent from a document with a chatter."))
+            if self.om_whatsapp_template_id and self.om_whatsapp_template_id.model_id != self.model_id:
+                warnings.append(_("The WhatsApp template of %(action)s is not for this model.", action=self.name))
+        return warnings
 
     def _run_action_om_whatsapp_multi(self, eval_context=None):
         if not self.om_whatsapp_template_id or self._is_recompute():

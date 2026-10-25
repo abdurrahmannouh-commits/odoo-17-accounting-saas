@@ -1,6 +1,6 @@
 {
-    'name': 'Odoo 17 Currency Revaluation',
-    'version': '17.0.1.0.1',
+    'name': 'Odoo 19 Currency Revaluation',
+    'version': '1.0.1',
     'category': 'Accounting',
     'summary': 'Revalue the open foreign currency balances at the closing rate, with unrealized gains and losses',
     'description': """
@@ -16,8 +16,7 @@ are paid. Required by IAS 21 and by most local rules at the closing of a period.
     'maintainer': 'Odoo Mates',
     'license': 'LGPL-3',
     'support': 'odoomates@gmail.com',
-    # the Closing menu of the accounting is the one of om_fiscal_year on 17
-    'depends': ['account', 'om_fiscal_year'],
+    'depends': ['account'],
     'data': [
         'security/ir.model.access.csv',
         'views/res_config_settings_views.xml',

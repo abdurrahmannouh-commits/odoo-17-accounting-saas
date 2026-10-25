@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-22 07:07+0000\n"
 "PO-Revision-Date: 2026-10-22 07:07+0000\n"
@@ -18,21 +18,19 @@ msgstr ""
 #. module: om_spreadsheet_account_asset
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account_asset/data/files/assets_sample_dashboard.json:0
 msgid "Accumulated Depreciation"
 msgstr ""
 
 #. module: om_spreadsheet_account_asset
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
 msgid "Accumulated depreciation"
 msgstr ""
 
 #. module: om_spreadsheet_account_asset
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
 msgid "Asset Category"
 msgstr ""
 
@@ -44,160 +42,119 @@ msgstr ""
 #. module: om_spreadsheet_account_asset
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
-msgid "Assets by Category"
-msgstr ""
-
-#. module: om_spreadsheet_account_asset
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account_asset/data/files/assets_sample_dashboard.json:0
 msgid "Book Value"
 msgstr ""
 
 #. module: om_spreadsheet_account_asset
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
 msgid "Book value"
 msgstr ""
 
 #. module: om_spreadsheet_account_asset
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
-msgid "By Category"
-msgstr ""
-
-#. module: om_spreadsheet_account_asset
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account_asset/data/files/assets_sample_dashboard.json:0
 msgid "Depreciation Posted"
 msgstr ""
 
 #. module: om_spreadsheet_account_asset
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account_asset/data/files/assets_sample_dashboard.json:0
 msgid "Depreciation by Month"
 msgstr ""
 
 #. module: om_spreadsheet_account_asset
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
 msgid "Depreciation posted"
 msgstr ""
 
 #. module: om_spreadsheet_account_asset
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
 msgid "Depreciation posted in the period"
 msgstr ""
 
 #. module: om_spreadsheet_account_asset
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account_asset/data/files/assets_sample_dashboard.json:0
 msgid "Depreciation to Post"
 msgstr ""
 
 #. module: om_spreadsheet_account_asset
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
 msgid "Depreciation to post in the period"
 msgstr ""
 
 #. module: om_spreadsheet_account_asset
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
 msgid "First month"
 msgstr ""
 
 #. module: om_spreadsheet_account_asset
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account_asset/data/files/assets_sample_dashboard.json:0
 msgid "Gross Value"
 msgstr ""
 
 #. module: om_spreadsheet_account_asset
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
 msgid "Gross value of the running assets"
 msgstr ""
 
 #. module: om_spreadsheet_account_asset
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
 msgid "Month"
 msgstr ""
 
 #. module: om_spreadsheet_account_asset
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
 msgid "Period"
 msgstr ""
 
 #. module: om_spreadsheet_account_asset
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
 msgid "Period start"
 msgstr ""
 
 #. module: om_spreadsheet_account_asset
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
 msgid "Posted"
 msgstr ""
 
 #. module: om_spreadsheet_account_asset
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
-msgid "Posted Depreciation"
-msgstr ""
-
-#. module: om_spreadsheet_account_asset
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account_asset/data/files/assets_sample_dashboard.json:0
 msgid "Running Assets"
 msgstr ""
 
 #. module: om_spreadsheet_account_asset
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
 msgid "Running Assets by Category"
 msgstr ""
 
 #. module: om_spreadsheet_account_asset
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
 msgid "Running assets"
 msgstr ""
 
 #. module: om_spreadsheet_account_asset
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
 msgid "To Post"
-msgstr ""
-
-#. module: om_spreadsheet_account_asset
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account_asset/data/files/assets_dashboard.json:0
-#, python-format
-msgid "Total"
 msgstr ""

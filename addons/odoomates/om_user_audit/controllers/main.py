@@ -5,9 +5,11 @@ import json
 from odoo import http
 from odoo.http import request
 
-from odoo.addons.base.controllers import rpc as base_rpc
+from odoo.addons.rpc.controllers import jsonrpc, xmlrpc
+from odoo.addons.rpc.controllers.json2 import WebJson2Controller
 from odoo.addons.web.controllers.dataset import DataSet
 from odoo.addons.web.controllers.export import CSVExport, ExcelExport, Export
+from odoo.addons.web.controllers.json import WebJsonController
 from odoo.addons.web.controllers.report import ReportController
 from odoo.addons.web.controllers.session import Session
 
@@ -40,7 +42,8 @@ def with_address(dispatch_rpc):
 
 # the RPC routes run without a database, so overriding their controllers would
 # not apply: wrap the function they call instead
-base_rpc.dispatch_rpc = with_address(base_rpc.dispatch_rpc)
+xmlrpc.dispatch_rpc = with_address(xmlrpc.dispatch_rpc)
+jsonrpc.dispatch_rpc = with_address(jsonrpc.dispatch_rpc)
 
 
 class DataSetAudit(DataSet):
@@ -51,18 +54,35 @@ class DataSetAudit(DataSet):
         return super().call_kw(model, method, args, kwargs, path=path)
 
     @http.route()
-    def call_button(self, model, method, args, kwargs):
+    def call_button(self, model, method, args, kwargs, path=None):
         mark_rpc_entry(model, method)
-        return super().call_button(model, method, args, kwargs)
+        return super().call_button(model, method, args, kwargs, path=path)
+
+
+class WebJson2Audit(WebJson2Controller):
+
+    @http.route()
+    def web_json_2_rpc(self, __model__, __method__, *args, **kwargs):
+        mark_rpc_entry(__model__, __method__)
+        return super().web_json_2_rpc(__model__, __method__, *args, **kwargs)
+
+
+class WebJsonAudit(WebJsonController):
+    # the /json views read the action's model with a domain and group-bys from the URL
+
+    def _get_action(self, subpath):
+        result = super()._get_action(subpath)
+        mark_rpc_entry(result[0].res_model, '*')
+        return result
 
 
 class ExportAudit(Export):
 
     @http.route()
-    def get_fields(self, model, prefix='', parent_name='', import_compat=True,
+    def get_fields(self, model, domain, prefix='', parent_name='', import_compat=True,
                    parent_field_type=None, parent_field=None, exclude=None):
         mark_rpc_entry(model, '*')
-        return super().get_fields(model, prefix=prefix, parent_name=parent_name,
+        return super().get_fields(model, domain, prefix=prefix, parent_name=parent_name,
                                   import_compat=import_compat, parent_field_type=parent_field_type,
                                   parent_field=parent_field, exclude=exclude)
 
@@ -91,7 +111,7 @@ class SessionAudit(Session):
         return super().destroy()
 
     @http.route()
-    def logout(self, redirect='/web'):
+    def logout(self, redirect='/odoo'):
         request.env['ir.http']._om_log_logout()
         return super().logout(redirect=redirect)
 

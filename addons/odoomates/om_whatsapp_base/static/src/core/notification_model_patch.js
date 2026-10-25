@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import { Notification } from "@mail/core/common/notification_model";
 import { _t } from "@web/core/l10n/translation";
 import { patch } from "@web/core/utils/patch";
@@ -9,9 +7,11 @@ patch(Notification.prototype, {
     get isWhatsapp() {
         return this.notification_type === "om_whatsapp";
     },
-    /** Why a WhatsApp message failed, as its provider said. */
     get failureMessage() {
-        return (this.isWhatsapp && this.failure_reason) || "";
+        if (this.isWhatsapp && this.failure_reason) {
+            return this.failure_reason;
+        }
+        return super.failureMessage;
     },
     get icon() {
         return this.isWhatsapp && !this.isFailure ? "fa fa-whatsapp" : super.icon;
@@ -26,7 +26,10 @@ patch(Notification.prototype, {
         return super.statusIcon;
     },
     get statusClass() {
-        return this.isWhatsapp && this.om_whatsapp_read ? "text-info" : "";
+        if (this.isWhatsapp && this.om_whatsapp_read) {
+            return "text-info";
+        }
+        return super.statusClass;
     },
     get statusTitle() {
         if (this.isWhatsapp && this.om_whatsapp_read) {

@@ -6,9 +6,9 @@
         <field name="model">account.journal</field>
         <field name="inherit_id" ref="account_check_printing.view_account_journal_form_inherited"/>
         <field name="arch" type="xml">
-            <!-- Odoo 17 chooses the cheque layout per company, in the settings -->
-            <field name="check_next_number" position="after">
-                <field name="check_format_id"/>
+            <field name="bank_check_printing_layout" position="after">
+                <field name="check_format_id"
+                       invisible="bank_check_printing_layout not in (False, 'om_account_check_printing.action_report_check')"/>
             </field>
         </field>
     </record>

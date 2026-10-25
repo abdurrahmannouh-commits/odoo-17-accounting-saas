@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-06 19:11+0000\n"
-"PO-Revision-Date: 2026-10-06 19:11+0000\n"
+"POT-Creation-Date: 2026-10-22 07:06+0000\n"
+"PO-Revision-Date: 2026-10-22 07:06+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -23,28 +23,24 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
-#, python-format
 msgid "%(label)s (%(count)s)"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_test_user.py:0
-#, python-format
 msgid "%(profile)s, from %(menus)s"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_condition.py:0
-#, python-format
 msgid "%(rule)s: %(error)s"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_test_user.py:0
-#, python-format
 msgid ""
 "%(user)s does not have the profile %(profile)s: choose one of its users."
 msgstr ""
@@ -52,21 +48,18 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_history.py:0
-#, python-format
 msgid "%(verb)s: %(kind)s"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_transfer.py:0
-#, python-format
 msgid "%(what)s not found: %(ref)s"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_profile.py:0
-#, python-format
 msgid "%s (copy)"
 msgstr ""
 
@@ -74,56 +67,48 @@ msgstr ""
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_menu_panel.py:0
 #: code:addons/om_access_manager/wizard/om_access_scan_buttons.py:0
-#, python-format
 msgid "%s (group by)"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_transfer.py:0
-#, python-format
 msgid "%s (imported)"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_preview.py:0
-#, python-format
 msgid "%s has rights you do not have: only a Settings user can preview them."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.js:0
-#, python-format
 msgid "%s hidden"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_template_wizard.py:0
-#, python-format
 msgid "%s is not installed: its part was skipped."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_preview.py:0
-#, python-format
 msgid "%s may use this. It is not run in a preview."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_profile_element.py:0
-#, python-format
 msgid "'%(name)s' is not a view type. Use one of: %(types)s"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_allowed.py:0
-#, python-format
 msgid "'Each user's own' is set on a profile, not on a user."
 msgstr ""
 
@@ -136,14 +121,12 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/preview/preview_banner.xml:0
-#, python-format
 msgid "(no access profile)"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.js:0
-#, python-format
 msgid "1 hidden"
 msgstr ""
 
@@ -160,7 +143,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_profile_element.py:0
-#, python-format
 msgid "A '%s' rule needs a name."
 msgstr ""
 
@@ -186,13 +168,7 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_preview.py:0
-#, python-format
 msgid "A preview needs a browser session."
-msgstr ""
-
-#. module: om_access_manager
-#: model:ir.model.constraint,message:om_access_manager.constraint_om_access_grant_unique_grant
-msgid "A profile adds a group to a user once."
 msgstr ""
 
 #. module: om_access_manager
@@ -223,7 +199,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_profile.py:0
-#, python-format
 msgid ""
 "A profile cannot grant %s: it would make its users administrators, or access"
 " managers. Give it on the user form instead."
@@ -232,7 +207,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_profile.py:0
-#, python-format
 msgid "A profile cannot grant its own group."
 msgstr ""
 
@@ -261,7 +235,7 @@ msgid "Access Level"
 msgstr ""
 
 #. module: om_access_manager
-#: model:ir.module.category,name:om_access_manager.module_category_access_management
+#: model:res.groups.privilege,name:om_access_manager.res_groups_privilege_access_management
 msgid "Access Management"
 msgstr ""
 
@@ -278,7 +252,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_profile_assignment__profile_id
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_form
 #: model_terms:ir.ui.view,arch_db:om_access_manager.view_users_search_access_profile
-#, python-format
 msgid "Access Profile"
 msgstr ""
 
@@ -310,7 +283,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_profile.py:0
-#, python-format
 msgid "Access Profile: %s"
 msgstr ""
 
@@ -339,21 +311,18 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_test_user.py:0
-#, python-format
 msgid "Access granted"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "Access to the app"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_templates.py:0
-#, python-format
 msgid "Accountant without Configuration"
 msgstr ""
 
@@ -361,12 +330,10 @@ msgstr ""
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_menu_panel.py:0
 #: code:addons/om_access_manager/models/om_access_transfer.py:0
-#: code:addons/om_access_manager/models/om_access_transfer.py:0
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_app_wizard_action__action_ref
 #: model:ir.model.fields.selection,name:om_access_manager.selection__om_access_profile_button__button_type__action
 #: model:ir.model.fields.selection,name:om_access_manager.selection__om_access_scan_buttons_line__button_type__action
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_form
-#, python-format
 msgid "Action"
 msgstr ""
 
@@ -374,7 +341,6 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_form
-#, python-format
 msgid "Action Menu"
 msgstr ""
 
@@ -391,7 +357,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.xml:0
-#, python-format
 msgid "Action menu"
 msgstr ""
 
@@ -416,7 +381,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_test_user.py:0
-#, python-format
 msgid "Activities hidden"
 msgstr ""
 
@@ -438,14 +402,12 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "Add..."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_history.py:0
-#, python-format
 msgid "Added"
 msgstr ""
 
@@ -454,7 +416,6 @@ msgstr ""
 #: code:addons/om_access_manager/wizard/om_access_test_user.py:0
 #: model:ir.model.fields.selection,name:om_access_manager.selection__om_access_profile__strictness__additive
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_search
-#, python-format
 msgid "Additive"
 msgstr ""
 
@@ -478,7 +439,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "All"
 msgstr ""
 
@@ -508,7 +468,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_login.py:0
-#, python-format
 msgid "Allowed Networks: %s"
 msgstr ""
 
@@ -529,28 +488,24 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_transfer.py:0
-#, python-format
 msgid "Allowed record not found: %s"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "Allowed records"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_transfer.py:0
-#, python-format
 msgid "Allowed records of an app not installed: %s"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_copy_access.py:0
-#, python-format
 msgid "Allowed records: %s"
 msgstr ""
 
@@ -584,15 +539,12 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "Also shared data"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_allowed.py:0
-#, python-format
 msgid "An allowed record belongs to a profile or to a user."
 msgstr ""
 
@@ -620,14 +572,12 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_templates.py:0
-#, python-format
 msgid "App Read Only"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_templates.py:0
-#, python-format
 msgid "App User without Configuration"
 msgstr ""
 
@@ -683,7 +633,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_test_user.py:0
-#, python-format
 msgid "Archiving blocked"
 msgstr ""
 
@@ -700,7 +649,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_templates.py:0
-#, python-format
 msgid "Auditor"
 msgstr ""
 
@@ -712,21 +660,18 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "Back to full access"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "Back to the settings of"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "Back to the settings of the menu above"
 msgstr ""
 
@@ -738,7 +683,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.xml:0
-#, python-format
 msgid "Beta: something missing or unclear? Tell us at"
 msgstr ""
 
@@ -803,14 +747,12 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
-#, python-format
 msgid "Blocked"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "Blocked: hidden, and refused by the server."
 msgstr ""
 
@@ -846,7 +788,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_transfer.py:0
-#, python-format
 msgid "Button action not found: %s"
 msgstr ""
 
@@ -857,14 +798,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_profile__button_ids
 #: model:ir.model.fields.selection,name:om_access_manager.selection__om_access_scan_buttons__target__buttons
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_form
-#, python-format
 msgid "Buttons"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.js:0
-#, python-format
 msgid "Buttons hidden or blocked"
 msgstr ""
 
@@ -879,7 +818,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_test_user.py:0
-#, python-format
 msgid "By the profile"
 msgstr ""
 
@@ -898,14 +836,12 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_templates.py:0
-#, python-format
 msgid "Cashier"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_history.py:0
-#, python-format
 msgid "Changed"
 msgstr ""
 
@@ -917,7 +853,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_test_user.py:0
-#, python-format
 msgid "Chatter hidden everywhere"
 msgstr ""
 
@@ -933,7 +868,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_import.py:0
-#, python-format
 msgid "Choose the file to import."
 msgstr ""
 
@@ -947,7 +881,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.xml:0
-#, python-format
 msgid "Click a menu on the left to set, for the users of this profile:"
 msgstr ""
 
@@ -971,7 +904,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_test_user.py:0
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_search
-#, python-format
 msgid "Combines as"
 msgstr ""
 
@@ -989,7 +921,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.xml:0
-#, python-format
 msgid "Configure from the menus"
 msgstr ""
 
@@ -1019,7 +950,6 @@ msgstr ""
 #: code:addons/om_access_manager/models/om_access_profile.py:0
 #: model:ir.actions.server,name:om_access_manager.om_access_profile_copy_restrictions
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_copy_restrictions_view_form
-#, python-format
 msgid "Copy Restrictions"
 msgstr ""
 
@@ -1046,7 +976,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_rights_mixin__perm_create
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_model_view_form
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_form
-#, python-format
 msgid "Create"
 msgstr ""
 
@@ -1093,7 +1022,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_assign__create_uid
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_copy_access__create_uid
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_copy_restrictions__create_uid
-#: model:ir.model.fields,field_description:om_access_manager.field_om_access_grant__create_uid
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_import__create_uid
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_load_models__create_uid
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_login_slot__create_uid
@@ -1114,7 +1042,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_template_wizard.py:0
-#, python-format
 msgid "Created from the template %s."
 msgstr ""
 
@@ -1128,7 +1055,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_assign__create_date
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_copy_access__create_date
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_copy_restrictions__create_date
-#: model:ir.model.fields,field_description:om_access_manager.field_om_access_grant__create_date
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_import__create_date
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_load_models__create_date
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_login_slot__create_date
@@ -1174,7 +1100,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_templates.py:0
-#, python-format
 msgid ""
 "Creates and follows requests for quotation and purchase orders. The purchase"
 " configuration is hidden."
@@ -1190,7 +1115,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "Custom"
 msgstr ""
 
@@ -1198,21 +1122,18 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
 #: model:ir.model.fields.selection,name:om_access_manager.selection__om_access_app_wizard_model__scope__custom
-#, python-format
 msgid "Custom filter"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "Custom filter..."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_allowed.py:0
-#, python-format
 msgid "Dashboards"
 msgstr ""
 
@@ -1231,9 +1152,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_transfer.py:0
-#: code:addons/om_access_manager/models/om_access_transfer.py:0
-#: code:addons/om_access_manager/models/om_access_transfer.py:0
-#, python-format
 msgid "Data not installed: %s"
 msgstr ""
 
@@ -1255,7 +1173,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_rights_mixin__perm_unlink
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_model_view_form
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_form
-#, python-format
 msgid "Delete"
 msgstr ""
 
@@ -1276,6 +1193,15 @@ msgid "Discard"
 msgstr ""
 
 #. module: om_access_manager
+#: model:ir.model.fields,field_description:om_access_manager.field_ir_actions_actions__display_name
+#: model:ir.model.fields,field_description:om_access_manager.field_ir_actions_report__display_name
+#: model:ir.model.fields,field_description:om_access_manager.field_ir_filters__display_name
+#: model:ir.model.fields,field_description:om_access_manager.field_ir_http__display_name
+#: model:ir.model.fields,field_description:om_access_manager.field_ir_model_access__display_name
+#: model:ir.model.fields,field_description:om_access_manager.field_ir_module_module__display_name
+#: model:ir.model.fields,field_description:om_access_manager.field_ir_rule__display_name
+#: model:ir.model.fields,field_description:om_access_manager.field_ir_ui_menu__display_name
+#: model:ir.model.fields,field_description:om_access_manager.field_mail_thread__display_name
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_allowed__display_name
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_app_wizard__display_name
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_app_wizard_action__display_name
@@ -1283,9 +1209,10 @@ msgstr ""
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_app_wizard_model__display_name
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_app_wizard_report__display_name
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_assign__display_name
+#: model:ir.model.fields,field_description:om_access_manager.field_om_access_condition_mixin__display_name
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_copy_access__display_name
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_copy_restrictions__display_name
-#: model:ir.model.fields,field_description:om_access_manager.field_om_access_grant__display_name
+#: model:ir.model.fields,field_description:om_access_manager.field_om_access_history_mixin__display_name
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_import__display_name
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_load_models__display_name
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_login_slot__display_name
@@ -1296,17 +1223,20 @@ msgstr ""
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_profile_field__display_name
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_profile_menu__display_name
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_profile_model__display_name
+#: model:ir.model.fields,field_description:om_access_manager.field_om_access_rights_mixin__display_name
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_scan_buttons__display_name
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_scan_buttons_line__display_name
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_template_wizard__display_name
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_test_user__display_name
+#: model:ir.model.fields,field_description:om_access_manager.field_om_user_audit_log__display_name
+#: model:ir.model.fields,field_description:om_access_manager.field_res_groups__display_name
+#: model:ir.model.fields,field_description:om_access_manager.field_res_users__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_templates.py:0
-#, python-format
 msgid ""
 "Does the daily accounting: invoices, bills, payments, entries and reports. "
 "The accounting configuration is hidden and read only."
@@ -1315,7 +1245,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_test_user.py:0
-#, python-format
 msgid "Duplication blocked"
 msgstr ""
 
@@ -1329,7 +1258,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_allowed.py:0
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "Each user's own"
 msgstr ""
 
@@ -1346,7 +1274,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_rights_mixin__perm_write
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_model_view_form
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_form
-#, python-format
 msgid "Edit"
 msgstr ""
 
@@ -1365,8 +1292,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "Edit drafts only"
 msgstr ""
 
@@ -1415,7 +1340,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "Every internal user has this app: nothing to grant."
 msgstr ""
 
@@ -1430,14 +1354,12 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "Everything below"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/preview/preview_banner.xml:0
-#, python-format
 msgid "Exit preview"
 msgstr ""
 
@@ -1449,14 +1371,12 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_test_user.py:0
-#, python-format
 msgid "Export blocked"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
-#, python-format
 msgid "Exported: click to keep it out of the exports"
 msgstr ""
 
@@ -1468,7 +1388,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_transfer.py:0
-#, python-format
 msgid "Field not installed: %(model)s / %(field)s"
 msgstr ""
 
@@ -1478,25 +1397,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_copy_restrictions__copy_fields
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_profile__field_ids
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_form
-#, python-format
 msgid "Fields"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.js:0
-#, python-format
 msgid "Fields, tabs or filters hidden"
 msgstr ""
 
 #. module: om_access_manager
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_import__file
 msgid "File"
-msgstr ""
-
-#. module: om_access_manager
-#: model:ir.model,name:om_access_manager.model_ir_binary
-msgid "File streaming helper model for controllers"
 msgstr ""
 
 #. module: om_access_manager
@@ -1523,7 +1435,6 @@ msgstr ""
 #: model:ir.model,name:om_access_manager.model_ir_filters
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_profile__filter_element_ids
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_form
-#, python-format
 msgid "Filters"
 msgstr ""
 
@@ -1547,14 +1458,12 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_templates.py:0
-#, python-format
 msgid "For any app: everything in it can be read, nothing can be changed."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_templates.py:0
-#, python-format
 msgid ""
 "For any app: its configuration is hidden and read only, and the data of the "
 "app cannot be deleted."
@@ -1587,21 +1496,18 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
-#, python-format
 msgid "From %s. Change a box to set it here."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
-#, python-format
 msgid "From the menu above"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
-#, python-format
 msgid "From the menu above. Change a box to set it on this data."
 msgstr ""
 
@@ -1609,14 +1515,12 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
 #: model:ir.model.fields.selection,name:om_access_manager.selection__om_access_app_wizard__level__full
-#, python-format
 msgid "Full access"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
-#, python-format
 msgid "Full access."
 msgstr ""
 
@@ -1624,7 +1528,6 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.xml:0
 #: model_terms:ir.actions.act_window,help:om_access_manager.om_access_profile_action
-#, python-format
 msgid "GitHub"
 msgstr ""
 
@@ -1651,16 +1554,8 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_transfer.py:0
-#: code:addons/om_access_manager/models/om_access_transfer.py:0
 #: code:addons/om_access_manager/wizard/om_access_test_user.py:0
-#: model:ir.model.fields,field_description:om_access_manager.field_om_access_grant__group_id
-#, python-format
 msgid "Group"
-msgstr ""
-
-#. module: om_access_manager
-#: model:ir.model,name:om_access_manager.model_om_access_grant
-msgid "Group Added by an Access Profile"
 msgstr ""
 
 #. module: om_access_manager
@@ -1674,7 +1569,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_templates.py:0
-#, python-format
 msgid "HR Officer without Salaries"
 msgstr ""
 
@@ -1691,9 +1585,7 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
-#: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
 #: model:ir.model.fields.selection,name:om_access_manager.selection__om_access_profile_field__mode__hide
-#, python-format
 msgid "Hidden"
 msgstr ""
 
@@ -1723,7 +1615,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_test_user.py:0
-#, python-format
 msgid "Hidden menu entries"
 msgstr ""
 
@@ -1886,11 +1777,19 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_transfer.py:0
-#, python-format
 msgid "Home page: not found"
 msgstr ""
 
 #. module: om_access_manager
+#: model:ir.model.fields,field_description:om_access_manager.field_ir_actions_actions__id
+#: model:ir.model.fields,field_description:om_access_manager.field_ir_actions_report__id
+#: model:ir.model.fields,field_description:om_access_manager.field_ir_filters__id
+#: model:ir.model.fields,field_description:om_access_manager.field_ir_http__id
+#: model:ir.model.fields,field_description:om_access_manager.field_ir_model_access__id
+#: model:ir.model.fields,field_description:om_access_manager.field_ir_module_module__id
+#: model:ir.model.fields,field_description:om_access_manager.field_ir_rule__id
+#: model:ir.model.fields,field_description:om_access_manager.field_ir_ui_menu__id
+#: model:ir.model.fields,field_description:om_access_manager.field_mail_thread__id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_allowed__id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_app_wizard__id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_app_wizard_action__id
@@ -1898,9 +1797,10 @@ msgstr ""
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_app_wizard_model__id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_app_wizard_report__id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_assign__id
+#: model:ir.model.fields,field_description:om_access_manager.field_om_access_condition_mixin__id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_copy_access__id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_copy_restrictions__id
-#: model:ir.model.fields,field_description:om_access_manager.field_om_access_grant__id
+#: model:ir.model.fields,field_description:om_access_manager.field_om_access_history_mixin__id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_import__id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_load_models__id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_login_slot__id
@@ -1911,10 +1811,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_profile_field__id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_profile_menu__id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_profile_model__id
+#: model:ir.model.fields,field_description:om_access_manager.field_om_access_rights_mixin__id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_scan_buttons__id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_scan_buttons_line__id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_template_wizard__id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_test_user__id
+#: model:ir.model.fields,field_description:om_access_manager.field_om_user_audit_log__id
+#: model:ir.model.fields,field_description:om_access_manager.field_res_groups__id
+#: model:ir.model.fields,field_description:om_access_manager.field_res_users__id
 msgid "ID"
 msgstr ""
 
@@ -1944,21 +1848,18 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_transfer.py:0
-#, python-format
 msgid "Imported Profile"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_import.py:0
-#, python-format
 msgid "Imported Profiles"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_transfer.py:0
-#, python-format
 msgid "Imported from a file."
 msgstr ""
 
@@ -1990,7 +1891,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_profile_model.py:0
-#, python-format
 msgid "Invalid %(filter)s on %(model)s: %(error)s"
 msgstr ""
 
@@ -2002,14 +1902,12 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "Its data stays reachable from other menus, links and the API: untick"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_allowed.py:0
-#, python-format
 msgid "Journals"
 msgstr ""
 
@@ -2027,7 +1925,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
-#, python-format
 msgid "Kept out of the exports: click to allow exporting it"
 msgstr ""
 
@@ -2056,7 +1953,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_assign__write_uid
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_copy_access__write_uid
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_copy_restrictions__write_uid
-#: model:ir.model.fields,field_description:om_access_manager.field_om_access_grant__write_uid
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_import__write_uid
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_load_models__write_uid
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_login_slot__write_uid
@@ -2084,7 +1980,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_assign__write_date
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_copy_access__write_date
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_copy_restrictions__write_date
-#: model:ir.model.fields,field_description:om_access_manager.field_om_access_grant__write_date
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_import__write_date
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_load_models__write_date
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_login_slot__write_date
@@ -2152,8 +2047,8 @@ msgid "Lines of"
 msgstr ""
 
 #. module: om_access_manager
-#: model:ir.model.fields.selection,name:om_access_manager.selection__om_access_profile_button__view_type__tree
-#: model:ir.model.fields.selection,name:om_access_manager.selection__om_access_scan_buttons_line__view_type__tree
+#: model:ir.model.fields.selection,name:om_access_manager.selection__om_access_profile_button__view_type__list
+#: model:ir.model.fields.selection,name:om_access_manager.selection__om_access_scan_buttons_line__view_type__list
 msgid "List"
 msgstr ""
 
@@ -2167,7 +2062,6 @@ msgstr ""
 #: code:addons/om_access_manager/models/om_access_profile.py:0
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_load_models_view_form
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_form
-#, python-format
 msgid "Load Models"
 msgstr ""
 
@@ -2179,7 +2073,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_allowed.py:0
-#, python-format
 msgid "Locations"
 msgstr ""
 
@@ -2201,7 +2094,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_profile.py:0
-#, python-format
 msgid ""
 "Maintained by the access profile of the same name. Do not assign it by hand."
 msgstr ""
@@ -2214,7 +2106,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_templates.py:0
-#, python-format
 msgid ""
 "Manages the employees without seeing their wage. The Payroll app is hidden "
 "when it is installed."
@@ -2223,11 +2114,9 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_transfer.py:0
-#: code:addons/om_access_manager/models/om_access_transfer.py:0
 #: model:ir.model,name:om_access_manager.model_ir_ui_menu
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_app_wizard_menu__label
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_profile_menu__menu_id
-#, python-format
 msgid "Menu"
 msgstr ""
 
@@ -2244,7 +2133,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.js:0
-#, python-format
 msgid "Menu Tree"
 msgstr ""
 
@@ -2304,7 +2192,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_profile_model__model_id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_scan_buttons__model_id
 #: model:ir.model.fields.selection,name:om_access_manager.selection__om_access_scan_buttons__state__model
-#, python-format
 msgid "Model"
 msgstr ""
 
@@ -2319,7 +2206,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_copy_restrictions__copy_models
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_profile__model_ids
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_form
-#, python-format
 msgid "Models"
 msgstr ""
 
@@ -2440,63 +2326,54 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
 #: model:ir.model.fields.selection,name:om_access_manager.selection__om_access_app_wizard__level__none
-#, python-format
 msgid "No access"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_test_user.py:0
-#, python-format
 msgid "No access profile restricts this user: nothing is taken away."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.js:0
-#, python-format
 msgid "No access to the data"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "No button on these screens."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
-#, python-format
 msgid "No configuration"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "No export"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "No field on these screens."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
-#, python-format
 msgid "No filter in the search of this menu."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
-#, python-format
 msgid "No page (tab) on the form of this menu."
 msgstr ""
 
@@ -2508,14 +2385,12 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
-#, python-format
 msgid "No report for this data."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_profile.py:0
-#, python-format
 msgid ""
 "No user has this profile yet.\n"
 "\n"
@@ -2535,7 +2410,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.xml:0
-#, python-format
 msgid "Not given"
 msgstr ""
 
@@ -2553,21 +2427,18 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
-#, python-format
 msgid "Nothing in the Action menu of this data."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
-#, python-format
 msgid "Nothing set: full access. Change a box to restrict everything below."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_scan_buttons.py:0
-#, python-format
 msgid ""
 "Nothing this profile does not already cover was found in the views of %s."
 msgstr ""
@@ -2662,49 +2533,42 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_profile_element.py:0
-#, python-format
 msgid "Only a tab can be hidden under a condition."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_preview.py:0
-#, python-format
 msgid "Only access managers can preview a user."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_preview.py:0
-#, python-format
 msgid "Only active internal users can be previewed."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/conditions.py:0
-#, python-format
 msgid "Only fixed values can be compared in a condition."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.js:0
-#, python-format
 msgid "Only some records"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.js:0
-#, python-format
 msgid "Only some records allowed in this app"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_menu_panel.py:0
-#, python-format
 msgid "Only the administrators can edit access profiles."
 msgstr ""
 
@@ -2735,14 +2599,12 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.xml:0
-#, python-format
 msgid "Only what is restricted"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "Only when... (e.g. state == 'done')"
 msgstr ""
 
@@ -2766,7 +2628,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.js:0
-#, python-format
 msgid "Opens the app to its users"
 msgstr ""
 
@@ -2783,7 +2644,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.xml:0
-#, python-format
 msgid "Other apps open this data too"
 msgstr ""
 
@@ -2792,7 +2652,6 @@ msgstr ""
 #: code:addons/om_access_manager/wizard/om_access_test_user.py:0
 #: model:ir.model.fields.selection,name:om_access_manager.selection__om_access_profile__strictness__override
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_search
-#, python-format
 msgid "Override"
 msgstr ""
 
@@ -2811,14 +2670,12 @@ msgstr ""
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_profile__page_element_ids
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_form
-#, python-format
 msgid "Pages"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_copy_restrictions.py:0
-#, python-format
 msgid "Pick a profile other than the one you are filling."
 msgstr ""
 
@@ -2830,28 +2687,24 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_allowed.py:0
-#, python-format
 msgid "Pick the allowed record, or tick 'Each user's own'."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_template_wizard.py:0
-#, python-format
 msgid "Pick the app this template applies to."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_assign.py:0
-#, python-format
 msgid "Pick the profiles to add or to remove."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_copy_access.py:0
-#, python-format
 msgid "Pick the users to give the access of %s to."
 msgstr ""
 
@@ -2863,7 +2716,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_allowed.py:0
-#, python-format
 msgid "Points of Sale"
 msgstr ""
 
@@ -2875,14 +2727,12 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_preview.py:0
-#, python-format
 msgid "Preview as %s"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_preview.py:0
-#, python-format
 msgid "Preview as %s started"
 msgstr ""
 
@@ -2891,21 +2741,18 @@ msgstr ""
 #: code:addons/om_access_manager/models/om_access_profile.py:0
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_form
 #: model_terms:ir.ui.view,arch_db:om_access_manager.view_users_form_access_profile
-#, python-format
 msgid "Preview as User"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_preview.py:0
-#, python-format
 msgid "Preview ended"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/preview/preview_banner.xml:0
-#, python-format
 msgid "Previewing as"
 msgstr ""
 
@@ -2919,7 +2766,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_menu_panel.py:0
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
-#, python-format
 msgid "Print"
 msgstr ""
 
@@ -2934,7 +2780,6 @@ msgstr ""
 #: code:addons/om_access_manager/wizard/om_access_test_user.py:0
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_allowed__profile_id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_app_wizard__profile_id
-#: model:ir.model.fields,field_description:om_access_manager.field_om_access_grant__profile_id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_load_models__profile_id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_login_slot__profile_id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_profile_button__profile_id
@@ -2944,14 +2789,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_profile_model__profile_id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_scan_buttons__profile_id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_test_user__profile_id
-#, python-format
 msgid "Profile"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_profile.py:0
-#, python-format
 msgid ""
 "Profile %s would block the login of every user who could undo it. Leave at "
 "least one access manager (Access Management group) out of it."
@@ -2960,7 +2803,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_profile.py:0
-#, python-format
 msgid ""
 "Profile %s would hide the Access Manager app from every user who could put "
 "it back. Leave at least one access manager (Access Management group) out of "
@@ -2970,7 +2812,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_profile.py:0
-#, python-format
 msgid ""
 "Profile %s would take the access profiles away from every user who could "
 "give them back. Leave at least one access manager (Access Management group) "
@@ -2990,21 +2831,18 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_test_user.py:0
-#, python-format
 msgid "Profiles applied"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_copy_access.py:0
-#, python-format
 msgid "Profiles: %s"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_templates.py:0
-#, python-format
 msgid "Purchase User"
 msgstr ""
 
@@ -3022,7 +2860,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_rights_mixin__perm_read
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_model_view_form
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_form
-#, python-format
 msgid "Read"
 msgstr ""
 
@@ -3046,28 +2883,24 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
 #: model:ir.model.fields.selection,name:om_access_manager.selection__om_access_app_wizard__level__readonly
-#, python-format
 msgid "Read only"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_test_user.py:0
-#, python-format
 msgid "Read only everywhere"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
-#, python-format
 msgid "Read-only"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_templates.py:0
-#, python-format
 msgid ""
 "Reads everything the Odoo groups of the user allow, changes nothing, and "
 "cannot export or import. The Settings app is hidden."
@@ -3081,7 +2914,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_templates.py:0
-#, python-format
 msgid ""
 "Receives, moves and delivers goods. No inventory configuration, no costs and"
 " no stock valuation."
@@ -3106,18 +2938,15 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_test_user.py:0
-#, python-format
 msgid "Record filter"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_app_wizard_model__scope
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_profile_menu__records
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_form
-#, python-format
 msgid "Records"
 msgstr ""
 
@@ -3152,7 +2981,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "Remove"
 msgstr ""
 
@@ -3164,7 +2992,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_history.py:0
-#, python-format
 msgid "Removed"
 msgstr ""
 
@@ -3203,7 +3030,6 @@ msgstr ""
 #: code:addons/om_access_manager/models/om_access_transfer.py:0
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_app_wizard_report__report_id
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_form
-#, python-format
 msgid "Report"
 msgstr ""
 
@@ -3222,7 +3048,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.js:0
-#, python-format
 msgid "Reports or actions hidden"
 msgstr ""
 
@@ -3230,7 +3055,6 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
 #: model:ir.model.fields.selection,name:om_access_manager.selection__om_access_profile_field__mode__required
-#, python-format
 msgid "Required"
 msgstr ""
 
@@ -3251,7 +3075,6 @@ msgstr ""
 #: model:ir.model,name:om_access_manager.model_om_access_app_wizard
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_app_wizard_view_form
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_form
-#, python-format
 msgid "Restrict an App"
 msgstr ""
 
@@ -3283,7 +3106,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.js:0
-#, python-format
 msgid "Restricts everything below"
 msgstr ""
 
@@ -3298,7 +3120,6 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_model_view_form
-#, python-format
 msgid "Rights"
 msgstr ""
 
@@ -3320,21 +3141,18 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_templates.py:0
-#, python-format
 msgid "Sales Read Only"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_allowed.py:0
-#, python-format
 msgid "Sales Teams"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_templates.py:0
-#, python-format
 msgid "Salesperson"
 msgstr ""
 
@@ -3358,7 +3176,6 @@ msgstr ""
 #: code:addons/om_access_manager/models/om_access_profile.py:0
 #: code:addons/om_access_manager/wizard/om_access_scan_buttons.py:0
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_form
-#, python-format
 msgid "Scan Buttons"
 msgstr ""
 
@@ -3404,21 +3221,18 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "Search a field..."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.xml:0
-#, python-format
 msgid "Search a menu, a data or a report..."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_templates.py:0
-#, python-format
 msgid ""
 "Sees the sales documents without changing them, and cannot export them."
 msgstr ""
@@ -3431,7 +3245,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_templates.py:0
-#, python-format
 msgid ""
 "Sells and follows their own customers, opportunities and quotations. No "
 "configuration, no sales reporting, no costs or margins, no export."
@@ -3440,7 +3253,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_templates.py:0
-#, python-format
 msgid ""
 "Sells at the point of sale. The point of sale configuration, its reporting, "
 "the costs and the margins are hidden."
@@ -3466,42 +3278,36 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_test_user.py:0
-#, python-format
 msgid "Set by"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.js:0
-#, python-format
 msgid "Set for everything below"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
-#, python-format
 msgid "Set on this data."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
-#, python-format
 msgid "Set on this menu."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_test_user.py:0
-#, python-format
 msgid "Settings app hidden"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "Show it again"
 msgstr ""
 
@@ -3518,14 +3324,12 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/ir_http.py:0
-#, python-format
 msgid "Sign-in blocked by the access profile"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/ir_http.py:0
-#, python-format
 msgid "Signed in elsewhere (One Session per User)"
 msgstr ""
 
@@ -3538,21 +3342,18 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_transfer.py:0
-#, python-format
 msgid "Skipped, not found on this database:"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_template_wizard.py:0
-#, python-format
 msgid "Skipped:"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.js:0
-#, python-format
 msgid "Some rights removed"
 msgstr ""
 
@@ -3581,7 +3382,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_test_user.py:0
-#, python-format
 msgid "Status bars locked"
 msgstr ""
 
@@ -3606,14 +3406,12 @@ msgstr ""
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
 #: code:addons/om_access_manager/wizard/om_access_test_user.py:0
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_form
-#, python-format
 msgid "Switches"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.js:0
-#, python-format
 msgid "Switches on"
 msgstr ""
 
@@ -3666,7 +3464,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_copy_access.py:0
-#, python-format
 msgid "Temporary profiles: %s"
 msgstr ""
 
@@ -3678,14 +3475,12 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_preview.py:0
-#, python-format
 msgid "The administrator is never restricted: there is nothing to preview."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_template_wizard.py:0
-#, python-format
 msgid "The app menu %s was not found: its part was skipped."
 msgstr ""
 
@@ -3707,7 +3502,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid ""
 "The closest setting wins: a menu or a data below can be set apart.\n"
 "                    Shared data (opened by other apps too) is left alone unless"
@@ -3716,7 +3510,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/conditions.py:0
-#, python-format
 msgid "The condition is not valid: %s"
 msgstr ""
 
@@ -3742,14 +3535,12 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/conditions.py:0
-#, python-format
 msgid "The field %(field)s does not exist on %(model)s."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_template_wizard.py:0
-#, python-format
 msgid "The field %(field)s of %(model)s was not found and stays visible."
 msgstr ""
 
@@ -3763,7 +3554,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_membership.py:0
-#, python-format
 msgid ""
 "The group of an access profile cannot give another profile: pick the "
 "profile's users instead."
@@ -3784,7 +3574,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_template_wizard.py:0
-#, python-format
 msgid "The menu %s was not found and stays visible."
 msgstr ""
 
@@ -3874,7 +3663,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "Their own Odoo groups"
 msgstr ""
 
@@ -3907,87 +3695,72 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/conditions.py:0
-#, python-format
 msgid "This comparison is not supported in a condition."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_menu_panel.py:0
-#, python-format
 msgid "This field does not exist."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_transfer.py:0
-#, python-format
 msgid "This file comes from a newer version of the module: upgrade it first."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_transfer.py:0
-#: code:addons/om_access_manager/models/om_access_transfer.py:0
-#, python-format
 msgid "This file is not an export of access profiles."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_menu_panel.py:0
-#, python-format
 msgid "This group does not open this app."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_preview.py:0
-#, python-format
 msgid "This is a preview: nothing is saved."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "This menu is hidden."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_menu_panel.py:0
-#: code:addons/om_access_manager/models/om_access_menu_panel.py:0
-#, python-format
 msgid "This menu no longer exists."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
-#, python-format
 msgid "This menu opens a single view."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_menu_panel.py:0
-#: code:addons/om_access_manager/models/om_access_menu_panel.py:0
-#, python-format
 msgid "This menu opens no data."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "This menu opens no list of data: it can only be shown or hidden."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_template_wizard.py:0
-#, python-format
 msgid "This template needs an app that is not installed."
 msgstr ""
 
@@ -4004,7 +3777,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_scan_buttons.py:0
-#, python-format
 msgid "Tick at least one line."
 msgstr ""
 
@@ -4038,49 +3810,42 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_menu_panel.py:0
-#, python-format
 msgid "Unknown access level."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_menu_panel.py:0
-#, python-format
 msgid "Unknown access level: %s"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_menu_panel.py:0
-#, python-format
 msgid "Unknown button mode: %s"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_menu_panel.py:0
-#, python-format
 msgid "Unknown change: %s"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_menu_panel.py:0
-#, python-format
 msgid "Unknown entry."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_menu_panel.py:0
-#, python-format
 msgid "Unknown field mode: %s"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_menu_panel.py:0
-#, python-format
 msgid "Unknown kind of allowed records: %s"
 msgstr ""
 
@@ -4106,7 +3871,6 @@ msgstr ""
 #. module: om_access_manager
 #: model:ir.model,name:om_access_manager.model_res_users
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_allowed__user_id
-#: model:ir.model.fields,field_description:om_access_manager.field_om_access_grant__user_id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_profile_assignment__user_id
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_test_user__user_id
 msgid "User"
@@ -4120,7 +3884,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_transfer.py:0
-#, python-format
 msgid "User not found: %s"
 msgstr ""
 
@@ -4136,7 +3899,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_profile__user_ids
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_template_wizard__user_ids
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_form
-#, python-format
 msgid "Users"
 msgstr ""
 
@@ -4151,7 +3913,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid ""
 "Users whose form gives them no access to this app do not see it: grant it\n"
 "                        here, then restrict it below and on its menus. Taken away with the profile."
@@ -4188,29 +3949,24 @@ msgstr ""
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
 #: model:ir.model.fields,field_description:om_access_manager.field_om_access_profile__view_element_ids
 #: model_terms:ir.ui.view,arch_db:om_access_manager.om_access_profile_view_form
-#, python-format
 msgid "Views"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
-#: code:addons/om_access_manager/static/src/menu_tree/menu_panel.js:0
-#, python-format
 msgid "Visible"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_templates.py:0
-#, python-format
 msgid "Warehouse Operator"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_allowed.py:0
-#, python-format
 msgid "Warehouses"
 msgstr ""
 
@@ -4227,7 +3983,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid ""
 "What is set here applies to this data wherever it opens: Odoo checks\n"
 "                    rights per data, not per menu."
@@ -4318,14 +4073,12 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_login.py:0
-#, python-format
 msgid "Working hours run from 00:00 to 24:00, and end after they start."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/conditions.py:0
-#, python-format
 msgid ""
 "Write the condition as comparisons of fields with values, joined by and, or,"
 " not: state == 'done' and amount_total > 1000"
@@ -4334,7 +4087,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_profile.py:0
-#, python-format
 msgid ""
 "You are not allowed to run this action.\n"
 "\n"
@@ -4344,7 +4096,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_profile.py:0
-#, python-format
 msgid ""
 "You are not allowed to use this button.\n"
 "\n"
@@ -4354,42 +4105,36 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_preview.py:0
-#, python-format
 msgid "You cannot preview yourself."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/base_model.py:0
-#, python-format
 msgid "Your access profile does not allow archiving '%s'."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/base_model.py:0
-#, python-format
 msgid "Your access profile does not allow changing the properties of a form."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/base_model.py:0
-#, python-format
 msgid "Your access profile does not allow duplicating '%s'."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/base_model.py:0
-#, python-format
 msgid "Your access profile does not allow exporting '%s'."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/field_guard.py:0
-#, python-format
 msgid ""
 "Your access profile does not allow exporting the field '%(field)s' of "
 "'%(model)s'."
@@ -4398,14 +4143,12 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/base_model.py:0
-#, python-format
 msgid "Your access profile does not allow importing '%s'."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/ir_module.py:0
-#, python-format
 msgid ""
 "Your access profile does not allow installing, upgrading or uninstalling "
 "apps."
@@ -4414,14 +4157,12 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/ir_actions.py:0
-#, python-format
 msgid "Your access profile does not allow printing '%s'."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/ir_filters.py:0
-#, python-format
 msgid "Your access profile does not allow saving searches."
 msgstr ""
 
@@ -4429,7 +4170,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/om_access_manager/controllers/mail.py:0
 #: code:addons/om_access_manager/models/mail_thread.py:0
-#, python-format
 msgid ""
 "Your access profile does not allow sending messages here. Log a note "
 "instead."
@@ -4438,22 +4178,25 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/res_users.py:0
-#, python-format
 msgid "Your access profile does not allow signing in from this network."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/res_users.py:0
-#, python-format
 msgid ""
 "Your access profile does not allow signing in through the external API."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
+#: code:addons/om_access_manager/models/ir_http.py:0
+msgid "Your access profile does not allow this sign-in."
+msgstr ""
+
+#. module: om_access_manager
+#. odoo-python
 #: code:addons/om_access_manager/models/field_guard.py:0
-#, python-format
 msgid ""
 "Your access profile does not allow this value for the field '%(field)s' of "
 "'%(model)s'."
@@ -4462,7 +4205,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/field_guard.py:0
-#, python-format
 msgid ""
 "Your access profile does not allow using the field '%(field)s' of "
 "'%(model)s'."
@@ -4471,7 +4213,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/base_model.py:0
-#, python-format
 msgid ""
 "Your access profile does not allow you to %(operation)s %(model)s.\n"
 "\n"
@@ -4481,7 +4222,6 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/base_model.py:0
-#, python-format
 msgid ""
 "Your access profile does not allow you to %(operation)s these %(model)s records: they are outside the ones allowed to you.\n"
 "\n"
@@ -4491,70 +4231,73 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/res_users.py:0
-#, python-format
 msgid "Your access profile does not allow you to sign in."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
-#: code:addons/om_access_manager/models/field_guard.py:0
-#, python-format
-msgid "Your access profile hides this file."
-msgstr ""
-
-#. module: om_access_manager
-#. odoo-python
 #: code:addons/om_access_manager/models/res_users.py:0
-#, python-format
 msgid "Your access profile only allows signing in during your working hours."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_allowed.py:0
-#, python-format
 msgid "allowed record"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "also opened by:"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid "below to deny it."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
+#: code:addons/om_access_manager/wizard/om_access_test_user.py:0
+msgid "block_archive"
+msgstr ""
+
+#. module: om_access_manager
+#. odoo-python
+#: code:addons/om_access_manager/wizard/om_access_test_user.py:0
+msgid "block_duplicate"
+msgstr ""
+
+#. module: om_access_manager
+#. odoo-python
+#: code:addons/om_access_manager/wizard/om_access_test_user.py:0
+msgid "block_export"
+msgstr ""
+
+#. module: om_access_manager
+#. odoo-python
 #: code:addons/om_access_manager/models/om_access_profile_button.py:0
-#, python-format
 msgid "button"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/base_model.py:0
-#, python-format
+#: code:addons/om_access_manager/wizard/om_access_test_user.py:0
 msgid "create"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_profile_model.py:0
-#, python-format
 msgid "data rule"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/base_model.py:0
-#, python-format
 msgid "delete"
 msgstr ""
 
@@ -4566,21 +4309,49 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/base_model.py:0
-#, python-format
 msgid "edit"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_profile_field.py:0
-#, python-format
 msgid "field"
+msgstr ""
+
+#. module: om_access_manager
+#. odoo-python
+#: code:addons/om_access_manager/wizard/om_access_test_user.py:0
+msgid "hide_activities"
+msgstr ""
+
+#. module: om_access_manager
+#. odoo-python
+#: code:addons/om_access_manager/wizard/om_access_test_user.py:0
+msgid "hide_chatter_all"
+msgstr ""
+
+#. module: om_access_manager
+#. odoo-python
+#: code:addons/om_access_manager/wizard/om_access_test_user.py:0
+msgid "hide_settings_menu"
+msgstr ""
+
+#. module: om_access_manager
+#. odoo-python
+#: code:addons/om_access_manager/models/om_access_templates.py:0
+msgid "hr.version"
+msgstr ""
+
+#. module: om_access_manager
+#. odoo-python
+#: code:addons/om_access_manager/models/om_access_profile.py:0
+#: code:addons/om_access_manager/wizard/om_access_import.py:0
+msgid "id"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_panel.xml:0
-#, python-format
 msgid ""
 "is ticked. The records choice leaves the data of\n"
 "                    the Configuration menus whole (a salesperson still sees every sales team)."
@@ -4589,14 +4360,18 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.xml:0
-#, python-format
 msgid "its fields, buttons, tabs and filters, print and action entries;"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
+#: code:addons/om_access_manager/wizard/om_access_test_user.py:0
+msgid "lock_statusbar"
+msgstr ""
+
+#. module: om_access_manager
+#. odoo-python
 #: code:addons/om_access_manager/models/om_access_profile_menu.py:0
-#, python-format
 msgid "menu rule"
 msgstr ""
 
@@ -4604,14 +4379,12 @@ msgstr ""
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_profile_menu.py:0
 #: code:addons/om_access_manager/models/om_access_profile_model.py:0
-#, python-format
 msgid "no access"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/wizard/om_access_copy_access.py:0
-#, python-format
 msgid "none"
 msgstr ""
 
@@ -4619,21 +4392,18 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.xml:0
 #: model_terms:ir.actions.act_window,help:om_access_manager.om_access_profile_action
-#, python-format
 msgid "odoomates@gmail.com"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.xml:0
-#, python-format
 msgid "on an app or a submenu, the same for everything below it."
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.xml:0
-#, python-format
 msgid "or on"
 msgstr ""
 
@@ -4644,22 +4414,40 @@ msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
+#: code:addons/om_access_manager/models/om_access_profile_menu.py:0
+#: code:addons/om_access_manager/models/om_access_profile_model.py:0
+msgid "perm_create"
+msgstr ""
+
+#. module: om_access_manager
+#. odoo-python
+#: code:addons/om_access_manager/models/om_access_profile_menu.py:0
+#: code:addons/om_access_manager/models/om_access_profile_model.py:0
+msgid "perm_unlink"
+msgstr ""
+
+#. module: om_access_manager
+#. odoo-python
+#: code:addons/om_access_manager/models/om_access_profile_menu.py:0
+#: code:addons/om_access_manager/models/om_access_profile_model.py:0
+msgid "perm_write"
+msgstr ""
+
+#. module: om_access_manager
+#. odoo-python
 #: code:addons/om_access_manager/models/base_model.py:0
-#, python-format
 msgid "read"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_profile_model.py:0
-#, python-format
 msgid "record filter"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.xml:0
-#, python-format
 msgid "shared"
 msgstr ""
 
@@ -4675,15 +4463,19 @@ msgstr ""
 
 #. module: om_access_manager
 #. odoo-python
+#: code:addons/om_access_manager/wizard/om_access_test_user.py:0
+msgid "unlink"
+msgstr ""
+
+#. module: om_access_manager
+#. odoo-python
 #: code:addons/om_access_manager/models/om_access_profile_element.py:0
-#, python-format
 msgid "view element"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/menu_tree/menu_tree_field.xml:0
-#, python-format
 msgid ""
 "whether they may read, create, edit and delete its data, and which records "
 "they see;"
@@ -4692,13 +4484,17 @@ msgstr ""
 #. module: om_access_manager
 #. odoo-python
 #: code:addons/om_access_manager/models/om_access_login.py:0
-#, python-format
 msgid "working hours"
+msgstr ""
+
+#. module: om_access_manager
+#. odoo-python
+#: code:addons/om_access_manager/wizard/om_access_test_user.py:0
+msgid "write"
 msgstr ""
 
 #. module: om_access_manager
 #. odoo-javascript
 #: code:addons/om_access_manager/static/src/preview/preview_banner.xml:0
-#, python-format
 msgid "· read only"
 msgstr ""

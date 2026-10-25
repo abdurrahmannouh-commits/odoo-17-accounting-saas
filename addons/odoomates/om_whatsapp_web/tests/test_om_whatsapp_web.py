@@ -218,10 +218,10 @@ class TestOmWhatsappWeb(TransactionCase):
         message = self.env['mail.message'].search([('model', '=', 'res.partner'), ('res_id', '=', self.alice.id),
                                                    ('message_type', '=', 'om_whatsapp')], limit=1)
         message.om_whatsapp_id = '3EB0AB'
-        with patch.object(type(self.env['bus.bus']), '_sendone', autospec=True) as bus_send:
-            message.with_user(self.user).sudo()._message_reaction('👍', 'add')
-        user, kind, payload = [c.args[1:] for c in bus_send.call_args_list if c.args[2] == 'om_whatsapp/action'][-1]
-        self.assertEqual((user, kind), (self.user.partner_id, 'om_whatsapp/action'))
+        with patch.object(type(self.env.user), '_bus_send', autospec=True) as bus_send:
+            message.with_user(self.user).sudo()._message_reaction('👍', 'add', self.user.partner_id, self.env['mail.guest'])
+        (user, kind, payload), _kwargs = bus_send.call_args
+        self.assertEqual((user, kind), (self.user, 'om_whatsapp/action'))
         self.assertEqual(payload['action']['tag'], 'om_whatsapp_web_react')
         self.assertEqual(payload['action']['params'], {'phone': '32470123456', 'whatsapp_id': '3EB0AB', 'emoji': '👍'})
 
@@ -252,10 +252,10 @@ class TestOmWhatsappWeb(TransactionCase):
     def test_receipt_goes_through_the_browser(self):
         self.account._om_whatsapp_receive('+32470123456', 'Is it ready?', '3EB0R1')
         message = self.env['mail.message'].search([('om_whatsapp_id', '=', '3EB0R1')], limit=1)
-        with patch.object(type(self.env['bus.bus']), '_sendone', autospec=True) as bus_send:
+        with patch.object(type(self.env.user), '_bus_send', autospec=True) as bus_send:
             message.with_user(self.user)._om_whatsapp_send_receipts('read')
-        user, kind, payload = [c.args[1:] for c in bus_send.call_args_list if c.args[2] == 'om_whatsapp/action'][-1]
-        self.assertEqual((user, kind, payload['action']['tag']), (self.user.partner_id, 'om_whatsapp/action', 'om_whatsapp_web_receipt'))
+        (user, kind, payload), _kwargs = bus_send.call_args
+        self.assertEqual((user, kind, payload['action']['tag']), (self.user, 'om_whatsapp/action', 'om_whatsapp_web_receipt'))
         self.assertEqual(payload['action']['params'], {'phone': '32470123456', 'ids': ['3EB0R1'], 'kind': 'read'})
 
     def test_pictures_read_by_the_browser(self):
@@ -281,10 +281,10 @@ class TestOmWhatsappWeb(TransactionCase):
 
     def test_automation_from_the_click_of_a_user(self):
         """ An order confirmed by a user: their browser sends the message. """
-        with patch.object(type(self.env['bus.bus']), '_sendone', autospec=True) as bus_send:
+        with patch.object(type(self.env.user), '_bus_send', autospec=True) as bus_send:
             notification = self._automate(self.alice, at_screen=True)
         self.assertEqual(notification.notification_status, 'ready')
-        _user, kind, payload = [c.args[1:] for c in bus_send.call_args_list if c.args[2] == 'om_whatsapp/action'][-1]
+        (_user, kind, payload), _kwargs = bus_send.call_args
         self.assertEqual(kind, 'om_whatsapp/action')
         self.assertEqual(payload['action']['params']['notification_ids'], notification.ids)
 

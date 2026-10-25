@@ -32,7 +32,7 @@ class TestCurrencyRevaluation(AccountTestInvoicingCommon):
 
     def _invoice(self, amount=1000.0, date='2026-01-01', move_type='out_invoice'):
         invoice = self.init_invoice(move_type, partner=self.partner_a, invoice_date=date, amounts=[amount],
-                                    currency=self.foreign, post=True, taxes=[])
+                                    currency=self.foreign, post=True)
         return invoice
 
     def _adjustment_of(self, move, account):
@@ -64,7 +64,7 @@ class TestCurrencyRevaluation(AccountTestInvoicingCommon):
         self.assertEqual(sorted(move.line_ids.mapped('amount_currency')), [-125.0, 125.0])
         self.assertEqual(sum(move.line_ids.mapped('balance')), 0.0)
 
-        reversal = move.reversal_move_id
+        reversal = move.reversal_move_ids
         self.assertEqual(reversal.state, 'posted')
         self.assertEqual(str(reversal.date), '2026-02-01')
         self.assertEqual(self._adjustment_of(reversal, self.receivable), -125.0)
@@ -73,7 +73,7 @@ class TestCurrencyRevaluation(AccountTestInvoicingCommon):
         # the foreign currency gains on the company one: what is owed in it costs more
         foreign = self.setup_other_currency('GBP', rates=[('2026-01-01', 2.0), ('2026-01-30', 1.6)])
         bill = self.init_invoice('in_invoice', partner=self.partner_a, invoice_date='2026-01-01',
-                                 amounts=[1000.0], currency=foreign, post=True, taxes=[])
+                                 amounts=[1000.0], currency=foreign, post=True)
         self.assertEqual(bill.amount_total_signed, -500.0)
 
         # 1000 GBP owed is worth 625 at the closing rate instead of the 500 in the books
@@ -146,7 +146,7 @@ class TestCurrencyRevaluation(AccountTestInvoicingCommon):
 
     def test_nothing_to_revalue(self):
         self.init_invoice('out_invoice', partner=self.partner_a, invoice_date='2026-01-01',
-                          amounts=[100.0], post=True, taxes=[])
+                          amounts=[100.0], post=True)
         wizard = self._wizard()
         self.assertFalse(wizard.line_ids)
         with self.assertRaises(UserError):

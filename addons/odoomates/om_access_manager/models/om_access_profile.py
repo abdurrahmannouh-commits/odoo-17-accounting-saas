@@ -11,9 +11,9 @@ from lxml import etree
 
 from odoo import _, api, fields, models, tools
 from odoo.exceptions import AccessError, UserError, ValidationError
+from odoo.fields import Domain
 from odoo.tools import frozendict
-from dateutil.relativedelta import relativedelta
-from odoo.tools.safe_eval import datetime as safe_eval_datetime, time as safe_eval_time
+from odoo.tools.safe_eval import time as safe_eval_time
 
 from .om_access_allowed import ALLOWED_KINDS
 from .conditions import condition_fields
@@ -749,7 +749,7 @@ class OmAccessProfile(models.Model):
         self.ensure_one()
         return {
             'name': _('Access Profile: %s', self.name),
-            'users': [(6, 0, self._om_direct_users().ids)],
+            'user_ids': [(6, 0, self._om_direct_users().ids)],
             # what the profile grants comes with its group; an archived group
             # still implies its groups, so an archived profile grants nothing
             'implied_ids': [(6, 0, self.granted_group_ids.ids if self.active else [])],
@@ -763,14 +763,12 @@ class OmAccessProfile(models.Model):
         It makes a user's group set a unique key for _visible_menu_ids(),
         which is cached per group set and not per user.
         """
-        self._om_record_grants()
         for profile in self:
             if profile.group_id:
                 profile.group_id.sudo().write(profile._group_values())
             else:
                 group = self.env['res.groups'].sudo().create(profile._group_values())
                 profile.with_context(om_access_skip_sync=True).group_id = group
-        self._om_revoke_grants()
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -787,7 +785,6 @@ class OmAccessProfile(models.Model):
         return result
 
     def unlink(self):
-        self._om_revoke_grants(everything=True)
         groups = self.group_id.sudo()
         result = super().unlink()
         groups.unlink()
@@ -809,7 +806,7 @@ class OmAccessProfile(models.Model):
             forbidden |= self.env.ref(xmlid, raise_if_not_found=False) or self.env['res.groups']
         for profile in self:
             for group in profile.sudo().granted_group_ids:
-                if (group | group.trans_implied_ids) & forbidden:
+                if (group | group.all_implied_ids) & forbidden:
                     raise ValidationError(_(
                         "A profile cannot grant %s: it would make its users administrators, "
                         "or access managers. Give it on the user form instead.", group.full_name))
@@ -827,7 +824,7 @@ class OmAccessProfile(models.Model):
             return
         # the rules as they are now, not as cached before this change
         self.env.registry.clear_cache('default')
-        managers = managers_group.sudo().users.filtered('active')
+        managers = managers_group.sudo().all_user_ids.filtered('active')
         # no active access manager left at all is the worst lock out
         reasons = [self._om_lockout(manager) for manager in managers] or ['login']
         if all(reasons):
@@ -896,7 +893,7 @@ class OmAccessProfile(models.Model):
             'type': 'ir.actions.act_window',
             'name': _('Users'),
             'res_model': 'res.users',
-            'view_mode': 'tree,form',
+            'view_mode': 'list,form',
             'domain': [('id', 'in', self._om_members().ids)],
         }
 
@@ -927,9 +924,7 @@ class OmAccessProfile(models.Model):
     @api.model
     def _om_eval_context(self):
         """ The record filter eval context: a standard access domain's, plus uid. """
-        return dict(self.env['ir.rule']._eval_context(), uid=self.env.uid, time=safe_eval_time,
-                    datetime=safe_eval_datetime, relativedelta=relativedelta,
-                    context_today=lambda: fields.Date.context_today(self))
+        return dict(self.env['ir.rule']._eval_context(), uid=self.env.uid, time=safe_eval_time)
 
     def action_load_models(self):
         return self._open_wizard('om.access.load.models', _('Load Models'))
@@ -962,7 +957,7 @@ class OmAccessProfile(models.Model):
             'context': {
                 'default_profile_id': self.id,
                 'default_user_id': users[:1].id,
-                'om_preview_back': f'/web#action=om_access_manager.om_access_profile_action&id={self.id}&view_type=form',
+                'om_preview_back': f'/odoo/action-om_access_manager.om_access_profile_action/{self.id}',
             },
         }
 
@@ -1093,7 +1088,7 @@ class OmAccessProfile(models.Model):
 
         menus = frozenset()
         if profile.hidden_menu_ids:
-            menus = frozenset(self.env['ir.ui.menu'].sudo().with_context(**{'ir.ui.menu.full_list': True}).with_context(active_test=False).search(
+            menus = frozenset(self.env['ir.ui.menu'].sudo().with_context(active_test=False).search(
                 [('id', 'child_of', profile.hidden_menu_ids.ids)]
             )._ids)
 
@@ -1138,7 +1133,7 @@ class OmAccessProfile(models.Model):
             companies = set(user.company_ids._ids)
             profiles = profiles.filtered(
                 lambda profile: not profile.company_id or profile.company_id.id in companies)
-        if profiles and user.has_group('base.group_system'):
+        if profiles and user._has_group('base.group_system'):
             profiles = profiles.filtered('apply_to_admin')
         if not profiles:
             return NO_RULES
@@ -1268,7 +1263,7 @@ class OmAccessProfile(models.Model):
         replaces in the web client. """
         field = self.env[model_name]._fields.get(field_name) if model_name in self.env else None
         domain = getattr(field, 'domain', None)
-        if isinstance(domain, (list, tuple)):
+        if isinstance(domain, (list, tuple, Domain)):
             return repr(list(domain))
         return domain if isinstance(domain, str) else None
 
@@ -1477,7 +1472,7 @@ class OmAccessProfile(models.Model):
 
         self._add_needed_fields(needed)
 
-        if tree.tag in ('form', 'list', 'tree', 'kanban'):
+        if tree.tag in ('form', 'list', 'kanban'):
             if rules.model_flag(model_name, 'hide_export'):
                 tree.set('export_xlsx', '0')
             if rules.model_flag(model_name, 'hide_import'):

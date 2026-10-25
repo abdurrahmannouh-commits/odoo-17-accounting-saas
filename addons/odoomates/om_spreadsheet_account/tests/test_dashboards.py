@@ -1,8 +1,10 @@
+import json
+
 from odoo import fields
 from odoo.tests import TransactionCase, tagged
 
 from odoo.addons.account.tests.common import AccountTestInvoicingHttpCommon
-from .common import built_dashboards, check_dashboards, shipped_dashboard
+from .common import built_dashboards, check_dashboards, check_sample, shipped_dashboard
 
 DASHBOARDS = {
     'om_spreadsheet_account.dashboard_accounting_overview': 'accounting_overview_dashboard.json',
@@ -30,13 +32,19 @@ class TestDashboardFiles(TransactionCase):
             dashboard = self.env.ref(xmlid)
             with self.subTest(dashboard=dashboard.name):
                 self.assertEqual(dashboard.dashboard_group_id, finance)
+                self.assertTrue(dashboard.is_published)
                 self.assertIn(self.env.ref('account.group_account_readonly'), dashboard.group_ids)
-                self.assertTrue(dashboard.get_readonly_dashboard()['snapshot']['sheets'])
+                self.assertTrue(json.loads(dashboard._get_serialized_readonly_dashboard())['snapshot']['sheets'])
+
+    def test_samples(self):
+        for xmlid in DASHBOARDS:
+            with self.subTest(dashboard=xmlid):
+                check_sample(self, xmlid)
 
     def test_billing_users_only_see_the_partner_dashboard(self):
         billing = self.env['res.users'].create({
             'name': 'Dashboard Billing', 'login': 'dashboard_billing',
-            'groups_id': [(6, 0, [self.env.ref('account.group_account_invoice').id])],
+            'group_ids': [(6, 0, [self.env.ref('account.group_account_invoice').id])],
         })
         visible = self.env['spreadsheet.dashboard'].with_user(billing).search([]).mapped('name')
         self.assertIn('Receivables and Payables', visible)
@@ -49,7 +57,7 @@ class TestDashboardsInBrowser(AccountTestInvoicingHttpCommon):
     def test_dashboards_compute_without_errors(self):
         self.env.ref('base.user_admin').write({
             'company_id': self.env.company.id, 'company_ids': [(6, 0, self.env.company.ids)],
-            'groups_id': [(4, self.env.ref('account.group_account_user').id),
+            'group_ids': [(4, self.env.ref('account.group_account_user').id),
                           (4, self.env.ref('account.group_account_manager').id)],
         })
         today = fields.Date.today()

@@ -1,10 +1,6 @@
-/** @odoo-module **/
-
 import { registry } from "@web/core/registry";
 
-// on Odoo 17 a step without run clicks its trigger: the steps that only check one are marked isCheck
 registry.category("web_tour.tours").add("om_bank_reconciliation_tour", {
-    test: true,
     steps: () => [
         {
             content: "Select the transaction paying the invoice",
@@ -14,7 +10,6 @@ registry.category("web_tour.tours").add("om_bank_reconciliation_tour", {
         {
             content: "The invoice is suggested",
             trigger: ".o_om_bank_rec_match_row:contains(Tour Customer)",
-            isCheck: true,
         },
         {
             content: "Nothing is left on the suspense account",
@@ -24,7 +19,6 @@ registry.category("web_tour.tours").add("om_bank_reconciliation_tour", {
         {
             content: "The reconciled transaction leaves the list",
             trigger: ".o_om_bank_rec_list:not(:has(.o_om_bank_rec_transaction:contains(TOUR PAYMENT)))",
-            isCheck: true,
         },
         {
             content: "Select the bank fee",
@@ -39,7 +33,7 @@ registry.category("web_tour.tours").add("om_bank_reconciliation_tour", {
         {
             content: "Choose the account",
             trigger: ".o_om_bank_rec_writeoff_form .o_record_selector input",
-            run: "text Tour Bank Charges",
+            run: "edit Tour Bank Charges",
         },
         {
             content: "Pick it in the dropdown",
@@ -54,7 +48,6 @@ registry.category("web_tour.tours").add("om_bank_reconciliation_tour", {
         {
             content: "The counterpart is in the proposal",
             trigger: ".o_om_bank_rec_writeoff_row:contains(Tour Bank Charges)",
-            isCheck: true,
         },
         {
             content: "Validate the fee",
@@ -64,7 +57,6 @@ registry.category("web_tour.tours").add("om_bank_reconciliation_tour", {
         {
             content: "No transaction left to reconcile",
             trigger: ".o_om_bank_rec_list:not(:has(.o_om_bank_rec_transaction))",
-            isCheck: true,
         },
         {
             content: "Show the reconciled transactions",
@@ -84,7 +76,6 @@ registry.category("web_tour.tours").add("om_bank_reconciliation_tour", {
         {
             content: "The fee can be reconciled again",
             trigger: ".o_om_bank_rec_header:contains(Tour bank fee) ~ .o_om_bank_rec_proposal .o_om_bank_rec_validate",
-            isCheck: true,
         },
     ],
 });

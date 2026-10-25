@@ -13,12 +13,6 @@ try:
     import openpyxl
 except ImportError:
     openpyxl = None
-try:
-    # Odoo 17 pins xlrd 1.2, which reads the .xlsx files as well as the .xls ones;
-    # xlrd 2 reads the .xls ones only
-    import xlrd
-except ImportError:
-    xlrd = None
 
 # the extensions we read
 EXCEL_EXTENSIONS = ('.xlsx', '.xlsm', '.xltx', '.xltm', '.xls')
@@ -117,8 +111,6 @@ def _delimiter(file_map, extension):
 def _read_excel(data, file_map, extension):
     """ :return: the rows of the sheet of the map as lists of values, or None when it is not a workbook """
     if openpyxl is None:
-        if xlrd is not None:
-            return _read_excel_xlrd(data, file_map, extension)
         raise ValueError('Reading an Excel file needs the Python library openpyxl. Install it, or export '
                          'the statement of your bank in CSV.')
     if data[:8] == OLE_SIGNATURE:
@@ -135,41 +127,6 @@ def _read_excel(data, file_map, extension):
         return [list(row) for row in sheet.iter_rows(values_only=True)]
     finally:
         workbook.close()
-
-
-def _read_excel_xlrd(data, file_map, extension):
-    """ _read_excel() with xlrd: the dates are datetimes and the empty cells None, as openpyxl gives them """
-    try:
-        book = xlrd.open_workbook(file_contents=data)
-    except Exception as error:
-        if extension in EXCEL_EXTENSIONS:
-            if getattr(xlrd, '__version__', '1')[:1] != '1':
-                raise ValueError('Reading a %s file needs the Python library openpyxl, as the xlrd '
-                                 'installed reads the .xls files only. Install openpyxl, or export the '
-                                 'statement of your bank in CSV.' % extension)
-            raise ValueError('The Excel file cannot be opened: %s' % error)
-        return None  # a zip file of something else: the next parser may
-    names = book.sheet_names()
-    sheet = (file_map.get('sheet') or '').strip()
-    if not sheet:
-        worksheet = book.sheet_by_index(0)
-    elif sheet in names:
-        worksheet = book.sheet_by_name(sheet)
-    elif sheet.isdigit() and 1 <= int(sheet) <= len(names):
-        worksheet = book.sheet_by_index(int(sheet) - 1)
-    else:
-        raise ValueError('The file has no sheet %r. Its sheets are: %s.' % (sheet, ', '.join(names)))
-
-    def value(cell):
-        if cell.ctype == xlrd.XL_CELL_DATE:
-            return xlrd.xldate.xldate_as_datetime(cell.value, book.datemode)
-        if cell.ctype in (xlrd.XL_CELL_EMPTY, xlrd.XL_CELL_BLANK):
-            return None
-        if cell.ctype == xlrd.XL_CELL_NUMBER and cell.value == int(cell.value):
-            return int(cell.value)
-        return cell.value
-
-    return [[value(cell) for cell in worksheet.row(index)] for index in range(worksheet.nrows)]
 
 
 def _pick_sheet(workbook, file_map):

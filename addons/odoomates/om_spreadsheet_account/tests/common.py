@@ -11,17 +11,12 @@ CHECK_DASHBOARDS_JS = """
     const names = %(names)s;
     const expected = %(expected)s;
     const { helpers } = odoo.loader.modules.get("@odoo/o-spreadsheet");
-    // Odoo 17: the loader is the one of the dashboard action, in the lazy bundle of the spreadsheets: one of our own
-    const { DashboardLoader } = odoo.loader.modules.get(
-        "@spreadsheet_dashboard/bundle/dashboard_action/dashboard_loader"
-    );
-    const env = odoo.__WOWL_DEBUG__.root.env;
-    const loader = new DashboardLoader(env, env.services.orm);
+    const loader = odoo.__WOWL_DEBUG__.root.env.services.spreadsheet_dashboard_loader;
     await loader.load();
     const found = {};
     for (const group of loader.getDashboardGroups()) {
         for (const dashboard of group.dashboards) {
-            found[dashboard.displayName] = dashboard.id;
+            found[dashboard.data.name] = dashboard.data.id;
         }
     }
     const failures = [];
@@ -45,8 +40,8 @@ CHECK_DASHBOARDS_JS = """
                         if (cell.type !== "error") {
                             continue;
                         }
-                        const message = String((cell.error && cell.error.message) || cell.value);
-                        if (String(cell.value).includes("Loading")) {
+                        const message = String(cell.message || cell.value);
+                        if (message.includes("Loading")) {
                             loading = true;
                         } else {
                             errors.push(`${sheetName}!${helpers.toXC(col, row)}: ${message}`);
@@ -83,10 +78,9 @@ CHECK_DASHBOARDS_JS = """
 def check_dashboards(case, names, expected=None):
     """ Open the dashboards in the browser as the admin and check their cells """
     case.browser_js(
-        '/web#action=spreadsheet_dashboard.ir_actions_dashboard_action',
+        '/odoo/action-spreadsheet_dashboard.ir_actions_dashboard_action',
         CHECK_DASHBOARDS_JS % {'names': json.dumps(names), 'expected': json.dumps(expected or {})},
-        ready="!!(odoo.__WOWL_DEBUG__ && document.querySelector('.o_spreadsheet_dashboard_action')"
-              " && odoo.loader.modules.get('@spreadsheet_dashboard/bundle/dashboard_action/dashboard_loader'))",
+        ready="!!(odoo.__WOWL_DEBUG__ && document.querySelector('.o_spreadsheet_dashboard_action'))",
         login='admin',
         timeout=180,
     )
@@ -99,10 +93,27 @@ def built_dashboards(module):
     spec = importlib.util.spec_from_file_location('%s_build_dashboards' % module, path)
     script = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(script)
-    return {name: build().to_odoo_17_json() for name, build in script.DASHBOARDS.items()}
+    return {name: build().to_json() for name, build in script.DASHBOARDS.items()}
 
 
 def shipped_dashboard(module, file_name):
     with file_open('%s/data/files/%s' % (module, file_name)) as file:
         return json.load(file)
 
+
+def check_sample(case, xmlid):
+    """ The sample of the dashboard shows values only: no formula, no data source """
+    dashboard = case.env.ref(xmlid)
+    sample = dashboard._get_sample_dashboard()
+    case.assertTrue(sample, 'the sample file of %s exists' % dashboard.name)
+    case.assertFalse(sample['pivots'] or sample['lists'] or sample['globalFilters'])
+    cells = [value for sheet in sample['sheets'] for value in sheet['cells'].values()]
+    case.assertTrue(cells)
+    case.assertFalse([value for value in cells if isinstance(value, str) and value.startswith('=')])
+    for sheet in sample['sheets']:
+        for figure in sheet['figures']:
+            for definition in figure['data'].get('chartDefinitions', {}).values():
+                # the charts of 19.0 reading a model are the odoo_* ones
+                case.assertFalse(definition['type'].startswith('odoo_'))
+    # a database without the records of these models shows the sample
+    case.assertTrue(dashboard.main_data_model_ids)

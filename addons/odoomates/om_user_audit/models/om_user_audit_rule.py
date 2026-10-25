@@ -22,7 +22,7 @@ class OmUserAuditRule(models.Model):
     _description = 'User Audit Rule'
     _order = 'sequence, id'
     # the parameters are cached there too: a parameter changed by hand reaches the rules
-    _clear_cache_name = 'default'
+    _clear_cache_name = 'stable'
 
     name = fields.Char(required=True)
     sequence = fields.Integer(default=10)
@@ -45,7 +45,7 @@ class OmUserAuditRule(models.Model):
     log_print = fields.Boolean(string='Print', default=True)
 
     @api.model
-    @tools.ormcache(cache='default')
+    @tools.ormcache(cache='stable')
     def _om_policy(self):
         """ The rules and settings, frozen. """
         params = self.env['ir.config_parameter'].sudo()
@@ -74,7 +74,7 @@ class OmUserAuditRule(models.Model):
         return any(fnmatchcase(model_name, pattern) for pattern in policy['excluded'])
 
     @api.model
-    @tools.ormcache('model_name', 'operation', 'uid', cache='default')
+    @tools.ormcache('model_name', 'operation', 'uid', cache='stable')
     def _om_should_log(self, model_name, operation, uid):
         if not uid or uid == SUPERUSER_ID:
             return False
@@ -98,7 +98,7 @@ class OmUserAuditRule(models.Model):
             if rule['users'] or rule['groups']:
                 if uid not in rule['users']:
                     if user_groups is None:
-                        user_groups = set(self.env['res.users'].sudo().browse(uid).groups_id.ids)
+                        user_groups = set(self.env['res.users'].sudo().browse(uid).all_group_ids.ids)
                     if not rule['groups'] & user_groups:
                         continue
             return True

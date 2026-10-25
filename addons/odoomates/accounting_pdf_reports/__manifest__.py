@@ -1,10 +1,10 @@
 {
-    'name': 'Odoo 17 Accounting Financial Reports',
-    'version': '17.0.1.4',
+    'name': 'Odoo 19 Accounting Financial Reports',
+    'version': '1.1.1',
     'category': 'Invoicing Management',
-    'description': 'Accounting Reports For Odoo 17, Accounting Financial Reports, '
-                   'Odoo 17 Financial Reports',
-    'summary': 'Accounting Reports For Odoo 17',
+    'description': 'Accounting Reports For Odoo 19, Accounting Financial Reports, '
+                   'Odoo 19 Financial Reports',
+    'summary': 'Accounting Reports For Odoo 19',
     'sequence': '1',
     'author': 'Odoo Mates, Odoo SA',
     'license': 'LGPL-3',

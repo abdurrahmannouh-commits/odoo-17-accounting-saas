@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-22 07:06+0000\n"
 "PO-Revision-Date: 2026-10-22 07:06+0000\n"
@@ -89,7 +89,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:om_currency_revaluation.currency_revaluation_view_form
 #: model_terms:ir.ui.view,arch_db:om_currency_revaluation.res_config_settings_view_form
 #: model_terms:ir.ui.view,arch_db:om_currency_revaluation.view_account_move_filter
-#, python-format
 msgid "Currency Revaluation"
 msgstr ""
 
@@ -107,19 +106,24 @@ msgstr ""
 #. module: om_currency_revaluation
 #. odoo-python
 #: code:addons/om_currency_revaluation/wizard/currency_revaluation.py:0
-#, python-format
 msgid "Currency revaluation of %s"
 msgstr ""
 
 #. module: om_currency_revaluation
+#: model:ir.model.fields,field_description:om_currency_revaluation.field_account_move__display_name
 #: model:ir.model.fields,field_description:om_currency_revaluation.field_currency_revaluation__display_name
 #: model:ir.model.fields,field_description:om_currency_revaluation.field_currency_revaluation_line__display_name
+#: model:ir.model.fields,field_description:om_currency_revaluation.field_res_company__display_name
+#: model:ir.model.fields,field_description:om_currency_revaluation.field_res_config_settings__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: om_currency_revaluation
+#: model:ir.model.fields,field_description:om_currency_revaluation.field_account_move__id
 #: model:ir.model.fields,field_description:om_currency_revaluation.field_currency_revaluation__id
 #: model:ir.model.fields,field_description:om_currency_revaluation.field_currency_revaluation_line__id
+#: model:ir.model.fields,field_description:om_currency_revaluation.field_res_company__id
+#: model:ir.model.fields,field_description:om_currency_revaluation.field_res_config_settings__id
 msgid "ID"
 msgstr ""
 
@@ -164,14 +168,12 @@ msgstr ""
 #. module: om_currency_revaluation
 #. odoo-python
 #: code:addons/om_currency_revaluation/wizard/currency_revaluation.py:0
-#, python-format
 msgid "Nothing is open in a foreign currency to revalue on this date."
 msgstr ""
 
 #. module: om_currency_revaluation
 #. odoo-python
 #: code:addons/om_currency_revaluation/wizard/currency_revaluation.py:0
-#, python-format
 msgid "Only the accounting managers can post a currency revaluation."
 msgstr ""
 
@@ -208,7 +210,6 @@ msgstr ""
 #. module: om_currency_revaluation
 #: model:ir.model.fields,field_description:om_currency_revaluation.field_account_bank_statement_line__currency_reval_date
 #: model:ir.model.fields,field_description:om_currency_revaluation.field_account_move__currency_reval_date
-#: model:ir.model.fields,field_description:om_currency_revaluation.field_account_payment__currency_reval_date
 #: model:ir.model.fields,field_description:om_currency_revaluation.field_currency_revaluation__date
 msgid "Revaluation Date"
 msgstr ""
@@ -216,7 +217,6 @@ msgstr ""
 #. module: om_currency_revaluation
 #. odoo-python
 #: code:addons/om_currency_revaluation/wizard/currency_revaluation.py:0
-#, python-format
 msgid "Revaluation of %(amount)s at the rate of %(date)s"
 msgstr ""
 
@@ -228,7 +228,6 @@ msgstr ""
 #. module: om_currency_revaluation
 #. odoo-python
 #: code:addons/om_currency_revaluation/wizard/currency_revaluation.py:0
-#, python-format
 msgid "Reversal of the currency revaluation of %s"
 msgstr ""
 
@@ -275,7 +274,6 @@ msgstr ""
 #. module: om_currency_revaluation
 #: model:ir.model.fields,help:om_currency_revaluation.field_account_bank_statement_line__currency_reval_date
 #: model:ir.model.fields,help:om_currency_revaluation.field_account_move__currency_reval_date
-#: model:ir.model.fields,help:om_currency_revaluation.field_account_payment__currency_reval_date
 msgid ""
 "The date the open foreign currency balances were revalued at, for the "
 "adjustment entries of the currency revaluation."
@@ -290,7 +288,6 @@ msgstr ""
 #. module: om_currency_revaluation
 #. odoo-python
 #: code:addons/om_currency_revaluation/wizard/currency_revaluation.py:0
-#, python-format
 msgid ""
 "The open balances are already revalued on %(date)s by the entry %(entry)s. "
 "Reverse or delete it before revaluing that date again."
@@ -320,14 +317,12 @@ msgstr ""
 #. module: om_currency_revaluation
 #. odoo-python
 #: code:addons/om_currency_revaluation/wizard/currency_revaluation.py:0
-#, python-format
 msgid "Unrealized gain"
 msgstr ""
 
 #. module: om_currency_revaluation
 #. odoo-python
 #: code:addons/om_currency_revaluation/wizard/currency_revaluation.py:0
-#, python-format
 msgid "Unrealized loss"
 msgstr ""
 

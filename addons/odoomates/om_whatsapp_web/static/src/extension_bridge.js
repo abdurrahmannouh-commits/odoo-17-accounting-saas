@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 // Talks to the Odoo Mates WhatsApp Connector extension through window.postMessage.
 // Both sides post JSON strings, which Chrome and Firefox pass to content scripts
 // as they are. The protocol is described in PROTOCOL.md of the extension.

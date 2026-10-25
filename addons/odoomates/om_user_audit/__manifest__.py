@@ -8,7 +8,7 @@
     'maintainer': 'Odoo Mates',
     'support': 'odoomates@gmail.com',
     'license': 'LGPL-3',
-    'depends': ['base', 'web', 'mail'],
+    'depends': ['base', 'web', 'mail', 'rpc'],
     'data': [
         'security/ir.model.access.csv',
         'data/ir_cron.xml',

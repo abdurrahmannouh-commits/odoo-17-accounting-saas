@@ -5,16 +5,12 @@ from markupsafe import Markup
 
 from odoo import _, api, fields, models
 from odoo.exceptions import AccessError, UserError
+from odoo.service.model import PG_CONCURRENCY_EXCEPTIONS_TO_RETRY
 from odoo.tools import SQL
 
 _logger = logging.getLogger(__name__)
 
-# PG_CONCURRENCY_EXCEPTIONS_TO_RETRY of Odoo 18 and later: Odoo 17 has the error codes only
-PG_CONCURRENCY_EXCEPTIONS_TO_RETRY = (
-    psycopg2.errors.LockNotAvailable, psycopg2.errors.SerializationFailure, psycopg2.errors.DeadlockDetected,
-)
-
-# The transactions of the standard Odoo 17 applications: the documents a company records day after day.
+# The transactions of the standard Odoo 19 applications: the documents a company records day after day.
 # The master data they point to (partners, products, chart of accounts, journals, taxes, employees, bills of
 # materials, projects, configuration) is kept. The models of applications that are not installed are skipped.
 # Within a group the lines come before their document, but the order does not have to be right: a table the
@@ -31,16 +27,12 @@ TRANSACTION_GROUPS = [
         'purchase.order.line', 'purchase.order', 'purchase.requisition.line', 'purchase.requisition',
     ]),
     ('inventory', 'Inventory', [
-        # stock.valuation.layer, stock.package_level and stock.quant.package are the ones of Odoo 17
-        'stock.valuation.adjustment.lines', 'stock.landed.cost.lines', 'stock.landed.cost', 'stock.valuation.layer',
-        'stock.package_level', 'stock.move.line', 'stock.move', 'stock.quant', 'stock.quant.package', 'stock.package',
-        'stock.picking', 'stock.picking.batch', 'stock.lot', 'stock.reference',
+        'stock.valuation.adjustment.lines', 'stock.landed.cost.lines', 'stock.landed.cost',
+        'stock.move.line', 'stock.move', 'stock.quant', 'stock.package', 'stock.picking', 'stock.picking.batch',
+        'stock.lot', 'stock.reference',
     ]),
     ('mrp', 'Manufacturing', ['mrp.workcenter.productivity', 'mrp.workorder', 'mrp.unbuild', 'mrp.production']),
-    # the expense reports (hr.expense.sheet) are the ones of Odoo 17
-    ('hr', 'Employees', [
-        'hr.expense', 'hr.expense.sheet', 'hr.leave', 'hr.leave.allocation', 'hr.attendance', 'hr.applicant',
-    ]),
+    ('hr', 'Employees', ['hr.expense', 'hr.leave', 'hr.leave.allocation', 'hr.attendance', 'hr.applicant']),
     ('crm', 'CRM', ['crm.lead']),
     ('project', 'Projects', ['project.update', 'project.task', 'project.task.recurrence']),
     ('repair', 'Repairs', ['repair.order']),
@@ -115,16 +107,6 @@ class OmDataRemove(models.TransientModel):
     def _compute_display_name(self):
         for record in self:
             record.display_name = _('Data Cleaning')
-
-    @api.model
-    def default_get(self, fields_list):
-        # the form of Odoo 17 computes no field without dependencies on a new record: the summary as a default
-        values = super().default_get(fields_list)
-        wanted = [name for name in ('summary', 'total_count') if name in fields_list]
-        if wanted:
-            record = self.new({})
-            values.update({name: record[name] for name in wanted})
-        return values
 
     @api.model
     def _om_check_access(self):
@@ -446,7 +428,7 @@ class OmDataRemoveReport(models.TransientModel):
             'type': 'ir.actions.act_window',
             'name': _('Database Tables'),
             'res_model': 'om.data.remove.table',
-            'view_mode': 'tree',
+            'view_mode': 'list',
             'views': [(False, 'list')],
             'domain': [('report_id', '=', self.id)],
             'context': {'search_default_with_rows': 1, 'search_default_data': 1},

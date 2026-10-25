@@ -1,8 +1,8 @@
 from datetime import date
 
 from odoo import Command
-from odoo.exceptions import UserError, ValidationError
-from odoo.tests import new_test_user, tagged
+from odoo.exceptions import UserError
+from odoo.tests import Form, new_test_user, tagged
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
@@ -143,7 +143,7 @@ class TestYearEndClosing(AccountTestInvoicingCommon):
 
         self.assertEqual(self.fy_2025.state, 'open')
         self.assertFalse(self.fy_2025.closing_move_id)
-        self.assertEqual(closing_move.reversal_move_id.state, 'posted')
+        self.assertEqual(closing_move.reversal_move_ids.state, 'posted')
         self.assertEqual(self._balance(self.retained_earnings, '2026-01-01'), 0.0)
 
         self._close(self.fy_2025)
@@ -189,26 +189,24 @@ class TestYearEndClosing(AccountTestInvoicingCommon):
         with self.assertRaises(UserError):
             self._close(self.fy_2025, lock=False, retained_earnings_account_id=self.unaffected_earnings.id)
 
-        # Odoo 17 allows one Current Year Earnings account per company: the one chosen is that one
-        with self.assertRaises(ValidationError):
-            self.unaffected_earnings.copy({'code': 'PLAPPR2', 'name': 'Other Appropriation'})
-        self._close(self.fy_2025, lock=False, unaffected_earnings_account_id=self.unaffected_earnings.id)
+        other_unaffected = self.unaffected_earnings.copy({'code': 'PLAPPR2', 'name': 'Other Appropriation'})
+        self._close(self.fy_2025, lock=False, unaffected_earnings_account_id=other_unaffected.id)
         self.assertEqual(
-            self.fy_2025.closing_move_id.line_ids.filtered(lambda line: line.balance > 0).account_id,
-            self.unaffected_earnings)
+            self.fy_2025.closing_move_id.line_ids.filtered(lambda line: line.balance > 0).account_id, other_unaffected)
 
     def test_lock_date_settings_update_their_own_lock_date(self):
-        # created without the form: its onchanges warn about the cash basis taxes of the test company on Odoo 17
-        self.env['res.config.settings'].create({
-            'period_lock_date': date(2025, 3, 31),
-            'tax_lock_date': date(2025, 5, 31),
-        }).execute()
-        self.assertEqual(self.company.period_lock_date, date(2025, 3, 31))
+        settings = Form(self.env['res.config.settings'])
+        settings.sale_lock_date = date(2025, 3, 31)
+        settings.purchase_lock_date = date(2025, 4, 30)
+        settings.tax_lock_date = date(2025, 5, 31)
+        settings.save().execute()
+        self.assertEqual(self.company.sale_lock_date, date(2025, 3, 31))
+        self.assertEqual(self.company.purchase_lock_date, date(2025, 4, 30))
         self.assertEqual(self.company.tax_lock_date, date(2025, 5, 31))
-        self.assertFalse(self.company.fiscalyear_lock_date)
+        self.assertFalse(self.company.hard_lock_date)
 
     def test_multi_company_rule(self):
-        company_2 = self.company_data_2['company']
+        company_2 = self.setup_other_company()['company']
         fy_other = self.env['account.fiscal.year'].create({
             'name': 'Other 2025', 'date_from': date(2025, 1, 1), 'date_to': date(2025, 12, 31),
             'company_id': company_2.id,

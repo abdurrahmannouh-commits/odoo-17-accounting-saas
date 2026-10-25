@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import { Message } from "@mail/core/common/message";
 import { ConfirmationDialog } from "@web/core/confirmation_dialog/confirmation_dialog";
 import { _t } from "@web/core/l10n/translation";
@@ -9,7 +7,7 @@ import { patch } from "@web/core/utils/patch";
 patch(Message.prototype, {
     /** The ticks of a WhatsApp message sent: one when sent, two when delivered, blue when read. */
     get whatsappTicks() {
-        const notification = this.message.notifications.find((n) => n.isWhatsapp);
+        const notification = this.message.notification_ids.find((n) => n.isWhatsapp);
         if (!notification || !["pending", "sent"].includes(notification.notification_status)) {
             return null;
         }

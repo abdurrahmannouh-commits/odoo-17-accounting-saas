@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-22 07:07+0000\n"
 "PO-Revision-Date: 2026-10-22 07:07+0000\n"
@@ -18,42 +18,38 @@ msgstr ""
 #. module: om_spreadsheet_account_budget
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account_budget/data/files/budgets_sample_dashboard.json:0
 msgid "Actual Expenses"
 msgstr ""
 
 #. module: om_spreadsheet_account_budget
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account_budget/data/files/budgets_sample_dashboard.json:0
 msgid "Actual Revenues"
 msgstr ""
 
 #. module: om_spreadsheet_account_budget
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
 msgid "Actual expenses"
 msgstr ""
 
 #. module: om_spreadsheet_account_budget
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
 msgid "Actual revenues"
 msgstr ""
 
 #. module: om_spreadsheet_account_budget
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
 msgid "Budget"
 msgstr ""
 
 #. module: om_spreadsheet_account_budget
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
 msgid "Budget by Position"
 msgstr ""
 
@@ -65,125 +61,88 @@ msgstr ""
 #. module: om_spreadsheet_account_budget
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
-msgid "Budgets by Position"
-msgstr ""
-
-#. module: om_spreadsheet_account_budget
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
-msgid "Expense Budgets"
-msgstr ""
-
-#. module: om_spreadsheet_account_budget
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account_budget/data/files/budgets_sample_dashboard.json:0
 msgid "Expenses Spent (%)"
 msgstr ""
 
 #. module: om_spreadsheet_account_budget
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
 msgid "Expenses expected to date"
 msgstr ""
 
 #. module: om_spreadsheet_account_budget
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
 msgid "Expenses spent of the plan"
 msgstr ""
 
 #. module: om_spreadsheet_account_budget
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
 msgid "Expenses spent of the plan (%)"
 msgstr ""
 
 #. module: om_spreadsheet_account_budget
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
 msgid "Period"
 msgstr ""
 
 #. module: om_spreadsheet_account_budget
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account_budget/data/files/budgets_sample_dashboard.json:0
 msgid "Planned Expenses"
 msgstr ""
 
 #. module: om_spreadsheet_account_budget
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account_budget/data/files/budgets_sample_dashboard.json:0
 msgid "Planned Revenues"
 msgstr ""
 
 #. module: om_spreadsheet_account_budget
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
 msgid "Planned expenses"
 msgstr ""
 
 #. module: om_spreadsheet_account_budget
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
 msgid "Planned revenues"
 msgstr ""
 
 #. module: om_spreadsheet_account_budget
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
-msgid "Revenue Budgets"
-msgstr ""
-
-#. module: om_spreadsheet_account_budget
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account_budget/data/files/budgets_sample_dashboard.json:0
 msgid "Revenues Earned (%)"
 msgstr ""
 
 #. module: om_spreadsheet_account_budget
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
 msgid "Revenues earned of the plan"
 msgstr ""
 
 #. module: om_spreadsheet_account_budget
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
 msgid "Revenues earned of the plan (%)"
 msgstr ""
 
 #. module: om_spreadsheet_account_budget
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
 msgid "Revenues expected to date"
 msgstr ""
 
 #. module: om_spreadsheet_account_budget
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
-msgid "Total"
-msgstr ""
-
-#. module: om_spreadsheet_account_budget
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account_budget/data/files/budgets_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account_budget/data/files/budgets_sample_dashboard.json:0
 msgid "vs expected to date"
 msgstr ""

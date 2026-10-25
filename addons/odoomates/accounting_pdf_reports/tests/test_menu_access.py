@@ -57,12 +57,12 @@ class TestMenuAccess(AccountTestInvoicingCommon):
         self.assertEqual(self._run(user, 'accounting_pdf_reports.menu_aged_trial_balance')['type'], 'ir.actions.report')
 
     def test_the_old_folders_are_kept_but_not_shown(self):
-        """ The financial statements moved into the Statement Reports folder of the account module. The
-        folders they used to be in stay, for the modules that put their own menus in them, and are hidden
-        while empty; Partner Reports holds the partner reports on 17. """
+        """ The reports moved into the folders of the account module. The folders they used to be in
+        stay, for the modules that put their own menus in them, and are hidden while empty. """
         user = self._user('report_manager', 'account.group_account_manager')
         visible = self.env['ir.ui.menu'].with_user(user)._visible_menu_ids()
         for xmlid in ('accounting_pdf_reports.menu_finance_legal_statement',
+                      'accounting_pdf_reports.menu_finance_partner_reports',
                       'accounting_pdf_reports.menu_finance_reports_settings'):
             with self.subTest(xmlid=xmlid):
                 self.assertNotIn(self.env.ref(xmlid).id, visible)

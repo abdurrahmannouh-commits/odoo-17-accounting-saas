@@ -2,7 +2,7 @@
 WhatsApp Connector Meta
 =======================
 
-This module connects Odoo 17 to the official WhatsApp Cloud API of Meta. Messages, PDFs and template
+This module connects Odoo 19 to the official WhatsApp Cloud API of Meta. Messages, PDFs and template
 messages go out from the server: from the composer, the chatter, Discuss and automation rules, for any
 number of records, with no browser open. Replies, files, statuses and reactions come in through the
 webhook of the app, into the WhatsApp conversations of Discuss and the chatter of the documents. It is

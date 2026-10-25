@@ -1,7 +1,7 @@
 # Security regression tests, each through the entry point concerned.
 import json
+from datetime import datetime, timedelta
 from unittest.mock import patch
-import xmlrpc.client
 
 from odoo.exceptions import AccessError, ValidationError
 from odoo import http
@@ -49,7 +49,7 @@ class TestReview(HttpCase):
         self.assertIs(result['records'][0]['email'], False)
 
     def test_the_export_dialog_and_file(self):
-        fields = self.make_jsonrpc_request('/web/export/get_fields', {'model': 'res.partner'})
+        fields = self.make_jsonrpc_request('/web/export/get_fields', {'model': 'res.partner', 'domain': []})
         self.assertNotIn('email', [field['id'] for field in fields])
         self.assertIn('name', [field['id'] for field in fields])
         data = json.dumps({'model': 'res.partner', 'ids': self.partner.ids, 'domain': [], 'import_compat': False,
@@ -61,14 +61,14 @@ class TestReview(HttpCase):
     def test_a_language_or_an_aggregate_does_not_hide_a_field(self):
         for method, args, kwargs in (
             ('export_data', [self.partner.ids, ['email@en_US']], {}),
-            ('read_group', [[], ['email:count_distinct'], ['name']], {}),
+            ('formatted_read_group', [[]], {'groupby': ['name'], 'aggregates': ['__count'],
+                                            'having': [('email:count_distinct', '>', 0)]}),
             ('search_read', [[]], {'fields': ['name'], 'order': 'email:count_distinct'}),
         ):
             with self.subTest(method=method), self.assertRaises(JsonRpcException):
                 self._rpc(f'/web/dataset/call_kw/res.partner/{method}', 'res.partner', method, args, kwargs)
 
     def test_values_read_for_a_grouped_relation_are_blanked(self):
-        self.skipTest("Odoo 17 groups without reading the values of the grouped relation")
         result = self._rpc('/web/dataset/call_kw/res.partner/web_read_group', 'res.partner', 'web_read_group',
                            [[('id', '=', self.child.id)], ['parent_id']],
                            {'groupby_read_specification': {'parent_id': {'email': {}}}})
@@ -100,16 +100,14 @@ class TestReview(HttpCase):
             self.partner.with_user(self.user).write({'name': 'Not mine'})
 
     def test_an_api_key_follows_the_sign_in_rules(self):
-        # Odoo 17 has no JSON-2: an API key is used over XML-RPC
-        key = self.env['res.users.apikeys'].with_user(self.user)._generate('rpc', 'review')
-        count = self.xmlrpc_object.execute_kw(
-            self.env.cr.dbname, self.user.id, key, 'res.partner', 'search_count', [[]])
-        self.assertTrue(count)
+        key = self.env['res.users.apikeys'].with_user(self.user)._generate(
+            'rpc', 'review', datetime.now() + timedelta(days=1))
+        headers = {'Authorization': f'bearer {key}', 'X-Odoo-Database': self.env.cr.dbname}
+        self.assertEqual(self.url_open('/json/2/res.partner/search_count', json={'domain': []},
+                                       headers=headers).status_code, 200)
         self.profile.block_login = True
-        self.env.flush_all()
-        with self.assertRaises(xmlrpc.client.Fault):
-            self.xmlrpc_object.execute_kw(
-                self.env.cr.dbname, self.user.id, key, 'res.partner', 'search_count', [[]])
+        self.assertNotEqual(self.url_open('/json/2/res.partner/search_count', json={'domain': []},
+                                          headers=headers).status_code, 200)
 
     def test_xmlrpc_and_the_allowed_networks(self):
         from odoo.addons.om_user_audit.models.client_call import RPC_ADDRESS
@@ -120,12 +118,12 @@ class TestReview(HttpCase):
         # the address kept by the RPC controllers is checked
         token = RPC_ADDRESS.set('127.0.0.1')
         try:
-            user._check_credentials(credential['password'], {'interactive': False})
+            user._check_credentials(credential, {'interactive': False})
         finally:
             RPC_ADDRESS.reset(token)
         # an address Odoo does not know is refused, never let through
         with self.assertRaises(AccessDenied):
-            user._check_credentials(credential['password'], {'interactive': False})
+            user._check_credentials(credential, {'interactive': False})
         # end to end, the address read from the request
         self.assertEqual(self.xmlrpc_common.authenticate(self.env.cr.dbname, self.user.login, self.password, {}),
                          self.user.id)
@@ -134,7 +132,7 @@ class TestReview(HttpCase):
 
     def test_the_last_administrator_from_the_user_side(self):
         Profile = type(self.env['om.access.profile'])
-        admins = self.env.ref('base.group_system').users
+        admins = self.env.ref('base.group_system').all_user_ids
         locked = self.env['om.access.profile'].create({'name': 'Locked', 'block_login': True,
                                                        'apply_to_admin': True})
         with patch.object(Profile, '_exempt_user_ids', lambda self: ()), self.assertRaises(ValidationError):

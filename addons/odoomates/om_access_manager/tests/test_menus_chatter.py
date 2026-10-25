@@ -79,22 +79,18 @@ class TestMenusAndChatter(HttpCase):
         self.authenticate(self.user.login, self.password)
         with self.assertRaises(JsonRpcException):
             self._post('mail.mt_comment')
-        self._post('mail.mt_note')
-        # Odoo 17 answers with the data of the chatter: look for the note itself
-        self.assertTrue(self.env['mail.message'].search_count([
-            ('model', '=', 'res.partner'), ('res_id', '=', self.partner.id),
-            ('subtype_id', '=', self.env.ref('mail.mt_note').id), ('body', 'ilike', 'Hello')]))
+        self.assertTrue(self._post('mail.mt_note')['message_id'])
 
     def test_home_page(self):
         action = self.env['ir.actions.act_window'].create({'name': 'Landing', 'res_model': 'res.partner'})
         self._profile(home_action_id=action.id)
         self.authenticate(self.user.login, self.password)
-        info = self.make_jsonrpc_request('/web/session/get_session_info', {})
+        info = self.make_jsonrpc_request('/web/session/get_session_info')
         self.assertEqual(info['home_action_id'], action.id)
 
     def test_chatter_and_home_page_in_the_browser(self):
         action = self.env['ir.actions.act_window'].create({
-            'name': 'Landing Contacts', 'res_model': 'res.partner', 'view_mode': 'tree,form'})
+            'name': 'Landing Contacts', 'res_model': 'res.partner', 'view_mode': 'list,form'})
         self._profile(home_action_id=action.id, hide_send_message_all=True, hide_followers_all=True)
         code = """(async () => {
             const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -114,6 +110,7 @@ class TestMenusAndChatter(HttpCase):
             if (!title.includes('Landing Contacts')) {
                 throw new Error('not on the home page: ' + title);
             }
+            window.location.hash = '';
             (await until('.o_data_row td.o_data_cell')).click();
             const logNote = await until('.o-mail-Chatter-logNote');
             const visible = (element) => element && element.offsetParent !== null;
@@ -128,6 +125,4 @@ class TestMenusAndChatter(HttpCase):
             }
             console.log('test successful');
         })()"""
-        # Odoo 17 signs the browser in with the login as the password
-        self.user.password = self.user.login
-        self.browser_js('/web', code, login=self.user.login, timeout=90)
+        self.browser_js('/odoo', code, login=self.user.login, timeout=90)

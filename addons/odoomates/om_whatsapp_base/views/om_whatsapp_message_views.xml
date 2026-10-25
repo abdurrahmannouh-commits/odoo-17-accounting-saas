@@ -5,7 +5,7 @@
         <field name="model">mail.message</field>
         <field name="priority">100</field>
         <field name="arch" type="xml">
-            <tree create="0" edit="0" delete="0" decoration-danger="om_whatsapp_status == 'failed'"
+            <list create="0" edit="0" delete="0" decoration-danger="om_whatsapp_status == 'failed'"
                   decoration-muted="om_whatsapp_status == 'cancel'" decoration-info="om_whatsapp_status == 'queued'">
                 <field name="date"/>
                 <field name="author_id" widget="many2one_avatar"/>
@@ -16,7 +16,7 @@
                        decoration-success="om_whatsapp_status in ('delivered', 'read', 'received')"
                        decoration-danger="om_whatsapp_status == 'failed'"
                        decoration-info="om_whatsapp_status in ('queued', 'sent')"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -54,12 +54,12 @@
                     <field name="attachment_ids" widget="many2many_binary" readonly="1" invisible="not attachment_ids"/>
                     <field name="notification_ids" readonly="1" invisible="om_whatsapp_status == 'received'"
                            domain="[('notification_type', '=', 'om_whatsapp')]">
-                        <tree>
+                        <list>
                             <field name="res_partner_id" string="Contact"/>
                             <field name="om_whatsapp_number"/>
                             <field name="notification_status" string="Status"/>
                             <field name="failure_reason"/>
-                        </tree>
+                        </list>
                     </field>
                 </sheet>
             </form>
@@ -94,11 +94,11 @@
     <record id="om_whatsapp_message_action" model="ir.actions.act_window">
         <field name="name">WhatsApp Messages</field>
         <field name="res_model">mail.message</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[('message_type', '=', 'om_whatsapp')]</field>
         <field name="search_view_id" ref="om_whatsapp_message_view_search"/>
         <field name="view_ids" eval="[Command.clear(),
-            Command.create({'view_mode': 'tree', 'view_id': ref('om_whatsapp_message_view_list')}),
+            Command.create({'view_mode': 'list', 'view_id': ref('om_whatsapp_message_view_list')}),
             Command.create({'view_mode': 'form', 'view_id': ref('om_whatsapp_message_view_form')})]"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">No WhatsApp message yet</p>

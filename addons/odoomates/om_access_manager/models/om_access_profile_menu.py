@@ -45,10 +45,10 @@ class OmAccessProfileMenu(models.Model):
         help="Also apply to the data other apps open too (customers, products). "
              "Left unticked, making Sales read only leaves the Contacts app alone.")
 
-    _sql_constraints = [
-        ('unique_menu', 'UNIQUE(profile_id, menu_id)',
-         'A profile can only carry one rule per menu.'),
-    ]
+    _unique_menu = models.Constraint(
+        'UNIQUE(profile_id, menu_id)',
+        'A profile can only carry one rule per menu.',
+    )
 
     # a rule can take the access profiles away from the last administrator
     @api.model_create_multi
@@ -90,7 +90,7 @@ class OmAccessProfileMenu(models.Model):
         configuration), ...) for every menu opening data; the models of a
         document's lines (order lines) go with it. """
         Wizard = self.env['om.access.app.wizard']
-        Menu = self.env['ir.ui.menu'].sudo().with_context(**{'ir.ui.menu.full_list': True})
+        Menu = self.env['ir.ui.menu'].sudo()
         lines_of = {}
         result = []
         menus = Menu.search([('action', '!=', False)])

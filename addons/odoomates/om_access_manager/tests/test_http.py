@@ -16,14 +16,14 @@ class TestAccessProfileHttp(HttpCase):
 
     def _page_debug(self):
         self.authenticate(self.user.login, self.password)
-        page = self.url_open('/web?debug=1').text
+        page = self.url_open('/odoo?debug=1').text
         return re.search(r'debug: "([^"]*)"', page).group(1)
 
     def test_debug_mode_without_a_profile(self):
         self.assertEqual(self._page_debug(), '1')
 
     def test_block_developer_mode_on_the_web_client_page(self):
-        # /web is an auth='none' route: the hook must find the user in the session
+        # /odoo is an auth='none' route: the hook must find the user in the session
         self.env['om.access.profile'].create({
             'name': 'No Debug', 'block_developer_mode': True, 'user_ids': [(6, 0, self.user.ids)],
         })
@@ -31,11 +31,11 @@ class TestAccessProfileHttp(HttpCase):
 
     def test_block_login_ends_the_open_session(self):
         self.authenticate(self.user.login, self.password)
-        self.assertEqual(self.url_open('/web', allow_redirects=False).status_code, 200)
+        self.assertEqual(self.url_open('/odoo', allow_redirects=False).status_code, 200)
         self.env['om.access.profile'].create({
             'name': 'On Leave', 'block_login': True, 'user_ids': [(6, 0, self.user.ids)],
         })
-        response = self.url_open('/web', allow_redirects=False)
+        response = self.url_open('/odoo', allow_redirects=False)
         self.assertEqual(response.status_code, 303)
         self.assertIn('/web/login', response.headers['Location'])
         # and signing in again is refused, from a fresh session
@@ -44,7 +44,7 @@ class TestAccessProfileHttp(HttpCase):
             'login': self.user.login, 'password': self.password, 'csrf_token': http.Request.csrf_token(self),
         })
         self.assertIn('not allow you to sign in', response.text)
-        response = self.url_open('/web', allow_redirects=False)
+        response = self.url_open('/odoo', allow_redirects=False)
         self.assertEqual(response.status_code, 303)
 
     def test_menu_tree_hides_a_branch(self):
@@ -83,7 +83,7 @@ class TestAccessProfileHttp(HttpCase):
             console.log('test successful');
         })()""" % {'menu': discuss.id}
         self.browser_js(
-            f'/web#action=om_access_manager.om_access_profile_action&id={profile.id}&view_type=form', code,
+            f'/odoo/action-om_access_manager.om_access_profile_action/{profile.id}', code,
             login='admin', timeout=90)
         self.assertEqual(profile.hidden_menu_ids, discuss)
 
@@ -117,7 +117,7 @@ class TestAccessProfileHttp(HttpCase):
             console.log('test successful');
         })()"""
         self.browser_js(
-            f'/web?debug=1#action=om_access_manager.om_access_profile_action&id={profile.id}&view_type=form', code,
+            f'/odoo/action-om_access_manager.om_access_profile_action/{profile.id}?debug=1', code,
             login='admin', timeout=90)
         self.assertEqual(profile.model_ids.domain, "[('user_id', '=', uid)]")
 
@@ -127,9 +127,9 @@ class TestAccessProfileHttp(HttpCase):
         self.env['ir.model.access'].create({
             'name': 'om_access_manager panel test: tags', 'group_id': group.id, 'perm_read': True, 'perm_write': True, 'perm_create': True, 'perm_unlink': True,
             'model_id': self.env['ir.model']._get('res.partner.category').id})
-        self.user.groups_id |= group
+        self.user.group_ids |= group
         action = self.env['ir.actions.act_window'].create({
-            'name': 'OM Tags', 'res_model': 'res.partner.category', 'view_mode': 'tree,form'})
+            'name': 'OM Tags', 'res_model': 'res.partner.category', 'view_mode': 'list,form'})
         app = self.env['ir.ui.menu'].create({'name': 'OM Panel App'})
         tags = self.env['ir.ui.menu'].create({'name': 'OM Tags', 'parent_id': app.id,
                                               'action': f'ir.actions.act_window,{action.id}'})
@@ -180,7 +180,7 @@ class TestAccessProfileHttp(HttpCase):
             console.log('test successful');
         })()""" % {'tags': tags.id, 'app': app.id, 'report': report.id}
         self.browser_js(
-            f'/web#action=om_access_manager.om_access_profile_action&id={profile.id}&view_type=form', code,
+            f'/odoo/action-om_access_manager.om_access_profile_action/{profile.id}', code,
             login='admin', timeout=120)
         self.assertEqual((profile.model_ids.model, profile.model_ids.perm_create), ('res.partner.category', False))
         self.assertEqual((profile.field_ids.field_id.name, profile.field_ids.mode), ('color', 'hide'))
@@ -201,6 +201,4 @@ class TestAccessProfileHttp(HttpCase):
             }
             console.log('test successful');
         })()"""
-        # Odoo 17 signs the browser in with the login as the password
-        self.user.password = self.user.login
-        self.browser_js(f'/web#action={action.id}', user_code, login=self.user.login, timeout=90)
+        self.browser_js(f'/odoo/action-{action.id}', user_code, login=self.user.login, timeout=90)

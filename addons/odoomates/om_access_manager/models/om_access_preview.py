@@ -36,7 +36,7 @@ class ResUsers(models.Model):
     def _om_preview_refusal(self, viewer):
         """ Why ``viewer`` may not preview this user, or None. """
         self.ensure_one()
-        if not viewer.has_group(MANAGER_GROUP):
+        if not viewer._has_group(MANAGER_GROUP):
             return _("Only access managers can preview a user.")
         if self == viewer:
             return _("You cannot preview yourself.")
@@ -45,7 +45,7 @@ class ResUsers(models.Model):
         if self.id in self.env['om.access.profile']._exempt_user_ids():
             return _("The administrator is never restricted: there is nothing to preview.")
         # nobody reads more through a preview than they can already
-        if not viewer.has_group('base.group_system') and not self.groups_id <= viewer.groups_id:
+        if not viewer._has_group('base.group_system') and not self.all_group_ids <= viewer.all_group_ids:
             return _("%s has rights you do not have: only a Settings user can preview them.", self.name)
         return None
 
@@ -59,21 +59,18 @@ class ResUsers(models.Model):
             raise AccessError(reason)
         if not request:
             raise UserError(_("A preview needs a browser session."))
-        if 'res.users.settings' in self.env:
-            # Odoo 17 creates them on the first page load, and a preview is read only
-            self.env['res.users.settings'].sudo()._find_or_create_for_user(target)
         request.session[PREVIEW_KEY] = {
             'uid': target.id,
             'by': viewer.id,
             'until': time.time() + PREVIEW_SECONDS,
-            'back': back_url or f'/web#action=base.action_res_users&id={target.id}&view_type=form',
+            'back': back_url or f'/odoo/action-base.action_res_users/{target.id}',
             'cids': request.httprequest.cookies.get('cids'),
             'context': dict(request.session.context),
         }
         self.env['om.user.audit.log']._om_log(
             'other', separate=True, detail=_("Preview as %s started", target.name))
         # the screens of the user are cached per user: start from a clean page
-        return {'type': 'ir.actions.act_url', 'url': '/web', 'target': 'self'}
+        return {'type': 'ir.actions.act_url', 'url': '/odoo', 'target': 'self'}
 
     @api.model
     def _om_preview_stop(self):
@@ -105,8 +102,8 @@ class IrHttp(models.AbstractModel):
     _inherit = 'ir.http'
 
     @classmethod
-    def _authenticate(cls, endpoint):
-        super()._authenticate(endpoint)
+    def _authenticate_explicit(cls, routing):
+        super()._authenticate_explicit(routing)
         if not request.env.uid or request.env.uid != request.session.uid:
             return
         data = valid_preview(request.env)
@@ -137,7 +134,7 @@ class IrHttp(models.AbstractModel):
     def session_info(self):
         data = preview_of_request()
         if not data and request and self.env.uid and self.env.uid == request.session.uid:
-            # /web is served without a user: the preview is read from the session
+            # /odoo is served without a user: the preview is read from the session
             data = valid_preview(self.env)
         elif not data and request and self.env.context.get('om_preview'):
             data = request.session.get(PREVIEW_KEY)

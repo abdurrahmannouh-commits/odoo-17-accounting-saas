@@ -1,7 +1,7 @@
 import io
 from datetime import date, datetime
 
-import xlsxwriter
+import openpyxl
 
 from odoo.exceptions import ValidationError
 from odoo.tests import TransactionCase, tagged
@@ -116,24 +116,15 @@ class TestCsvParser(TransactionCase):
     def test_xlsx_file(self):
         """ The same map reads an Excel file, where the dates are real dates. """
         file_map = self._make_map(column_ref='Reference')
-        # written with XlsxWriter, which Odoo 16 ships
+        workbook = openpyxl.Workbook()
+        sheet = workbook.active
+        sheet.title = 'Transactions'
+        sheet.append(['Date', 'Label', 'Amount', 'Reference'])
+        sheet.append([datetime(2024, 5, 6), 'Supplier', -99.99, 'INV1'])
+        sheet.append([None, None, None, None])
+        sheet.append([datetime(2024, 5, 7), 'Customer', 120.5, 'INV2'])
         stream = io.BytesIO()
-        workbook = xlsxwriter.Workbook(stream, {'in_memory': True})
-        sheet = workbook.add_worksheet('Transactions')
-        date_style = workbook.add_format({'num_format': 'yyyy-mm-dd'})
-        rows = [
-            ['Date', 'Label', 'Amount', 'Reference'],
-            [datetime(2024, 5, 6), 'Supplier', -99.99, 'INV1'],
-            [None, None, None, None],
-            [datetime(2024, 5, 7), 'Customer', 120.5, 'INV2'],
-        ]
-        for row_index, row in enumerate(rows):
-            for column, value in enumerate(row):
-                if isinstance(value, datetime):
-                    sheet.write_datetime(row_index, column, value, date_style)
-                elif value is not None:
-                    sheet.write(row_index, column, value)
-        workbook.close()
+        workbook.save(stream)
 
         statement = self._parse(stream.getvalue(), 'bank.xlsx', file_map)[0]
         self.assertEqual(statement['date'], date(2024, 5, 7))

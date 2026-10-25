@@ -284,8 +284,9 @@ class AccountCheckFormat(models.Model):
             integral = int(amount)
             subunits = 10 ** currency.decimal_places
             cents = int(round((amount - integral) * subunits))
-            words = check_format._fraction_words(
-                currency.amount_to_text(integral), str(cents).zfill(currency.decimal_places), subunits)
+            words = check_format.env._(
+                '%(words)s and %(cents)s/%(subunits)s', words=currency.amount_to_text(integral),
+                cents=str(cents).zfill(currency.decimal_places), subunits=subunits)
         else:
             words = currency.amount_to_text(amount)
         if check_format.words_suffix:
@@ -293,10 +294,6 @@ class AccountCheckFormat(models.Model):
         if self.words_uppercase:
             words = words.upper()
         return words
-
-    def _fraction_words(self, words, cents, subunits):
-        # _() of Odoo 17 takes the language of self.env: called on the format in the language of the words
-        return _('%(words)s and %(cents)s/%(subunits)s', words=words, cents=cents, subunits=subunits)
 
     def _format_micr(self, check_number, routing_number, account_number):
         """ :return: the MICR line, whose symbols are drawn by the MICR font """
@@ -368,7 +365,7 @@ class AccountCheckFormat(models.Model):
         if self.print_micr and not void and bank_account is not None:
             if not bank_account:
                 raise UserError(_('Set the bank account of the journal to print the MICR line of the cheques.'))
-            micr = self._format_micr(check_number, bank_account._om_check_routing_number(), bank_account.acc_number)
+            micr = self._format_micr(check_number, bank_account.clearing_number, bank_account.acc_number)
         return {
             'date': self._format_date(date),
             'payee': partner_name or '',

@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import { Component, onWillStart, useState } from "@odoo/owl";
 import { useHotkey } from "@web/core/hotkeys/hotkey_hook";
 import { _t } from "@web/core/l10n/translation";
@@ -315,8 +313,7 @@ export class OmBankReconciliation extends Component {
     }
 
     get accountDomain() {
-        // Odoo 17 marks the accounts no longer used as deprecated (19: inactive)
-        return [["account_type", "!=", "off_balance"], ["deprecated", "=", false]];
+        return [["account_type", "!=", "off_balance"], ["active", "=", true]];
     }
 
     get taxDomain() {

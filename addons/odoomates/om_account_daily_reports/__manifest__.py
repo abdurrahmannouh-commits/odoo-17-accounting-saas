@@ -1,9 +1,9 @@
 {
     'name': 'Cash Book, Day Book, Bank Book Financial Reports',
-    'version': '17.0.1.2',
+    'version': '1.1.0',
     'category': 'Invoicing Management',
-    'summary': 'Cash Book, Day Book and Bank Book Report For Odoo 17',
-    'description': 'Cash Book, Day Book and Bank Book Report For Odoo 17',
+    'summary': 'Cash Book, Day Book and Bank Book Report For Odoo 19',
+    'description': 'Cash Book, Day Book and Bank Book Report For Odoo 19',
     'sequence': '10',
     'author': 'Odoo Mates',
     'license': 'LGPL-3',

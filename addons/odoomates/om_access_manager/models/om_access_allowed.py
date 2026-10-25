@@ -5,8 +5,9 @@ import ast
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
-from odoo.tools.translate import _lt
+from odoo.tools.translate import LazyTranslate
 
+_lt = LazyTranslate(__name__)
 
 # kind: (label, model of the records, {model to filter: domain with {ids}})
 ALLOWED_KINDS = {

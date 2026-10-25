@@ -1,9 +1,6 @@
-from datetime import date
-
 from odoo import Command
 from odoo.exceptions import UserError
 from odoo.tests import tagged
-from odoo.tools import file_open
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
@@ -39,16 +36,6 @@ VERSION:102
 
 @tagged('post_install', '-at_install')
 class TestStatementImport(AccountTestInvoicingCommon):
-
-    @classmethod
-    def setup_other_currency(cls, code, rates=None):
-        """ setup_other_currency() of Odoo 17 and later """
-        rates = rates or [('1900-01-01', 1.0), ('2016-01-01', 3.0), ('2017-01-01', 2.0)]
-        currency = cls.env['res.currency'].with_context(active_test=False).search([('name', '=', code)], limit=1)
-        currency.rate_ids.unlink()
-        currency.write({'active': True, 'rate_ids': [Command.create(
-            {'name': rate_date, 'rate': rate, 'company_id': cls.env.company.id}) for rate_date, rate in rates]})
-        return currency
 
     @classmethod
     def setUpClass(cls):
@@ -132,29 +119,3 @@ class TestStatementImport(AccountTestInvoicingCommon):
     def test_an_unknown_format_is_refused(self):
         with self.assertRaisesRegex(UserError, 'not supported'):
             self._import('nothing a bank would ever send', 'notes.txt', journal_id=self.journal.id)
-
-    def _sample(self, file_name):
-        with file_open('om_account_bank_statement_import/sample_files/%s' % file_name, 'rb') as file:
-            return file.read()
-
-    def test_the_layout_of_17_imports_without_a_map(self):
-        """ The files of the import of 17.0 before the maps (Date, Label, Reference, Partner, Amount, Currency)
-        import into a journal without a map of its own, as they did. """
-        partner = self.env['res.partner'].create({'name': 'odoo mates'})
-        self.assertFalse(self.journal.statement_import_map_id)
-        action = self._import(self._sample('Import_Sample.csv'), 'Import_Sample.csv', journal_id=self.journal.id)
-        lines = self._statements_of(action).line_ids.sorted('amount')
-        self.assertEqual(lines.mapped('amount'), [30.0, 40.0])
-        self.assertEqual(lines.mapped('payment_ref'), ['Test 1', 'Test 2'])
-        self.assertEqual(lines.mapped('ref'), ['Ref 1', 'Ref 2'])
-        self.assertEqual(lines.partner_id, partner)
-        self.assertEqual(set(lines.mapped('date')), {date(2020, 12, 1)})
-
-    def test_the_excel_layout_of_17_imports_without_a_map(self):
-        self.env['res.partner'].create({'name': 'odoo mates'})
-        self.env.ref('base.KWD').active = True
-        action = self._import(self._sample('Import_Sample.xlsx'), 'Import_Sample.xlsx', journal_id=self.journal.id)
-        lines = self._statements_of(action).line_ids.sorted('payment_ref')
-        self.assertEqual(lines.mapped('payment_ref'), ['Test 1', 'Test 2'])
-        self.assertEqual(lines.mapped('ref'), ['Ref 1', 'Ref 2'])
-        self.assertTrue(lines.partner_id)

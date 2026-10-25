@@ -7,7 +7,6 @@
         <field name="code">model._cron_device_send_queue()</field>
         <field name="interval_number">5</field>
         <field name="interval_type">minutes</field>
-        <field name="numbercall">-1</field>
     </record>
 
     <record id="ir_cron_device_check" model="ir.cron">
@@ -17,6 +16,5 @@
         <field name="code">model._cron_device_check()</field>
         <field name="interval_number">5</field>
         <field name="interval_type">minutes</field>
-        <field name="numbercall">-1</field>
     </record>
 </odoo>

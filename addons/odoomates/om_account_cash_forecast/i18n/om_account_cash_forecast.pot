@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-22 07:06+0000\n"
 "PO-Revision-Date: 2026-10-22 07:06+0000\n"
@@ -53,14 +53,12 @@ msgstr ""
 #. module: om_account_cash_forecast
 #. odoo-python
 #: code:addons/om_account_cash_forecast/report/report_cash_forecast.py:0
-#, python-format
 msgid "Bank payments already recorded"
 msgstr ""
 
 #. module: om_account_cash_forecast
 #. odoo-python
 #: code:addons/om_account_cash_forecast/report/report_cash_forecast.py:0
-#, python-format
 msgid "Bank receipts already recorded"
 msgstr ""
 
@@ -138,7 +136,6 @@ msgstr ""
 #. module: om_account_cash_forecast
 #. odoo-python
 #: code:addons/om_account_cash_forecast/report/report_cash_forecast.py:0
-#, python-format
 msgid "Customer invoices"
 msgstr ""
 
@@ -155,6 +152,7 @@ msgstr ""
 #. module: om_account_cash_forecast
 #: model:ir.model.fields,field_description:om_account_cash_forecast.field_account_cash_forecast_item__display_name
 #: model:ir.model.fields,field_description:om_account_cash_forecast.field_account_cash_forecast_report__display_name
+#: model:ir.model.fields,field_description:om_account_cash_forecast.field_report_om_account_cash_forecast_report_cash_forecast__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -201,6 +199,7 @@ msgstr ""
 #. module: om_account_cash_forecast
 #: model:ir.model.fields,field_description:om_account_cash_forecast.field_account_cash_forecast_item__id
 #: model:ir.model.fields,field_description:om_account_cash_forecast.field_account_cash_forecast_report__id
+#: model:ir.model.fields,field_description:om_account_cash_forecast.field_report_om_account_cash_forecast_report_cash_forecast__id
 msgid "ID"
 msgstr ""
 
@@ -212,7 +211,6 @@ msgstr ""
 #. module: om_account_cash_forecast
 #. odoo-python
 #: code:addons/om_account_cash_forecast/wizard/cash_forecast_report.py:0
-#, python-format
 msgid ""
 "Install the Accounting Excel Reports module to export the forecast to Excel."
 msgstr ""
@@ -252,10 +250,6 @@ msgstr ""
 #. module: om_account_cash_forecast
 #. odoo-python
 #: code:addons/om_account_cash_forecast/report/report_cash_forecast.py:0
-#: code:addons/om_account_cash_forecast/report/report_cash_forecast.py:0
-#: code:addons/om_account_cash_forecast/report/report_cash_forecast.py:0
-#: code:addons/om_account_cash_forecast/report/report_cash_forecast.py:0
-#, python-format
 msgid "No partner"
 msgstr ""
 
@@ -282,21 +276,18 @@ msgstr ""
 #. module: om_account_cash_forecast
 #. odoo-python
 #: code:addons/om_account_cash_forecast/report/report_cash_forecast.py:0
-#, python-format
 msgid "Other expected payments"
 msgstr ""
 
 #. module: om_account_cash_forecast
 #. odoo-python
 #: code:addons/om_account_cash_forecast/report/report_cash_forecast.py:0
-#, python-format
 msgid "Other expected receipts"
 msgstr ""
 
 #. module: om_account_cash_forecast
 #. odoo-python
 #: code:addons/om_account_cash_forecast/report/report_cash_forecast.py:0
-#, python-format
 msgid "Overdue"
 msgstr ""
 
@@ -319,14 +310,12 @@ msgstr ""
 #. odoo-python
 #: code:addons/om_account_cash_forecast/report/report_cash_forecast.py:0
 #: model_terms:ir.ui.view,arch_db:om_account_cash_forecast.view_cash_forecast_item_search
-#, python-format
 msgid "Payments"
 msgstr ""
 
 #. module: om_account_cash_forecast
 #. odoo-python
 #: code:addons/om_account_cash_forecast/report/report_cash_forecast.py:0
-#, python-format
 msgid "Payments not yet out of the bank"
 msgstr ""
 
@@ -349,14 +338,12 @@ msgstr ""
 #. odoo-python
 #: code:addons/om_account_cash_forecast/report/report_cash_forecast.py:0
 #: model_terms:ir.ui.view,arch_db:om_account_cash_forecast.view_cash_forecast_item_search
-#, python-format
 msgid "Receipts"
 msgstr ""
 
 #. module: om_account_cash_forecast
 #. odoo-python
 #: code:addons/om_account_cash_forecast/report/report_cash_forecast.py:0
-#, python-format
 msgid "Receipts not yet in the bank"
 msgstr ""
 
@@ -368,14 +355,12 @@ msgstr ""
 #. module: om_account_cash_forecast
 #. odoo-python
 #: code:addons/om_account_cash_forecast/report/report_cash_forecast.py:0
-#, python-format
 msgid "Recurring payments"
 msgstr ""
 
 #. module: om_account_cash_forecast
 #. odoo-python
 #: code:addons/om_account_cash_forecast/report/report_cash_forecast.py:0
-#, python-format
 msgid "Recurring receipts"
 msgstr ""
 
@@ -389,7 +374,6 @@ msgstr ""
 #. module: om_account_cash_forecast
 #. odoo-python
 #: code:addons/om_account_cash_forecast/models/cash_forecast_item.py:0
-#, python-format
 msgid "The amount of the expected item \"%s\" must be positive."
 msgstr ""
 
@@ -416,14 +400,12 @@ msgstr ""
 #. module: om_account_cash_forecast
 #. odoo-python
 #: code:addons/om_account_cash_forecast/models/cash_forecast_item.py:0
-#, python-format
 msgid "The expected item \"%s\" ends before it starts."
 msgstr ""
 
 #. module: om_account_cash_forecast
 #. odoo-python
 #: code:addons/om_account_cash_forecast/wizard/cash_forecast_report.py:0
-#, python-format
 msgid "The forecast covers between 1 and 60 periods."
 msgstr ""
 
@@ -452,14 +434,12 @@ msgstr ""
 #. module: om_account_cash_forecast
 #. odoo-python
 #: code:addons/om_account_cash_forecast/report/report_cash_forecast.py:0
-#, python-format
 msgid "Vendor bills"
 msgstr ""
 
 #. module: om_account_cash_forecast
 #. odoo-python
 #: code:addons/om_account_cash_forecast/wizard/cash_forecast_report.py:0
-#, python-format
 msgid "Week of %s"
 msgstr ""
 

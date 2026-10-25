@@ -30,7 +30,7 @@ class AccountBankStatementLine(models.Model):
             # what the counterparts still have to cover, as a journal item amount
             'remaining': -self.amount_residual if not self.is_reconciled else 0.0,
             # 19.0 marks the entries reviewed with a flag: the screen speaks of review states, as in 20.0
-            'review_state': 'todo' if self.move_id.state == 'posted' and self.move_id.to_check else 'reviewed',
+            'review_state': 'todo' if self.move_id.state == 'posted' and not self.move_id.checked else 'reviewed',
             'move_id': self.move_id.id,
         }
 
@@ -88,7 +88,7 @@ class AccountBankStatementLine(models.Model):
         elif state == 'reconciled':
             domain.append(('is_reconciled', '=', True))
         elif state == 'to_review':
-            domain += [('move_id.state', '=', 'posted'), ('move_id.to_check', '=', True)]
+            domain += [('move_id.state', '=', 'posted'), ('move_id.checked', '=', False)]
         if search:
             search = search.strip()
             text_domain = ['|', '|', ('payment_ref', 'ilike', search), ('partner_id.name', 'ilike', search),
@@ -125,8 +125,8 @@ class AccountBankStatementLine(models.Model):
         }
         models = self.env['account.reconcile.model'].search([
             ('company_id', '=', self.company_id.id),
-            # the counterpart models of Odoo 17, applied from the screen: all of them write a journal entry
-            ('rule_type', 'in', ('writeoff_button', 'writeoff_suggestion')),
+            ('rule_type', '!=', 'matching_rule'),
+            ('mapped_partner_id', '=', False),
         ])
         data['models'] = [
             {'id': model.id, 'name': model.name, 'applicable': model._om_is_applicable(self)}
@@ -203,7 +203,7 @@ class AccountBankStatementLine(models.Model):
     def om_bank_rec_set_review(self, to_check):
         self.ensure_one()
         self._om_check_access()
-        self.move_id.to_check = to_check
+        self.move_id.checked = not to_check
         return self.om_bank_rec_get_data()
 
     def _om_clean_proposal(self, proposal):

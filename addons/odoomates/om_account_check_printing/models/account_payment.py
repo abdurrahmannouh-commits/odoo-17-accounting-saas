@@ -8,8 +8,7 @@ class AccountPayment(models.Model):
     _inherit = 'account.payment'
 
     def _get_check_layout(self):
-        # Odoo 17 has one cheque layout per company, not per journal
-        return self.company_id.account_check_printing_layout
+        return self.journal_id.bank_check_printing_layout or self.company_id.account_check_printing_layout
 
     def do_print_checks(self):
         if self[:1]._get_check_layout() != CHECK_FORMAT_LAYOUT:
@@ -20,7 +19,7 @@ class AccountPayment(models.Model):
             raise RedirectWarning(
                 _('Create a cheque format and choose it on the bank journal %s.', self.journal_id[:1].name),
                 action.id, _('Go to the cheque formats'))
-        self.write({'is_move_sent': True})
+        self.write({'is_sent': True})
         return self.env.ref(CHECK_FORMAT_LAYOUT).with_context(
             om_check_format_id=check_format.id).report_action(self, config=False)
 
@@ -33,7 +32,7 @@ class AccountPayment(models.Model):
         for index, stub_lines in enumerate(stub_pages):
             pages.append({
                 'values': check_format._get_field_values(
-                    self.partner_id.name, self.amount, self.currency_id, self.date, self.ref, self.check_number,
+                    self.partner_id.name, self.amount, self.currency_id, self.date, self.memo, self.check_number,
                     self.company_id, void=index > 0, bank_account=self.journal_id.bank_account_id),
                 'stub_lines': stub_lines or [],
                 'partner_name': self.partner_id.name,

@@ -1,5 +1,5 @@
 {
-    'name': 'Odoo 17 Assets Dashboard',
+    'name': 'Odoo 19 Assets Dashboard',
     'version': '1.0.0',
     'category': 'Accounting',
     'summary': 'Assets dashboard in the Dashboards app: gross value, depreciation and book value of the assets',

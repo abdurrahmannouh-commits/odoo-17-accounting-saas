@@ -1,6 +1,8 @@
 from odoo import Command, _, api, fields, models
 from odoo.exceptions import AccessError, UserError
 
+from odoo.addons.mail.tools.discuss import Store
+
 
 class DiscussChannel(models.Model):
     """ A WhatsApp conversation: the chat of an account with one number, in
@@ -24,13 +26,8 @@ class DiscussChannel(models.Model):
     om_whatsapp_res_model = fields.Char('Last Document Model', readonly=True)
     om_whatsapp_res_id = fields.Many2oneReference('Last Document ID', model_field='om_whatsapp_res_model', readonly=True)
 
-    def init(self):
-        super().init()
-        # one conversation an account and number
-        self.env.cr.execute("""
-            CREATE UNIQUE INDEX IF NOT EXISTS discuss_channel__om_whatsapp_number_unique
-            ON discuss_channel (om_whatsapp_account_id, om_whatsapp_number) WHERE channel_type = 'om_whatsapp'
-        """)
+    _om_whatsapp_number_unique = models.UniqueIndex(
+        "(om_whatsapp_account_id, om_whatsapp_number) WHERE channel_type = 'om_whatsapp'")
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -70,7 +67,7 @@ class DiscussChannel(models.Model):
             partners = channel.om_whatsapp_account_id.user_ids.partner_id | channel.om_whatsapp_partner_id
             missing = partners - channel.channel_member_ids.partner_id
             if missing:
-                channel.add_members(partner_ids=missing.ids, post_joined_message=False)
+                channel._add_members(partners=missing, post_joined_message=False)
 
     def _om_whatsapp_set_document(self, document):
         """ The conversation shows the document it last spoke about. """
@@ -147,14 +144,14 @@ class DiscussChannel(models.Model):
         action = notification._om_whatsapp_send()
         if action:
             # posted from Discuss, which runs no action: the page of the user does
-            self.env['bus.bus']._sendone(self.env.user.partner_id, 'om_whatsapp/action', {'action': action})
+            self.env.user._bus_send('om_whatsapp/action', {'action': action})
         return message
 
-    def _notify_get_recipients(self, message, msg_vals=False, **kwargs):
+    def _notify_get_recipients(self, message, **kwargs):
         """ The users of a conversation get the messages of the contact as
         web push, as in a chat. """
         if self.channel_type != 'om_whatsapp' or message.message_type != 'om_whatsapp':
-            return super()._notify_get_recipients(message, msg_vals, **kwargs)
+            return super()._notify_get_recipients(message, **kwargs)
         members = self.channel_member_ids.sudo().filtered(
             lambda m: m.partner_id != message.author_id and m.partner_id.user_ids and not m.mute_until_dt)
         return [{
@@ -171,24 +168,32 @@ class DiscussChannel(models.Model):
             'ushare': False,
         } for member in members]
 
-    def _channel_basic_info(self):
-        """ What Discuss knows of a conversation; a change of it reaches the
-        open pages, as for the fields of every channel. """
-        data = super()._channel_basic_info()
-        if self.channel_type != 'om_whatsapp':
-            return data
-        # sudo: the members of the conversation see how its account sends, and the name of its document
-        account = self.om_whatsapp_account_id.sudo()
-        document = self._om_whatsapp_get_document()
-        data.update({
-            'om_whatsapp_number': self.om_whatsapp_number,
-            'om_whatsapp_has_contact': bool(self.om_whatsapp_partner_id),
-            'om_whatsapp_provider': account.provider,
-            'om_whatsapp_free_text_until': fields.Datetime.to_string(account._om_whatsapp_free_text_until(self)),
-            'om_whatsapp_document_name': document and document.sudo().display_name or False,
-        })
-        return data
+    def _om_whatsapp_store_fields(self):
+        is_whatsapp = lambda channel: channel.channel_type == 'om_whatsapp'  # noqa: E731
+        return [
+            Store.Attr('avatar_cache_key', predicate=is_whatsapp),
+            Store.Attr('om_whatsapp_number', predicate=is_whatsapp),
+            Store.Attr('om_whatsapp_has_contact', lambda channel: bool(channel.om_whatsapp_partner_id), predicate=is_whatsapp),
+            Store.Attr('om_whatsapp_provider', lambda channel: channel.om_whatsapp_account_id.provider, predicate=is_whatsapp),
+            Store.Attr(
+                'om_whatsapp_free_text_until',
+                lambda channel: fields.Datetime.to_string(channel.om_whatsapp_account_id._om_whatsapp_free_text_until(channel)),
+                predicate=is_whatsapp),
+            # sudo: the users of the conversation see the name of the document it speaks about
+            Store.Attr(
+                'om_whatsapp_document_name',
+                lambda channel: (document := channel._om_whatsapp_get_document()) and document.sudo().display_name or False,
+                predicate=is_whatsapp,
+            ),
+        ]
 
+    def _to_store_defaults(self, target):
+        return super()._to_store_defaults(target) + self._om_whatsapp_store_fields()
+
+    def _sync_field_names(self):
+        res = super()._sync_field_names()
+        res[None] += self._om_whatsapp_store_fields()
+        return res
 
 class OmWhatsappAccount(models.Model):
     _inherit = 'om.whatsapp.account'

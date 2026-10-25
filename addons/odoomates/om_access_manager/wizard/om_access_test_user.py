@@ -136,7 +136,7 @@ class OmAccessTestUser(models.TransientModel):
                 if terms:
                     domains.append('%s: %s' % (label, ' OR '.join(terms)))
             authors = ', '.join(
-                _("%(profile)s, from %(menus)s", profile=profile.name, menus=' / '.join(profile.sources[model_name]))
+                self.env._("%(profile)s, from %(menus)s", profile=profile.name, menus=' / '.join(profile.sources[model_name]))
                 if model_name in profile.sources else profile.name
                 for profile in rules.additive + rules.override
                 if model_name in profile.perms

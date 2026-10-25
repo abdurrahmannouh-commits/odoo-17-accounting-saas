@@ -1,15 +1,12 @@
-/** @odoo-module **/
-
 import { registry } from "@web/core/registry";
 
 // Adding existing users to a profile from the profile itself.
 registry.category("web_tour.tours").add("om_access_manager_add_users", {
-    test: true,
     steps: () => [
         {
             content: "type a user's name",
             trigger: '.o_field_widget[name="user_ids"] input',
-            run: "text om_add_users_target",
+            run: "edit om_add_users_target",
         },
         {
             content: "only existing users: no way to create one here",
@@ -29,7 +26,6 @@ registry.category("web_tour.tours").add("om_access_manager_add_users", {
         {
             content: "the user is a tag",
             trigger: '.o_field_widget[name="user_ids"] .o_tag:contains("om_add_users_target")',
-            isCheck: true,
         },
         {
             content: "save",
@@ -39,7 +35,6 @@ registry.category("web_tour.tours").add("om_access_manager_add_users", {
         {
             content: "saved",
             trigger: ".o_form_saved",
-            isCheck: true,
         },
     ],
 });

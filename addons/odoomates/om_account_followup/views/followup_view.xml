@@ -6,14 +6,14 @@
             <field name="name">followup.line.list</field>
             <field name="model">followup.line</field>
             <field name="arch" type="xml">
-                <tree string="Follow-up Levels">
+                <list string="Follow-up Levels">
                     <field name="delay"/>
                     <field name="name"/>
                     <field name="email_template_id" optional="show"/>
                     <field name="send_email"/>
                     <field name="send_letter"/>
                     <field name="manual_action"/>
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -107,12 +107,11 @@
             <field name="name">followup.followup.list</field>
             <field name="model">followup.followup</field>
             <field name="arch" type="xml">
-                <tree string="Follow-up Plans">
-                    <field name="company_id" column_invisible="1"/>
+                <list string="Follow-up Plans">
                     <field name="name"/>
                     <field name="auto_send"/>
                     <field name="company_id" groups="base.group_multi_company"/>
-                </tree>
+                </list>
             </field>
         </record>
 
@@ -131,7 +130,7 @@
             <field name="name">Follow-up Plans</field>
             <field name="res_model">followup.followup</field>
             <field name="search_view_id" ref="view_om_account_followup_filter"/>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">list,form</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">Create a follow-up plan</p>
                 <p>

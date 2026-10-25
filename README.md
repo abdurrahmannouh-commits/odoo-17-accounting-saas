@@ -1,95 +1,69 @@
-# Odoo 17 Full Accounting Multi-Tenant SaaS
+# Odoo 19 Full Accounting Multi-Tenant SaaS (Production-Grade)
 
-A production-ready, lightweight Docker setup for running **Odoo 17 Community** with **Full Accounting** (Enterprise-equivalent) configured for **Multi-Tenant SaaS**.
+An industrial, multi-tenant architecture running **Odoo 19.0 Community** with **Full Accounting** (Odoo Mates suite), **Caddy Reverse Proxy** (Automated Let's Encrypt Wildcard SSL), and **Filestore-Aware Database Provisioning**.
 
 ---
 
-## 🏗️ Architecture Overview
+## 🏗️ Architecture & Stack
 
-* **Odoo Version**: `17.0 Community`
-* **Database**: `PostgreSQL 15`
-* **Full Accounting Suite**: Odoo Mates Accounting Kit (`om_account_accountant`, `om_account_asset`, `om_account_budget`, `accounting_pdf_reports`, etc.)
-* **Tenancy Model**: Fast PostgreSQL Database Templating (`createdb -T template_db client_name`)
-* **GUI Management**: Fully visible & manageable in **Whaler** on Zorin OS / Linux.
+```
+[ Customer Subdomains: *.yourdomain.com ]
+                     │ (HTTPS / Auto SSL)
+                     ▼
+           [ Caddy Reverse Proxy ]
+                     │ (Port 8069)
+                     ▼
+        [ Odoo 19 Community Service ]
+         ├── config: proxy_mode = True
+         └── filter: dbfilter = ^%d$
+                     │
+       ┌─────────────┴─────────────┐
+       ▼                           ▼
+[ PostgreSQL 15/16 ]         [ Docker Filestore Volume ]
+├── template_db (Master)     └── /var/lib/odoo/filestore/
+├── acme_corp                ├── template_db/
+└── beta_llc                 ├── acme_corp/ (Logos, PDFs)
+                             └── beta_llc/ (Logos, PDFs)
+```
 
 ---
 
 ## 🚀 Quick Start Guide
 
-### 1. Start the Containers
-Inside this directory (`/home/abdirahman/.gemini/antigravity-ide/scratch/odoo-saas`), run:
-
+### 1. Launch with Docker Compose
 ```bash
 docker compose up -d
 ```
+*(Containers will be visible and manageable inside **Whaler** on Zorin OS).*
 
-*(You will immediately see `odoo_saas_web` and `odoo_saas_db` show up in **Whaler**).*
-
-### 2. Check the Status
-```bash
-docker compose ps
-```
-
----
-
-## 🎯 Step 1: Create Your "Golden Template" Database
-
-1. Open your browser and navigate to: **`http://localhost:8069`**
-2. Fill in the Database Manager form:
-   * **Master Password**: `admin_master_secret_2026` (configured in `config/odoo.conf`)
+### 2. Create the "Golden Template" Database (`template_db`)
+1. Open your browser at **`http://localhost:8069`** (or through Caddy at **`http://localhost`**).
+2. Create your master template:
+   * **Master Password**: `admin_master_secret_2026`
    * **Database Name**: `template_db`
-   * **Email (Login)**: `admin`
-   * **Password**: choose an admin password
-   * **Country / Currency**: Select your primary currency (e.g., USD)
-   * **Demo data**: Leave **UNCHECKED** (you want a clean template!)
-3. Click **Create database**.
-4. Once logged in:
-   * Go to **Settings** -> Scroll down -> Click **Activate the developer mode**.
-   * Go to **Apps** -> Click **Update Apps List** in the top navigation -> Click **Update**.
-   * Remove the default "Apps" search filter, type: `om_account_accountant`.
-   * Click **Activate** (Install).
-
-✅ **Result:** You now have the full Enterprise-style Accounting menu (Profit & Loss, Balance Sheet, Assets, Budgets, Ledger, etc.) inside `template_db`.
+   * **Email / Password**: Set your administrative credentials.
+   * **Demo Data**: Leave **unchecked**.
+3. Inside Odoo:
+   * Enable **Developer Mode** in Settings.
+   * Go to **Apps** -> **Update Apps List**.
+   * Search for `om_account_accountant` and click **Activate**.
+   * Set your chart of accounts, currency, and base configuration.
 
 ---
 
-## ⚡ Step 2: Instant 1-Second SaaS Tenant Provisioning
+## ⚡ Safe 1-Second Tenant Provisioning (`./create_tenant.sh`)
 
-Whenever a new customer signs up or you want to onboard a new company, simply run:
-
+When onboarding a new client, run:
 ```bash
-chmod +x create_tenant.sh
-./create_tenant.sh client_company_name
+./create_tenant.sh <tenant_subdomain> [admin_password] [template_name]
+```
+Example:
+```bash
+./create_tenant.sh acme_corp SecurePass2026!
 ```
 
-**How it works under the hood:**
-PostgreSQL clones the entire `template_db` instantly via file copy pointers. In **under 1 second**, the new tenant database is created with full accounting ready to go—no 10-minute module installation required!
-
----
-
-## 🌐 Production Multi-Tenant Domain Routing (`dbfilter`)
-
-In production with real subdomains (e.g. `client1.yourdomain.com`, `client2.yourdomain.com`):
-
-1. Point a Wildcard DNS A-record to your server IP:
-   ```text
-   *.yourdomain.com  ->  YOUR_SERVER_IP
-   ```
-
-2. In [config/odoo.conf](file:///home/abdirahman/.gemini/antigravity-ide/scratch/odoo-saas/config/odoo.conf):
-   ```ini
-   list_db = False
-   dbfilter = ^%d$
-   ```
-   * `%d` extracts the subdomain (e.g. `client1`) from `client1.yourdomain.com` and automatically connects to the database `client1`.
-   * Tenants will never see the database selector or any other tenant's data.
-
----
-
-## 🔒 Security & Maintenance
-
-* **Master Password**: Keep `admin_passwd` in [config/odoo.conf](file:///home/abdirahman/.gemini/antigravity-ide/scratch/odoo-saas/config/odoo.conf) secret.
-* **Backups**: Run automated nightly database dumps:
-  ```bash
-  docker exec odoo_saas_db pg_dump -U odoo -d client1 > client1_backup_$(date +%F).sql
-  ```
+### What `create_tenant.sh` does safely under the hood:
+1. **Closes Active Connections:** Terminates existing PostgreSQL connections to `template_db` to avoid PostgreSQL cloning locks.
+2. **Clones Database:** Uses PostgreSQL template cloning for sub-second database duplication.
+3. **Copies Odoo Filestore:** Copies all attachments, logos, and report assets from `/var/lib/odoo/filestore/template_db` to `/var/lib/odoo/filestore/<tenant_name>` with proper file ownership.
+4. **Regenerates Database UUID:** Assigns a unique `database.uuid` so telemetry, mail servers, and webhooks never collide across tenants.

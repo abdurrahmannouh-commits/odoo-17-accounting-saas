@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import { Component, onWillStart, useState } from "@odoo/owl";
 import { CheckBox } from "@web/core/checkbox/checkbox";
 import { _t } from "@web/core/l10n/translation";
@@ -11,14 +9,6 @@ import { standardFieldProps } from "@web/views/fields/standard_field_props";
 import { MenuPanel } from "./menu_panel";
 
 const MODEL = "om.access.profile";
-
-/** Odoo 17 keeps applyCommands private: do what its linkTo() does, with a list of commands. */
-function applyCommands(list, commands) {
-    return list.model.mutex.exec(async () => {
-        await list._applyCommands(commands);
-        await list._onUpdate();
-    });
-}
 
 /**
  * The Menus & Apps tab: the real menu tree of the database, where a profile is
@@ -290,14 +280,14 @@ export class MenuTreeField extends Component {
         if (info && granted) {
             if (shown && this.notGiven(menuId)) {
                 // ticking an app its users cannot open gives it to them
-                await applyCommands(granted, [
+                await granted.applyCommands([
                     [x2ManyCommands.LINK, info.grant.id, { id: info.grant.id, display_name: info.grant.name }],
                 ]);
             } else if (!shown) {
                 // unticking an app the profile gives takes it back
                 const given = info.group_ids.filter((id) => this.grantedIds.has(id));
                 if (given.length) {
-                    await applyCommands(granted, given.map((id) => [x2ManyCommands.UNLINK, id]));
+                    await granted.applyCommands(given.map((id) => [x2ManyCommands.UNLINK, id]));
                 }
             }
         }
@@ -318,7 +308,7 @@ export class MenuTreeField extends Component {
             }
         }
         if (commands.length) {
-            return applyCommands(this.record.data[this.props.name], commands);
+            return this.record.data[this.props.name].applyCommands(commands);
         }
     }
 

@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-22 07:07+0000\n"
 "PO-Revision-Date: 2026-10-22 07:07+0000\n"
@@ -18,70 +18,24 @@ msgstr ""
 #. module: om_spreadsheet_account_followup
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
-msgid "Amount"
-msgstr ""
-
-#. module: om_spreadsheet_account_followup
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
 msgid "Balance by Follow-up Level"
 msgstr ""
 
 #. module: om_spreadsheet_account_followup
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
-msgid "By Follow-up Level"
-msgstr ""
-
-#. module: om_spreadsheet_account_followup
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
 msgid "Cash Forecast Items"
 msgstr ""
 
 #. module: om_spreadsheet_account_followup
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
-msgid "Description"
-msgstr ""
-
-#. module: om_spreadsheet_account_followup
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
 msgid "Due Month"
 msgstr ""
 
 #. module: om_spreadsheet_account_followup
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
-msgid "Expected On"
-msgstr ""
-
-#. module: om_spreadsheet_account_followup
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
-msgid "Expected Payments"
-msgstr ""
-
-#. module: om_spreadsheet_account_followup
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
-msgid "Expected Receipts"
-msgstr ""
-
-#. module: om_spreadsheet_account_followup
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
 msgid "First month"
 msgstr ""
 
@@ -93,118 +47,76 @@ msgstr ""
 #. module: om_spreadsheet_account_followup
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
-msgid "Overdue"
-msgstr ""
-
-#. module: om_spreadsheet_account_followup
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_sample_dashboard.json:0
 msgid "Overdue Payables"
 msgstr ""
 
 #. module: om_spreadsheet_account_followup
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_sample_dashboard.json:0
 msgid "Overdue Receivables"
 msgstr ""
 
 #. module: om_spreadsheet_account_followup
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
 msgid "Overdue payables"
 msgstr ""
 
 #. module: om_spreadsheet_account_followup
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
 msgid "Overdue receivables"
 msgstr ""
 
 #. module: om_spreadsheet_account_followup
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
 msgid "Partner"
 msgstr ""
 
 #. module: om_spreadsheet_account_followup
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
 msgid "Payments"
 msgstr ""
 
 #. module: om_spreadsheet_account_followup
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_sample_dashboard.json:0
 msgid "Payments Due in 6 Months"
 msgstr ""
 
 #. module: om_spreadsheet_account_followup
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
 msgid "Payments expected in 6 months"
 msgstr ""
 
 #. module: om_spreadsheet_account_followup
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
 msgid "Receipts"
 msgstr ""
 
 #. module: om_spreadsheet_account_followup
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_sample_dashboard.json:0
 msgid "Receipts Due in 6 Months"
 msgstr ""
 
 #. module: om_spreadsheet_account_followup
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_sample_dashboard.json:0
 msgid "Receipts and Payments by Due Month"
 msgstr ""
 
 #. module: om_spreadsheet_account_followup
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
 msgid "Receipts expected in 6 months"
-msgstr ""
-
-#. module: om_spreadsheet_account_followup
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
-msgid "Recurrence"
-msgstr ""
-
-#. module: om_spreadsheet_account_followup
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
-msgid "Total"
-msgstr ""
-
-#. module: om_spreadsheet_account_followup
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
-msgid "Type"
-msgstr ""
-
-#. module: om_spreadsheet_account_followup
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account_followup/data/files/followups_forecast_dashboard.json:0
-#, python-format
-msgid "Until"
 msgstr ""

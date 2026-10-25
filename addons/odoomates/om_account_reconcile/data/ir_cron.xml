@@ -7,8 +7,5 @@
         <field name="code">model._om_cron_auto_reconcile()</field>
         <field name="interval_number">1</field>
         <field name="interval_type">days</field>
-        <!-- Odoo 17 stops a cron after numbercall runs: this one runs for ever -->
-        <field name="numbercall">-1</field>
-        <field name="doall" eval="False"/>
     </record>
 </odoo>

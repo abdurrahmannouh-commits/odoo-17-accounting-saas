@@ -12,8 +12,10 @@ class ChangeLockDate(models.TransientModel):
         company_rec = self.env.company
         res.update({
             'company_id': company_rec.id,
-            'period_lock_date': company_rec.period_lock_date,
+            'hard_lock_date': company_rec.hard_lock_date,
             'fiscalyear_lock_date': company_rec.fiscalyear_lock_date,
+            'purchase_lock_date': company_rec.purchase_lock_date,
+            'sale_lock_date': company_rec.sale_lock_date,
             'tax_lock_date': company_rec.tax_lock_date,
         })
         return res
@@ -25,9 +27,17 @@ class ChangeLockDate(models.TransientModel):
     tax_lock_date = fields.Date(
         string="Tax Return Lock Date",
         help="No users can edit journal entries related to a tax prior and inclusive of this date.")
-    period_lock_date = fields.Date(
-        string='Journal Entries Lock Date',
-        help='Prevent posting of journal entries in this period.'
+    sale_lock_date = fields.Date(
+        string='Sales Lock Date',
+        help='Prevents creation and modification of entries in sales journals up to the defined date inclusive.'
+    )
+    purchase_lock_date = fields.Date(
+        string='Purchase Lock date',
+        help='Prevents creation and modification of entries in purchase journals up to the defined date inclusive.'
+    )
+    hard_lock_date = fields.Date(
+        string='Hard Lock Date',
+        help='Like the "Global Lock Date", but no exceptions are possible.'
     )
     fiscalyear_lock_date = fields.Date(
         string='Lock Date for All Users',
@@ -46,7 +56,9 @@ class ChangeLockDate(models.TransientModel):
         # sudo() is required because setting lock dates writes on res.company,
         # which accounting managers are not allowed to write on.
         self.company_id.sudo().write({
-            'period_lock_date': self.period_lock_date,
+            'hard_lock_date': self.hard_lock_date,
             'fiscalyear_lock_date': self.fiscalyear_lock_date,
+            'purchase_lock_date': self.purchase_lock_date,
+            'sale_lock_date': self.sale_lock_date,
             'tax_lock_date': self.tax_lock_date,
         })

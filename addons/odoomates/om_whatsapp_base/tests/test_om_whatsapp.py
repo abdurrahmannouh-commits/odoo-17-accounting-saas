@@ -61,9 +61,10 @@ class TestOmWhatsapp(TransactionCase):
         ])
 
     def _channel(self, number='+32470123456'):
-        return self.env['discuss.channel'].search(
-            [('channel_type', '=', 'om_whatsapp'), ('om_whatsapp_account_id', '=', self.account.id),
-             ('om_whatsapp_number', '=', number)])
+        return self.env['discuss.channel'].search([
+            ('channel_type', '=', 'om_whatsapp'), ('om_whatsapp_account_id', '=', self.account.id),
+            ('om_whatsapp_number', '=', number),
+        ])
 
     def _post(self, document, body='Hi', partner=None, number='+32470123456'):
         return document._message_om_whatsapp(self.account, body, number, partner=partner or document)
@@ -275,11 +276,12 @@ class TestOmWhatsapp(TransactionCase):
                                                   attachments=[('voice-message.ogg', b'OggS')], voice=True)
         channel = self._channel()
         channel.with_user(self.user).message_post(body='Yes, today', message_type='comment')
+        member = channel.channel_member_ids.filtered(lambda m: m.partner_id == self.user.partner_id)
         last = self.env['mail.message'].search([('model', '=', 'discuss.channel'), ('res_id', '=', channel.id)],
                                                order='id desc', limit=1)
         with patch.object(OmWhatsappAccount, '_om_whatsapp_receipt_link', create=True, return_value=None) as receipt:
-            channel.with_user(self.user)._channel_seen(last.id)
-            channel.with_user(self.user)._channel_seen(last.id)
+            member.with_user(self.user)._mark_as_read(last.id)
+            member.with_user(self.user)._mark_as_read(last.id)
             self.env['mail.message'].with_user(self.user).om_whatsapp_played(voice.attachment_ids[:1].id)
             self.env['mail.message'].with_user(self.user).om_whatsapp_played(voice.attachment_ids[:1].id)
         self.assertEqual([(call.args[0], sorted(call.args[1]), call.args[2]) for call in receipt.call_args_list], [
@@ -293,9 +295,9 @@ class TestOmWhatsapp(TransactionCase):
         with patch.object(OmWhatsappAccount, '_om_whatsapp_receipt_link', create=True) as receipt:
             stranger = channel.channel_member_ids.filtered(lambda m: m.partner_id == self.other.partner_id)
             if not stranger:
-                channel.add_members(partner_ids=self.other.partner_id.ids, post_joined_message=False)
+                channel._add_members(partners=self.other.partner_id, post_joined_message=False)
                 stranger = channel.channel_member_ids.filtered(lambda m: m.partner_id == self.other.partner_id)
-            channel.with_user(self.other)._channel_seen(channel.message_ids[:1].id)
+            stranger.with_user(self.other)._mark_as_read(channel.message_ids[:1].id)
         receipt.assert_not_called()
 
     def test_profile_pictures_only_without_a_photo(self):
@@ -385,12 +387,13 @@ class TestOmWhatsapp(TransactionCase):
         empty emoji goes. """
         copies = self._sent_with_copies()
         message = copies[-1].with_user(self.user)
+        partner, guest = self.user.partner_id, self.env['mail.guest']
         with patch.object(OmWhatsappAccount, '_om_whatsapp_react_link', create=True, return_value=None) as react:
-            message.sudo()._message_reaction('👍', 'add')
+            message.sudo()._message_reaction('👍', 'add', partner, guest)
             self.assertEqual(copies.reaction_ids.mapped('content'), ['👍', '👍'])
-            message.sudo()._message_reaction('❤️', 'add')
+            message.sudo()._message_reaction('❤️', 'add', partner, guest)
             self.assertEqual(copies.reaction_ids.mapped('content'), ['❤️', '❤️'])
-            message.sudo()._message_reaction('❤️', 'remove')
+            message.sudo()._message_reaction('❤️', 'remove', partner, guest)
             self.assertFalse(copies.reaction_ids)
         self.assertEqual([call.args[0] for call in react.call_args_list], ['+32470123456'] * 3)
         self.assertEqual([call.args[2:] for call in react.call_args_list], [('👍', True), ('❤️', True), ('', True)])
@@ -401,18 +404,19 @@ class TestOmWhatsapp(TransactionCase):
         WhatsApp id; a provider that fails keeps the reaction in Odoo and
         tells the user. """
         copies = self._sent_with_copies()
+        guest = self.env['mail.guest']
         with patch.object(OmWhatsappAccount, '_om_whatsapp_react_link', create=True) as react:
-            copies[-1].with_user(self.other).sudo()._message_reaction('👍', 'add')
+            copies[-1].sudo()._message_reaction('👍', 'add', self.other.partner_id, guest)
             no_id = self._post(self.env['res.partner'].create({'name': 'S00014'}), 'Hi', partner=self.alice)
-            no_id.with_user(self.user).sudo()._message_reaction('👍', 'add')
+            no_id.sudo()._message_reaction('👍', 'add', self.user.partner_id, guest)
         react.assert_not_called()
         self.assertEqual(len(copies[-1].reaction_ids), 1, "the copies are left alone")
         with patch.object(OmWhatsappAccount, '_om_whatsapp_react_link', create=True, side_effect=UserError('Not linked')), \
-             self.assertLogs('odoo.addons.om_whatsapp_base.models.om_whatsapp_account', level='WARNING'), \
-             patch.object(type(self.env['bus.bus']), '_sendone', autospec=True) as bus_send:
-            copies[-1].with_user(self.user).sudo()._message_reaction('🙏', 'add')
+             patch.object(type(self.env.user), '_bus_send', autospec=True) as bus_send, \
+             self.assertLogs('odoo.addons.om_whatsapp_base.models.om_whatsapp_account', level='WARNING'):
+            copies[-1].with_user(self.user).sudo()._message_reaction('🙏', 'add', self.user.partner_id, guest)
         self.assertIn('🙏', copies[-1].reaction_ids.mapped('content'))
-        notification = [c.args[1:] for c in bus_send.call_args_list if c.args[2] == 'simple_notification']
+        notification = [c.args for c in bus_send.call_args_list if c.args[1] == 'simple_notification']
         self.assertEqual(notification[0][2]['message'], 'The reaction was not sent to WhatsApp: Not linked')
 
     def test_reply_goes_to_the_document(self):
@@ -484,7 +488,7 @@ class TestOmWhatsapp(TransactionCase):
 
     def test_users_send_only_from_their_accounts(self):
         with self.assertRaises(AccessError):
-            self.account.with_user(self.other).check_access_rule('read')
+            self.account.with_user(self.other).check_access('read')
         with self.assertRaises(UserError):
             self.account.with_user(self.other)._om_whatsapp_check_user()
 
@@ -515,13 +519,11 @@ class TestOmWhatsapp(TransactionCase):
     def test_whatsapp_message_made_by_account_only(self):
         """ No faked message of a customer, nor a taken WhatsApp id: replies
         to it would go to the document of who took it. """
-        # Odoo asks an email of who posts, before anything else
-        (self.user | self.other).email = 'om_whatsapp_user@example.com'
         self.account._om_whatsapp_receive('+32470123456', 'Hi', whatsapp_id='wamid.real')
         partner = self.bob.with_user(self.other)
         with self.assertRaises(AccessError):
             partner.message_post(body='I accept', message_type='om_whatsapp', author_id=self.alice.id,
-                                 email_from='alice@example.com', om_whatsapp_account_id=self.account.id)
+                                 om_whatsapp_account_id=self.account.id)
         with self.assertRaises(AccessError):
             self.bob.with_user(self.user).message_post(body='I accept', message_type='om_whatsapp',
                                                        om_whatsapp_account_id=self.account.id, om_whatsapp_id='wamid.real')
@@ -571,7 +573,8 @@ class TestOmWhatsappAutomation(TransactionCase):
         self.assertIn(self.env['ir.model']._get('sale.order') or self.env['ir.model']._get('res.partner'),
                       self.action.available_model_ids)
         self.assertNotIn(self.env['ir.model']._get('om.whatsapp.composer'), self.action.available_model_ids)
-        self.action.model_id = self.env['ir.model']._get('phone.blacklist')
+        self.assertFalse(self.action.warning)
+        self.action.model_id = self.env['ir.model']._get('res.users')
         self.assertFalse(self.action.om_whatsapp_template_id)
 
     def test_a_provider_sending_from_the_server_sends_each_record(self):

@@ -95,7 +95,7 @@ class AccountFiscalYearClosing(models.TransientModel):
             'name': _('Draft Entries'),
             'type': 'ir.actions.act_window',
             'res_model': 'account.move',
-            'view_mode': 'tree,form',
+            'view_mode': 'list,form',
             'domain': self.fiscal_year_id._get_draft_moves_domain(),
         }
 
@@ -105,6 +105,6 @@ class AccountFiscalYearClosing(models.TransientModel):
             'name': _('Unreconciled Bank Transactions'),
             'type': 'ir.actions.act_window',
             'res_model': 'account.bank.statement.line',
-            'view_mode': 'tree,form',
+            'view_mode': 'list,form',
             'domain': self.fiscal_year_id._get_unreconciled_statement_lines_domain(),
         }

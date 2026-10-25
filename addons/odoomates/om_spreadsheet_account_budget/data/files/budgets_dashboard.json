@@ -1,6 +1,5 @@
 {
-    "version": 14.5,
-    "odooVersion": 6,
+    "version": "18.5.10",
     "sheets": [
         {
             "id": "8dd65ee8-ea1d-5e2f-962f-aecfcd445a4c",
@@ -24,725 +23,155 @@
             },
             "merges": [],
             "cells": {
-                "A17": {
-                    "content": "=_t(\"Budget by Position\")",
-                    "style": 2
-                },
-                "B17": {
-                    "style": 2
-                },
-                "C17": {
-                    "style": 2
-                },
-                "D17": {
-                    "style": 2
-                },
-                "B18": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"measure\",\"planned_amount\")"
-                },
-                "C18": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"measure\",\"theoritical_amount\")"
-                },
-                "D18": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"measure\",\"practical_amount\")"
-                },
-                "A19": {
-                    "content": "=_t(\"Total\")"
-                },
-                "B19": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\")"
-                },
-                "C19": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\")"
-                },
-                "D19": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\")"
-                },
-                "A20": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",1)"
-                },
-                "B20": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",1)"
-                },
-                "C20": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",1)"
-                },
-                "D20": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",1)"
-                },
-                "A21": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",2)"
-                },
-                "B21": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",2)"
-                },
-                "C21": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",2)"
-                },
-                "D21": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",2)"
-                },
-                "A22": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",3)"
-                },
-                "B22": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",3)"
-                },
-                "C22": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",3)"
-                },
-                "D22": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",3)"
-                },
-                "A23": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",4)"
-                },
-                "B23": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",4)"
-                },
-                "C23": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",4)"
-                },
-                "D23": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",4)"
-                },
-                "A24": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",5)"
-                },
-                "B24": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",5)"
-                },
-                "C24": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",5)"
-                },
-                "D24": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",5)"
-                },
-                "A25": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",6)"
-                },
-                "B25": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",6)"
-                },
-                "C25": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",6)"
-                },
-                "D25": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",6)"
-                },
-                "A26": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",7)"
-                },
-                "B26": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",7)"
-                },
-                "C26": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",7)"
-                },
-                "D26": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",7)"
-                },
-                "A27": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",8)"
-                },
-                "B27": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",8)"
-                },
-                "C27": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",8)"
-                },
-                "D27": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",8)"
-                },
-                "A28": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",9)"
-                },
-                "B28": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",9)"
-                },
-                "C28": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",9)"
-                },
-                "D28": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",9)"
-                },
-                "A29": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",10)"
-                },
-                "B29": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",10)"
-                },
-                "C29": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",10)"
-                },
-                "D29": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",10)"
-                },
-                "A30": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",11)"
-                },
-                "B30": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",11)"
-                },
-                "C30": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",11)"
-                },
-                "D30": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",11)"
-                },
-                "A31": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",12)"
-                },
-                "B31": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",12)"
-                },
-                "C31": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",12)"
-                },
-                "D31": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",12)"
-                },
-                "A32": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",13)"
-                },
-                "B32": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",13)"
-                },
-                "C32": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",13)"
-                },
-                "D32": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",13)"
-                },
-                "A33": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",14)"
-                },
-                "B33": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",14)"
-                },
-                "C33": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",14)"
-                },
-                "D33": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",14)"
-                },
-                "A34": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",15)"
-                },
-                "B34": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",15)"
-                },
-                "C34": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",15)"
-                },
-                "D34": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",15)"
-                },
-                "A35": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",16)"
-                },
-                "B35": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",16)"
-                },
-                "C35": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",16)"
-                },
-                "D35": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",16)"
-                },
-                "A36": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",17)"
-                },
-                "B36": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",17)"
-                },
-                "C36": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",17)"
-                },
-                "D36": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",17)"
-                },
-                "A37": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",18)"
-                },
-                "B37": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",18)"
-                },
-                "C37": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",18)"
-                },
-                "D37": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",18)"
-                },
-                "A38": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",19)"
-                },
-                "B38": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",19)"
-                },
-                "C38": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",19)"
-                },
-                "D38": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",19)"
-                },
-                "A39": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",20)"
-                },
-                "B39": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",20)"
-                },
-                "C39": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",20)"
-                },
-                "D39": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",20)"
-                },
-                "A40": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",21)"
-                },
-                "B40": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",21)"
-                },
-                "C40": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",21)"
-                },
-                "D40": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",21)"
-                },
-                "A41": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",22)"
-                },
-                "B41": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",22)"
-                },
-                "C41": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",22)"
-                },
-                "D41": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",22)"
-                },
-                "A42": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",23)"
-                },
-                "B42": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",23)"
-                },
-                "C42": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",23)"
-                },
-                "D42": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",23)"
-                },
-                "A43": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",24)"
-                },
-                "B43": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",24)"
-                },
-                "C43": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",24)"
-                },
-                "D43": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",24)"
-                },
-                "A44": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",25)"
-                },
-                "B44": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",25)"
-                },
-                "C44": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",25)"
-                },
-                "D44": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",25)"
-                },
-                "A45": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",26)"
-                },
-                "B45": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",26)"
-                },
-                "C45": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",26)"
-                },
-                "D45": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",26)"
-                },
-                "A46": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",27)"
-                },
-                "B46": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",27)"
-                },
-                "C46": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",27)"
-                },
-                "D46": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",27)"
-                },
-                "A47": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",28)"
-                },
-                "B47": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",28)"
-                },
-                "C47": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",28)"
-                },
-                "D47": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",28)"
-                },
-                "A48": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",29)"
-                },
-                "B48": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",29)"
-                },
-                "C48": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",29)"
-                },
-                "D48": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",29)"
-                },
-                "A49": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",30)"
-                },
-                "B49": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",30)"
-                },
-                "C49": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",30)"
-                },
-                "D49": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",30)"
-                },
-                "A50": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",31)"
-                },
-                "B50": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",31)"
-                },
-                "C50": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",31)"
-                },
-                "D50": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",31)"
-                },
-                "A51": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",32)"
-                },
-                "B51": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",32)"
-                },
-                "C51": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",32)"
-                },
-                "D51": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",32)"
-                },
-                "A52": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",33)"
-                },
-                "B52": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",33)"
-                },
-                "C52": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",33)"
-                },
-                "D52": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",33)"
-                },
-                "A53": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",34)"
-                },
-                "B53": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",34)"
-                },
-                "C53": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",34)"
-                },
-                "D53": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",34)"
-                },
-                "A54": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",35)"
-                },
-                "B54": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",35)"
-                },
-                "C54": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",35)"
-                },
-                "D54": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",35)"
-                },
-                "A55": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",36)"
-                },
-                "B55": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",36)"
-                },
-                "C55": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",36)"
-                },
-                "D55": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",36)"
-                },
-                "A56": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",37)"
-                },
-                "B56": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",37)"
-                },
-                "C56": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",37)"
-                },
-                "D56": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",37)"
-                },
-                "A57": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",38)"
-                },
-                "B57": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",38)"
-                },
-                "C57": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",38)"
-                },
-                "D57": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",38)"
-                },
-                "A58": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",39)"
-                },
-                "B58": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",39)"
-                },
-                "C58": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",39)"
-                },
-                "D58": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",39)"
-                },
-                "A59": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",40)"
-                },
-                "B59": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",40)"
-                },
-                "C59": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",40)"
-                },
-                "D59": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",40)"
-                },
-                "A60": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",41)"
-                },
-                "B60": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",41)"
-                },
-                "C60": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",41)"
-                },
-                "D60": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",41)"
-                },
-                "A61": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",42)"
-                },
-                "B61": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",42)"
-                },
-                "C61": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",42)"
-                },
-                "D61": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",42)"
-                },
-                "A62": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",43)"
-                },
-                "B62": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",43)"
-                },
-                "C62": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",43)"
-                },
-                "D62": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",43)"
-                },
-                "A63": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",44)"
-                },
-                "B63": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",44)"
-                },
-                "C63": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",44)"
-                },
-                "D63": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",44)"
-                },
-                "A64": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",45)"
-                },
-                "B64": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",45)"
-                },
-                "C64": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",45)"
-                },
-                "D64": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",45)"
-                },
-                "A65": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",46)"
-                },
-                "B65": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",46)"
-                },
-                "C65": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",46)"
-                },
-                "D65": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",46)"
-                },
-                "A66": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",47)"
-                },
-                "B66": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",47)"
-                },
-                "C66": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",47)"
-                },
-                "D66": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",47)"
-                },
-                "A67": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",48)"
-                },
-                "B67": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",48)"
-                },
-                "C67": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",48)"
-                },
-                "D67": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",48)"
-                },
-                "A68": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",49)"
-                },
-                "B68": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",49)"
-                },
-                "C68": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",49)"
-                },
-                "D68": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",49)"
-                },
-                "A69": {
-                    "content": "=ODOO.PIVOT.HEADER(3,\"#general_budget_id\",50)"
-                },
-                "B69": {
-                    "content": "=ODOO.PIVOT(3,\"planned_amount\",\"#general_budget_id\",50)"
-                },
-                "C69": {
-                    "content": "=ODOO.PIVOT(3,\"theoritical_amount\",\"#general_budget_id\",50)"
-                },
-                "D69": {
-                    "content": "=ODOO.PIVOT(3,\"practical_amount\",\"#general_budget_id\",50)"
-                }
+                "A17": "=_t(\"Budget by Position\")",
+                "A18": "=PIVOT(3,50,TRUE,TRUE)"
             },
+            "styles": {
+                "A17": 2,
+                "B17": 2,
+                "C17": 2,
+                "D17": 2
+            },
+            "formats": {},
+            "borders": {},
             "conditionalFormats": [],
+            "dataValidationRules": [],
             "figures": [
                 {
                     "id": "da912f15-3bc6-5718-a2e7-afa0509a999e",
-                    "x": 0,
-                    "y": 0,
+                    "col": 0,
+                    "row": 0,
+                    "offset": {
+                        "x": 0,
+                        "y": 0
+                    },
                     "width": 235,
                     "height": 110,
                     "tag": "chart",
                     "data": {
                         "type": "scorecard",
-                        "title": "Actual Expenses",
+                        "title": {
+                            "text": "Actual Expenses",
+                            "color": "#01666B",
+                            "bold": true
+                        },
                         "background": "",
                         "keyValue": "Data!B3",
                         "baselineColorDown": "#00A04A",
                         "baselineColorUp": "#DC6965",
                         "baselineMode": "percentage",
+                        "humanize": true,
+                        "chartId": "da912f15-3bc6-5718-a2e7-afa0509a999e",
                         "baseline": "Data!B2",
-                        "baselineDescr": "vs expected to date"
+                        "baselineDescr": {
+                            "text": "vs expected to date"
+                        }
                     }
                 },
                 {
                     "id": "fac5cfad-da20-51ef-aae1-d65fe50fd4f9",
-                    "x": 245,
-                    "y": 0,
+                    "col": 0,
+                    "row": 0,
+                    "offset": {
+                        "x": 245,
+                        "y": 0
+                    },
                     "width": 235,
                     "height": 110,
                     "tag": "chart",
                     "data": {
                         "type": "scorecard",
-                        "title": "Planned Expenses",
+                        "title": {
+                            "text": "Planned Expenses",
+                            "color": "#01666B",
+                            "bold": true
+                        },
                         "background": "",
                         "keyValue": "Data!B1",
                         "baselineColorDown": "#DC6965",
                         "baselineColorUp": "#00A04A",
-                        "baselineMode": "percentage"
+                        "baselineMode": "percentage",
+                        "humanize": true,
+                        "chartId": "fac5cfad-da20-51ef-aae1-d65fe50fd4f9"
                     }
                 },
                 {
                     "id": "460fe30a-b28e-5ebf-858a-a80aeef83d66",
-                    "x": 490,
-                    "y": 0,
+                    "col": 0,
+                    "row": 0,
+                    "offset": {
+                        "x": 490,
+                        "y": 0
+                    },
                     "width": 235,
                     "height": 110,
                     "tag": "chart",
                     "data": {
                         "type": "scorecard",
-                        "title": "Actual Revenues",
+                        "title": {
+                            "text": "Actual Revenues",
+                            "color": "#01666B",
+                            "bold": true
+                        },
                         "background": "",
                         "keyValue": "Data!B6",
                         "baselineColorDown": "#DC6965",
                         "baselineColorUp": "#00A04A",
                         "baselineMode": "percentage",
+                        "humanize": true,
+                        "chartId": "460fe30a-b28e-5ebf-858a-a80aeef83d66",
                         "baseline": "Data!B5",
-                        "baselineDescr": "vs expected to date"
+                        "baselineDescr": {
+                            "text": "vs expected to date"
+                        }
                     }
                 },
                 {
                     "id": "adde33b4-c26f-5382-93ed-645460f2d07e",
-                    "x": 735,
-                    "y": 0,
+                    "col": 0,
+                    "row": 0,
+                    "offset": {
+                        "x": 735,
+                        "y": 0
+                    },
                     "width": 235,
                     "height": 110,
                     "tag": "chart",
                     "data": {
                         "type": "scorecard",
-                        "title": "Planned Revenues",
+                        "title": {
+                            "text": "Planned Revenues",
+                            "color": "#01666B",
+                            "bold": true
+                        },
                         "background": "",
                         "keyValue": "Data!B4",
                         "baselineColorDown": "#DC6965",
                         "baselineColorUp": "#00A04A",
-                        "baselineMode": "percentage"
+                        "baselineMode": "percentage",
+                        "humanize": true,
+                        "chartId": "adde33b4-c26f-5382-93ed-645460f2d07e"
                     }
                 },
                 {
                     "id": "9cafda76-32e4-5ec6-9ebe-7e9c123eaf51",
-                    "x": 0,
-                    "y": 120,
+                    "col": 0,
+                    "row": 0,
+                    "offset": {
+                        "x": 0,
+                        "y": 120
+                    },
                     "width": 480,
                     "height": 230,
                     "tag": "chart",
                     "data": {
                         "type": "gauge",
-                        "title": "Expenses Spent (%)",
+                        "title": {
+                            "text": "Expenses Spent (%)",
+                            "bold": true,
+                            "color": "#01666B",
+                            "fontSize": 14
+                        },
                         "background": "",
                         "dataRange": "Data!B9",
                         "sectionRule": {
@@ -755,25 +184,38 @@
                             "rangeMax": "120",
                             "lowerInflectionPoint": {
                                 "type": "number",
-                                "value": "80"
+                                "value": "80",
+                                "operator": "<="
                             },
                             "upperInflectionPoint": {
                                 "type": "number",
-                                "value": "100"
+                                "value": "100",
+                                "operator": "<="
                             }
-                        }
+                        },
+                        "humanize": true,
+                        "chartId": "9cafda76-32e4-5ec6-9ebe-7e9c123eaf51"
                     }
                 },
                 {
                     "id": "282fde53-69a7-566d-b347-3397e8a638cf",
-                    "x": 490,
-                    "y": 120,
+                    "col": 0,
+                    "row": 0,
+                    "offset": {
+                        "x": 490,
+                        "y": 120
+                    },
                     "width": 480,
                     "height": 230,
                     "tag": "chart",
                     "data": {
                         "type": "gauge",
-                        "title": "Revenues Earned (%)",
+                        "title": {
+                            "text": "Revenues Earned (%)",
+                            "bold": true,
+                            "color": "#01666B",
+                            "fontSize": 14
+                        },
                         "background": "",
                         "dataRange": "Data!B10",
                         "sectionRule": {
@@ -786,18 +228,29 @@
                             "rangeMax": "120",
                             "lowerInflectionPoint": {
                                 "type": "number",
-                                "value": "50"
+                                "value": "50",
+                                "operator": "<="
                             },
                             "upperInflectionPoint": {
                                 "type": "number",
-                                "value": "90"
+                                "value": "90",
+                                "operator": "<="
                             }
-                        }
+                        },
+                        "humanize": true,
+                        "chartId": "282fde53-69a7-566d-b347-3397e8a638cf"
                     }
                 }
             ],
+            "tables": [],
             "areGridLinesVisible": false,
-            "isVisible": true
+            "isVisible": true,
+            "headerGroups": {
+                "ROW": [],
+                "COL": []
+            },
+            "comments": {},
+            "backgroundColor": "#F9FAFB"
         },
         {
             "id": "d92304a0-079c-59a4-9055-fb4f6e62e8a8",
@@ -812,85 +265,57 @@
             },
             "merges": [],
             "cells": {
-                "A1": {
-                    "content": "=_t(\"Planned expenses\")",
-                    "style": 1
-                },
-                "B1": {
-                    "content": "=-ODOO.PIVOT(1,\"planned_amount\")"
-                },
-                "A2": {
-                    "content": "=_t(\"Expenses expected to date\")",
-                    "style": 1
-                },
-                "B2": {
-                    "content": "=-ODOO.PIVOT(1,\"theoritical_amount\")"
-                },
-                "A3": {
-                    "content": "=_t(\"Actual expenses\")",
-                    "style": 1
-                },
-                "B3": {
-                    "content": "=-ODOO.PIVOT(1,\"practical_amount\")"
-                },
-                "A4": {
-                    "content": "=_t(\"Planned revenues\")",
-                    "style": 1
-                },
-                "B4": {
-                    "content": "=ODOO.PIVOT(2,\"planned_amount\")"
-                },
-                "A5": {
-                    "content": "=_t(\"Revenues expected to date\")",
-                    "style": 1
-                },
-                "B5": {
-                    "content": "=ODOO.PIVOT(2,\"theoritical_amount\")"
-                },
-                "A6": {
-                    "content": "=_t(\"Actual revenues\")",
-                    "style": 1
-                },
-                "B6": {
-                    "content": "=ODOO.PIVOT(2,\"practical_amount\")"
-                },
-                "A7": {
-                    "content": "=_t(\"Expenses spent of the plan\")",
-                    "style": 1
-                },
-                "B7": {
-                    "content": "=IFERROR(B3/B1,0)",
-                    "format": 1
-                },
-                "A8": {
-                    "content": "=_t(\"Revenues earned of the plan\")",
-                    "style": 1
-                },
-                "B8": {
-                    "content": "=IFERROR(B6/B4,0)",
-                    "format": 1
-                },
-                "A9": {
-                    "content": "=_t(\"Expenses spent of the plan (%)\")",
-                    "style": 1
-                },
-                "B9": {
-                    "content": "=ROUND(B7*100)",
-                    "format": 2
-                },
-                "A10": {
-                    "content": "=_t(\"Revenues earned of the plan (%)\")",
-                    "style": 1
-                },
-                "B10": {
-                    "content": "=ROUND(B8*100)",
-                    "format": 2
-                }
+                "A1": "=_t(\"Planned expenses\")",
+                "B1": "=-PIVOT.VALUE(1,\"planned_amount\")",
+                "A2": "=_t(\"Expenses expected to date\")",
+                "B2": "=-PIVOT.VALUE(1,\"theoritical_amount:sum\")",
+                "A3": "=_t(\"Actual expenses\")",
+                "B3": "=-PIVOT.VALUE(1,\"practical_amount:sum\")",
+                "A4": "=_t(\"Planned revenues\")",
+                "B4": "=PIVOT.VALUE(2,\"planned_amount\")",
+                "A5": "=_t(\"Revenues expected to date\")",
+                "B5": "=PIVOT.VALUE(2,\"theoritical_amount:sum\")",
+                "A6": "=_t(\"Actual revenues\")",
+                "B6": "=PIVOT.VALUE(2,\"practical_amount:sum\")",
+                "A7": "=_t(\"Expenses spent of the plan\")",
+                "B7": "=IFERROR(B3/B1,0)",
+                "A8": "=_t(\"Revenues earned of the plan\")",
+                "B8": "=IFERROR(B6/B4,0)",
+                "A9": "=_t(\"Expenses spent of the plan (%)\")",
+                "B9": "=ROUND(B7*100)",
+                "A10": "=_t(\"Revenues earned of the plan (%)\")",
+                "B10": "=ROUND(B8*100)"
             },
+            "styles": {
+                "A1": 1,
+                "A2": 1,
+                "A3": 1,
+                "A4": 1,
+                "A5": 1,
+                "A6": 1,
+                "A7": 1,
+                "A8": 1,
+                "A9": 1,
+                "A10": 1
+            },
+            "formats": {
+                "B7": 1,
+                "B8": 1,
+                "B9": 2,
+                "B10": 2
+            },
+            "borders": {},
             "conditionalFormats": [],
+            "dataValidationRules": [],
             "figures": [],
+            "tables": [],
             "areGridLinesVisible": true,
-            "isVisible": true
+            "isVisible": true,
+            "headerGroups": {
+                "ROW": [],
+                "COL": []
+            },
+            "comments": {}
         }
     ],
     "styles": {
@@ -910,6 +335,7 @@
     },
     "borders": {},
     "revisionId": "START_REVISION",
+    "uniqueFigureIds": true,
     "settings": {
         "locale": {
             "name": "English (US)",
@@ -922,15 +348,11 @@
             "weekStart": 7
         }
     },
-    "chartOdooMenusReferences": {
-        "da912f15-3bc6-5718-a2e7-afa0509a999e": "om_account_budget.menu_act_crossovered_budget_view",
-        "fac5cfad-da20-51ef-aae1-d65fe50fd4f9": "om_account_budget.menu_act_crossovered_budget_view",
-        "460fe30a-b28e-5ebf-858a-a80aeef83d66": "om_account_budget.menu_act_crossovered_budget_view",
-        "adde33b4-c26f-5382-93ed-645460f2d07e": "om_account_budget.menu_act_crossovered_budget_view"
-    },
     "pivots": {
         "1": {
+            "type": "ODOO",
             "id": "1",
+            "formulaId": "1",
             "name": "Expense Budgets",
             "model": "crossovered.budget.lines",
             "domain": [
@@ -952,17 +374,22 @@
             "context": {},
             "measures": [
                 {
-                    "field": "planned_amount"
+                    "id": "planned_amount",
+                    "fieldName": "planned_amount"
                 },
                 {
-                    "field": "theoritical_amount"
+                    "id": "theoritical_amount:sum",
+                    "fieldName": "theoritical_amount",
+                    "aggregator": "sum"
                 },
                 {
-                    "field": "practical_amount"
+                    "id": "practical_amount:sum",
+                    "fieldName": "practical_amount",
+                    "aggregator": "sum"
                 }
             ],
-            "rowGroupBys": [],
-            "colGroupBys": [],
+            "rows": [],
+            "columns": [],
             "fieldMatching": {
                 "c414b32a-c602-55f0-94e1-97839e6f644b": {
                     "chain": "date_from",
@@ -976,7 +403,9 @@
             }
         },
         "2": {
+            "type": "ODOO",
             "id": "2",
+            "formulaId": "2",
             "name": "Revenue Budgets",
             "model": "crossovered.budget.lines",
             "domain": [
@@ -998,17 +427,22 @@
             "context": {},
             "measures": [
                 {
-                    "field": "planned_amount"
+                    "id": "planned_amount",
+                    "fieldName": "planned_amount"
                 },
                 {
-                    "field": "theoritical_amount"
+                    "id": "theoritical_amount:sum",
+                    "fieldName": "theoritical_amount",
+                    "aggregator": "sum"
                 },
                 {
-                    "field": "practical_amount"
+                    "id": "practical_amount:sum",
+                    "fieldName": "practical_amount",
+                    "aggregator": "sum"
                 }
             ],
-            "rowGroupBys": [],
-            "colGroupBys": [],
+            "rows": [],
+            "columns": [],
             "fieldMatching": {
                 "c414b32a-c602-55f0-94e1-97839e6f644b": {
                     "chain": "date_from",
@@ -1022,7 +456,9 @@
             }
         },
         "3": {
+            "type": "ODOO",
             "id": "3",
+            "formulaId": "3",
             "name": "Budgets by Position",
             "model": "crossovered.budget.lines",
             "domain": [
@@ -1039,19 +475,26 @@
             "context": {},
             "measures": [
                 {
-                    "field": "planned_amount"
+                    "id": "planned_amount",
+                    "fieldName": "planned_amount"
                 },
                 {
-                    "field": "theoritical_amount"
+                    "id": "theoritical_amount:sum",
+                    "fieldName": "theoritical_amount",
+                    "aggregator": "sum"
                 },
                 {
-                    "field": "practical_amount"
+                    "id": "practical_amount:sum",
+                    "fieldName": "practical_amount",
+                    "aggregator": "sum"
                 }
             ],
-            "rowGroupBys": [
-                "general_budget_id"
+            "rows": [
+                {
+                    "fieldName": "general_budget_id"
+                }
             ],
-            "colGroupBys": [],
+            "columns": [],
             "fieldMatching": {
                 "c414b32a-c602-55f0-94e1-97839e6f644b": {
                     "chain": "date_from",
@@ -1066,14 +509,12 @@
         }
     },
     "pivotNextId": 4,
-    "lists": {},
-    "listNextId": 1,
+    "customTableStyles": {},
     "globalFilters": [
         {
             "id": "c414b32a-c602-55f0-94e1-97839e6f644b",
             "type": "date",
             "label": "Period",
-            "rangeType": "fixedPeriod",
             "defaultValue": "this_year"
         },
         {
@@ -1081,8 +522,15 @@
             "type": "relation",
             "label": "Budget",
             "modelName": "crossovered.budget",
-            "defaultValueDisplayNames": [],
-            "defaultValue": []
+            "defaultValueDisplayNames": []
         }
-    ]
+    ],
+    "lists": {},
+    "listNextId": 1,
+    "chartOdooMenusReferences": {
+        "da912f15-3bc6-5718-a2e7-afa0509a999e": "om_account_budget.menu_act_crossovered_budget_view",
+        "fac5cfad-da20-51ef-aae1-d65fe50fd4f9": "om_account_budget.menu_act_crossovered_budget_view",
+        "460fe30a-b28e-5ebf-858a-a80aeef83d66": "om_account_budget.menu_act_crossovered_budget_view",
+        "adde33b4-c26f-5382-93ed-645460f2d07e": "om_account_budget.menu_act_crossovered_budget_view"
+    }
 }

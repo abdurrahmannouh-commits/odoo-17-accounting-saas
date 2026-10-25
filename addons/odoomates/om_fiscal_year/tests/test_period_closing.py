@@ -3,7 +3,6 @@ from datetime import date
 from odoo import Command
 from odoo.exceptions import UserError, ValidationError
 from odoo.tests import new_test_user, tagged
-from odoo.tools.misc import format_date
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
@@ -15,7 +14,7 @@ class TestPeriodClosing(AccountTestInvoicingCommon):
     def setUpClass(cls):
         super().setUpClass()
         cls.company = cls.env.company
-        cls.company.write({'fiscalyear_lock_date': False, 'period_lock_date': False, 'tax_lock_date': False})
+        cls.company.write({'fiscalyear_lock_date': False, 'sale_lock_date': False, 'purchase_lock_date': False})
         cls.env['account.period.closing.task'].search([]).active = False
         cls.task = cls.env['account.period.closing.task'].create({'name': 'Accrue the electricity'})
 
@@ -28,8 +27,7 @@ class TestPeriodClosing(AccountTestInvoicingCommon):
     def test_checklist_and_close(self):
         draft = self.init_invoice('out_invoice', amounts=[100.0], taxes=[], invoice_date='2026-03-10')
         closing = self._closing()
-        # in the language of the user, which is not English when other languages are installed
-        self.assertEqual(closing.name, format_date(self.env, date(2026, 3, 1), date_format='MMMM y'))
+        self.assertEqual(closing.name, 'March 2026')
         self.assertEqual(closing.date_to, date(2026, 3, 31))
         self.assertEqual(self._check(closing, 'draft_entries').status, 'blocking')
         self.assertEqual(self._check(closing, 'draft_entries').count, 1)
@@ -57,12 +55,13 @@ class TestPeriodClosing(AccountTestInvoicingCommon):
         self.assertEqual(closing.state, 'open')
         self.assertFalse(self.company.fiscalyear_lock_date)
 
-    def test_lock_the_entries_and_later_periods(self):
+    def test_lock_sales_and_purchases_and_later_periods(self):
         self.task.active = False
-        self.company.period_lock_date = date(2026, 1, 31)
-        march = self._closing(lock_type='period')
+        self.company.purchase_lock_date = date(2026, 1, 31)
+        march = self._closing(lock_type='sale_purchase')
         march.action_close()
-        self.assertEqual(self.company.period_lock_date, date(2026, 3, 31))
+        self.assertEqual((self.company.sale_lock_date, self.company.purchase_lock_date),
+                         (date(2026, 3, 31), date(2026, 3, 31)))
         self.assertFalse(self.company.fiscalyear_lock_date)
         april = self._closing(date_from=date(2026, 4, 1), lock_type='none')
         april.action_close()
@@ -70,7 +69,7 @@ class TestPeriodClosing(AccountTestInvoicingCommon):
             march.action_reopen()
         april.action_reopen()
         march.action_reopen()
-        self.assertEqual(self.company.period_lock_date, date(2026, 1, 31))
+        self.assertEqual((self.company.sale_lock_date, self.company.purchase_lock_date), (False, date(2026, 1, 31)))
 
         with self.assertRaises(ValidationError):
             self._closing(date_from=date(2026, 3, 15))

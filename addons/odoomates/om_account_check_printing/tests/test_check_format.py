@@ -42,7 +42,7 @@ class TestCheckFormat(AccountTestInvoicingCommon):
         action = payment.print_checks()
         self.assertEqual(action['report_name'], 'om_account_check_printing.report_check')
         self.assertEqual(action['context']['om_check_format_id'], self.leaf_format.id)
-        self.assertTrue(payment.is_move_sent)
+        self.assertTrue(payment.is_sent)
 
         report = self.env.ref(LAYOUT).with_context(om_check_format_id=self.leaf_format.id)
         html = report._render_qweb_html(report.report_name, payment.ids)[0].decode()
@@ -66,7 +66,7 @@ class TestCheckFormat(AccountTestInvoicingCommon):
         payment.print_checks()
         report = self.env.ref(LAYOUT).with_context(om_check_format_id=self.a4_format.id)
         html = report._render_qweb_html(report.report_name, payment.ids)[0].decode()
-        self.assertEqual(payment.ref, bill.name)
+        self.assertEqual(payment.memo, bill.name)
         self.assertEqual(html.count(bill.name), 3)  # the memo on the cheque and the bill on both stubs
         self.assertEqual(
             self.env.ref(LAYOUT).with_context(om_check_format_id=self.a4_format.id).get_paperformat().format, 'A4')
@@ -124,12 +124,13 @@ class TestCheckFormat(AccountTestInvoicingCommon):
             payment.print_checks()
 
     def test_other_layouts_are_left_alone(self):
+        self.bank.bank_check_printing_layout = False
         self.env.company.account_check_printing_layout = 'disabled'
         bill, payment = self._pay_bill()
         with self.assertRaises(RedirectWarning):
             # the standard message asking for a layout
             payment.print_checks()
-        self.assertFalse(payment.is_move_sent)
+        self.assertFalse(payment.is_sent)
 
     def test_every_installed_format_prints(self):
         """ The formats shipped with the module print their sample on a page of their own size. """

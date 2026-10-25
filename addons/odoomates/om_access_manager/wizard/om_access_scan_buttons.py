@@ -11,7 +11,7 @@ from odoo.addons.om_access_manager.models.om_access_profile_element import ELEME
 
 _logger = logging.getLogger(__name__)
 
-SCANNED_VIEW_TYPES = ('form', 'tree', 'kanban')
+SCANNED_VIEW_TYPES = ('form', 'list', 'kanban')
 
 
 class OmAccessScanButtons(models.TransientModel):
@@ -223,7 +223,7 @@ class OmAccessScanButtonsLine(models.TransientModel):
         'om.access.scan.buttons', required=True, ondelete='cascade')
     selected = fields.Boolean(string='Restrict')
     view_type = fields.Selection(
-        [('form', 'Form'), ('tree', 'List'), ('kanban', 'Kanban')])
+        [('form', 'Form'), ('list', 'List'), ('kanban', 'Kanban')])
     button_type = fields.Selection(
         [('object', 'Method'), ('action', 'Action')])
     button_name = fields.Char(string='Button')

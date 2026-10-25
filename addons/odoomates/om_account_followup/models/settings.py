@@ -11,5 +11,5 @@ class AccountConfigSettings(models.TransientModel):
             'name': 'Follow-up Levels',
             'res_model': 'followup.followup',
             'res_id': res_ids and res_ids.id or False,
-            'view_mode': 'form,tree',
+            'view_mode': 'form,list',
         }

@@ -117,7 +117,7 @@ class OmUserAuditLog(models.Model):
         if not vals_list:
             return
         cr = self.env.cr
-        if getattr(cr, 'readonly', False):
+        if cr.readonly:
             self._om_after_transaction(vals_list)
             return
         data = cr.precommit.data
@@ -134,7 +134,7 @@ class OmUserAuditLog(models.Model):
     @api.model
     def _om_after_transaction(self, vals_list):
         cr = self.env.cr
-        if getattr(cr, 'readonly', False) and module.current_test:
+        if cr.readonly and module.current_test:
             # tests cannot open a read/write cursor from a read-only one once it
             # is in use: roll it back and write now, as res.device.log does
             cr.rollback()

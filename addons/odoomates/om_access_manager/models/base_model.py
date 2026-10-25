@@ -1,12 +1,12 @@
-# Odoo 17 checks the rights on a model in ir.model.access and filters the
+# Odoo 19 checks the rights on a model in ir.model.access and filters the
 # records in ir.rule; both are cached per user, which is where a profile
 # subtracts access. Each profile carries its own hidden group, so the caches
 # keyed by group sets stay right too.
 from lxml import etree
 
-from odoo import _, api, fields, models, tools
+from odoo import _, api, models, tools
 from odoo.exceptions import AccessError, UserError
-from odoo.osv import expression
+from odoo.fields import Domain
 from odoo.tools import config
 from odoo.tools.safe_eval import safe_eval
 
@@ -15,7 +15,7 @@ ARCHIVE_FIELDS = frozenset({'active', 'x_active'})
 
 def _operation_label(env, operation):
     return {
-        'read': _("read"), 'write': _("edit"), 'create': _("create"), 'unlink': _("delete"),
+        'read': env._("read"), 'write': env._("edit"), 'create': env._("create"), 'unlink': env._("delete"),
     }.get(operation, operation)
 
 
@@ -48,34 +48,29 @@ class IrRule(models.Model):
     @tools.conditional(
         'xml' not in config['dev_mode'],
         tools.ormcache('self.env.uid', 'self.env.su', 'model_name', 'mode',
-                       'tuple(self._compute_domain_context_values())', 'self._om_today()'),
+                       'tuple(self._compute_domain_context_values())'),
     )
     def _compute_domain(self, model_name, mode="read"):
         domain = super()._compute_domain(model_name, mode)
-        if self.env.su or domain == expression.FALSE_DOMAIN:
+        if self.env.su or domain.is_false():
             return domain
         rules = self.env['om.access.profile']._resolve(self.env.uid)
         if not rules.enabled:
             return domain
         if not rules.allows(model_name, mode):
-            return expression.FALSE_DOMAIN
+            return Domain.FALSE
         or_groups, and_groups = rules.record_domains(model_name, mode)
         if not or_groups and not and_groups:
             return domain
         eval_context = self.env['om.access.profile']._om_eval_context()
 
         def parse(terms):
-            return expression.AND([expression.normalize_domain(safe_eval(term, eval_context)) for term in terms])
+            return Domain.AND([Domain(safe_eval(term, eval_context)) for term in terms])
 
         extra = [parse(terms) for terms in and_groups]
         if or_groups:
-            extra.append(expression.OR([parse(terms) for terms in or_groups]))
-        return expression.AND([domain or [], *extra])
-
-    def _om_today(self):
-        """ The date the access domains are computed for: filters on the date
-        of creation (this week...) change with it. """
-        return fields.Date.today()
+            extra.append(Domain.OR([parse(terms) for terms in or_groups]))
+        return (domain & Domain.AND(extra)).optimize(self.env[model_name])
 
     def _make_access_error(self, operation, records):
         # Say plainly that the profile refused, without naming the records:
@@ -84,7 +79,7 @@ class IrRule(models.Model):
         if rules.enabled and records:
             model_label = self.env['ir.model']._get(records._name).name or records._name
             core = super()._compute_domain(records._name, operation)
-            if core != expression.FALSE_DOMAIN and records.sudo().filtered_domain(core) == records.sudo():
+            if not core.is_false() and records.sudo().filtered_domain(core) == records.sudo():
                 return AccessError(_(
                     "Your access profile does not allow you to %(operation)s these %(model)s "
                     "records: they are outside the ones allowed to you.\n\n"

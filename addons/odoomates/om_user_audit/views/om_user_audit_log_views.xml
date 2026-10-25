@@ -5,7 +5,7 @@
         <field name="name">om.user.audit.log.list</field>
         <field name="model">om.user.audit.log</field>
         <field name="arch" type="xml">
-            <tree string="Logs" create="0" edit="0" delete="0"
+            <list string="Logs" create="0" edit="0" delete="0"
                   decoration-danger="event in ('login_failed', 'refused')"
                   decoration-muted="event in ('read', 'logout')"
                   decoration-info="event in ('export', 'import', 'print')">
@@ -25,7 +25,7 @@
                 <field name="ip" optional="show"/>
                 <field name="user_agent" optional="hide"/>
                 <field name="model" column_invisible="1"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -51,7 +51,6 @@
                             <field name="user_agent"/>
                         </group>
                         <group>
-                            <field name="model" invisible="1"/>
                             <field name="model_name" invisible="not model"/>
                             <field name="model" groups="base.group_no_one" invisible="not model"/>
                             <field name="res_name" invisible="not res_name"/>
@@ -131,7 +130,7 @@
     <record id="om_user_audit_log_action" model="ir.actions.act_window">
         <field name="name">Logs</field>
         <field name="res_model">om.user.audit.log</field>
-        <field name="view_mode">tree,pivot,graph,form</field>
+        <field name="view_mode">list,pivot,graph,form</field>
         <field name="context">{'search_default_today': 1}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Nothing logged yet</p>

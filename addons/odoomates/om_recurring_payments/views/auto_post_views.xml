@@ -10,10 +10,10 @@
         <field name="mode">primary</field>
         <field name="priority">100</field>
         <field name="arch" type="xml">
-            <xpath expr="//tree" position="attributes">
+            <xpath expr="//list" position="attributes">
                 <attribute name="create">0</attribute>
             </xpath>
-            <xpath expr="//tree" position="inside">
+            <xpath expr="//list" position="inside">
                 <header>
                     <button name="action_stop_auto_post" type="object" string="Stop Auto-post"
                             confirm="The selected draft entries will not be posted automatically any more, and their recurrence ends. Continue?"/>
@@ -61,7 +61,8 @@
     <record id="action_move_auto_post" model="ir.actions.act_window">
         <field name="name">Auto-Post Entries</field>
         <field name="res_model">account.move</field>
-        <field name="view_mode">tree,form</field>
+        <field name="path">auto-post-entries</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">['|', ('auto_post', '!=', 'no'), ('auto_post_origin_id', '!=', False)]</field>
         <field name="context">{'search_default_auto_post_draft': 1}</field>
         <field name="view_id" ref="view_move_auto_post_list"/>

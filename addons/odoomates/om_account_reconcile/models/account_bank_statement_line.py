@@ -2,9 +2,7 @@ import logging
 import re
 
 from odoo import api, fields, models, Command, _
-from odoo.exceptions import UserError
-
-from .tools import lock_rows
+from odoo.exceptions import LockError, UserError
 
 _logger = logging.getLogger(__name__)
 
@@ -48,7 +46,7 @@ class AccountBankStatementLine(models.Model):
 
     def _om_check_access(self):
         # the same users as the ones allowed to change bank transactions
-        if not self.env.su and not self.env.user.has_group('account.group_account_user'):
+        if not self.env.su and not self.env.user.has_group('account.group_account_basic'):
             raise UserError(_('Only accountants can reconcile transactions.'))
 
     # -------------------------------------------------------------------------
@@ -143,32 +141,27 @@ class AccountBankStatementLine(models.Model):
             amounts = self._prepare_counterpart_amounts_using_st_line_rate(trans_currency, None, amount)
             return [{**common, 'account_id': account.id, 'analytic_distribution': analytic_distribution, **amounts}]
 
-        # the taxes computation of Odoo 17: the base
-        # amount is signed (a debit is positive), the price included taxes only count when the amount includes them
+        sign = 1 if amount > 0 else -1
         tax_use = taxes[0].type_tax_use
-        tax_included = bool(writeoff.get('tax_included'))
-        base_line = AccountTax._convert_to_tax_base_line_dict(
+        base_line = AccountTax._prepare_base_line_for_taxes_computation(
             None,
-            partner=partner,
-            currency=trans_currency,
-            taxes=taxes,
-            price_unit=amount,
+            price_unit=abs(amount),
             quantity=1.0,
-            account=account,
+            tax_ids=taxes,
+            currency_id=trans_currency,
+            special_mode='total_included' if writeoff.get('tax_included') else 'total_excluded',
+            rate=self._om_rate(),
+            sign=sign,
+            is_refund=(tax_use == 'sale' and sign > 0) or (tax_use == 'purchase' and sign < 0),
+            partner_id=partner,
+            account_id=account,
             analytic_distribution=analytic_distribution,
-            price_subtotal=amount,
-            is_refund=(tax_use == 'sale' and amount > 0) or (tax_use == 'purchase' and amount < 0),
-            handle_price_include=tax_included,
-            extra_context={'force_price_include': True} if tax_included else None,
         )
-        tax_results = AccountTax._compute_taxes([base_line], include_caba_tags=True)
-
-        def amounts_of(amount_currency):
-            return {
-                'amount_currency': amount_currency,
-                'balance': self._prepare_counterpart_amounts_using_st_line_rate(
-                    trans_currency, None, amount_currency)['balance'],
-            }
+        base_lines = [base_line]
+        AccountTax._add_tax_details_in_base_lines(base_lines, company)
+        AccountTax._round_base_lines_tax_details(base_lines, company)
+        AccountTax._add_accounting_data_in_base_lines_tax_details(base_lines, company)
+        tax_results = AccountTax._prepare_tax_lines(base_lines, company)
 
         lines_vals = []
         for _base_line, to_update in tax_results['base_lines_to_update']:
@@ -178,24 +171,15 @@ class AccountBankStatementLine(models.Model):
                 'analytic_distribution': analytic_distribution,
                 'tax_ids': [Command.set(taxes.ids)],
                 'tax_tag_ids': to_update['tax_tag_ids'],
-                **amounts_of(to_update['price_subtotal']),
+                'amount_currency': to_update['amount_currency'],
+                'balance': to_update['balance'],
             })
         for tax_line_vals in tax_results['tax_lines_to_add']:
-            if not tax_line_vals['tax_amount']:
-                continue
-            repartition_line = self.env['account.tax.repartition.line'].browse(
-                tax_line_vals['tax_repartition_line_id'])
             lines_vals.append({
+                **tax_line_vals,
                 **common,
-                'name': repartition_line.tax_id.name,
-                'account_id': tax_line_vals['account_id'],
-                'analytic_distribution': tax_line_vals['analytic_distribution'],
-                'tax_repartition_line_id': repartition_line.id,
-                'tax_ids': tax_line_vals['tax_ids'],
-                'tax_tag_ids': tax_line_vals['tax_tag_ids'],
-                'group_tax_id': tax_line_vals['tax_id'] if tax_line_vals['tax_id'] != repartition_line.tax_id.id
-                else False,
-                **amounts_of(tax_line_vals['tax_amount']),
+                'name': self.env['account.tax.repartition.line'].browse(
+                    tax_line_vals['tax_repartition_line_id']).tax_id.name,
             })
         return lines_vals
 
@@ -281,7 +265,9 @@ class AccountBankStatementLine(models.Model):
         """
         self.ensure_one()
         self._om_check_access()
-        if not lock_rows(self):
+        try:
+            self.lock_for_update()
+        except LockError:
             raise UserError(_('This transaction is being reconciled by someone else, please try again in a moment.'))
         if self.is_reconciled:
             raise UserError(_('The transaction %s is already reconciled.', self.display_name))
@@ -479,27 +465,19 @@ class AccountBankStatementLine(models.Model):
         if self.is_reconciled:
             return False
         company_models = models.filtered(lambda model: model.company_id == self.company_id)
-        # Odoo 17: the partner mapping lines of the matching rules give the partner of the transaction
-        if not self.partner_id:
-            for model in company_models.filtered('partner_mapping_line_ids'):
-                partner = model._om_is_applicable(self) and model._om_get_mapped_partner(self)
-                if partner:
-                    self.partner_id = partner
-                    break
-        # the models validated automatically: a button is only applied by hand, and a counterpart model
-        # creating an invoice or a bill is left to the core
+        for model in company_models.filtered('mapped_partner_id'):
+            if not self.partner_id and model._om_is_applicable(self):
+                self.partner_id = model.mapped_partner_id
+                break
         for model in company_models.filtered(
-                lambda model: model.auto_reconcile and (
-                    model.rule_type == 'invoice_matching'
-                    or model.rule_type == 'writeoff_suggestion')):
+                lambda model: model.trigger == 'auto_reconcile' and not model.mapped_partner_id):
             if not model._om_is_applicable(self):
                 continue
             proposal = model._om_get_proposal(self)
             if proposal and self._om_is_complete(proposal):
                 self._om_reconcile(proposal)
-                if model.to_check:
-                    # Odoo 17 marks the entries to check, where 19 schedules an activity
-                    self.move_id.to_check = True
+                if model.next_activity_type_id:
+                    self.move_id.activity_schedule(activity_type_id=model.next_activity_type_id.id)
                 return True
         if self.company_id.om_reconcile_auto:
             scored = self._om_scored_candidates(limit=2)

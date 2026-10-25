@@ -25,7 +25,7 @@ class TestBankReconciliationTour(AccountTestInvoicingHttpCommon):
             'journal_id': bank_journal.id, 'date': '2026-01-21', 'amount': -7.0, 'payment_ref': 'Tour bank fee',
         })
 
-        self.start_tour('/web#action=om_account_reconcile.action_bank_reconciliation',
+        self.start_tour('/odoo/action-om_account_reconcile.action_bank_reconciliation',
                         'om_bank_reconciliation_tour', login=self.env.user.login)
 
         self.assertTrue(payment.is_reconciled)

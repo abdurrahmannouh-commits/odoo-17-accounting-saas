@@ -63,7 +63,7 @@
         <field name="model_id" ref="om_access_manager.model_om_access_profile"/>
         <field name="binding_model_id" ref="om_access_manager.model_om_access_profile"/>
         <field name="binding_view_types">list,form</field>
-        <field name="groups_id" eval="[(4, ref('group_access_manager'))]"/>
+        <field name="group_ids" eval="[(4, ref('group_access_manager'))]"/>
         <field name="state">code</field>
         <field name="code">action = records.action_export_profiles()</field>
     </record>
@@ -140,7 +140,7 @@
         <field name="res_model">om.access.assign</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
-        <field name="groups_id" eval="[(4, ref('group_access_manager'))]"/>
+        <field name="group_ids" eval="[(4, ref('group_access_manager'))]"/>
         <field name="binding_model_id" ref="base.model_res_users"/>
         <field name="binding_view_types">list,form</field>
     </record>
@@ -182,7 +182,7 @@
         <field name="res_model">om.access.copy.access</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
-        <field name="groups_id" eval="[(4, ref('group_access_manager'))]"/>
+        <field name="group_ids" eval="[(4, ref('group_access_manager'))]"/>
         <field name="binding_model_id" ref="base.model_res_users"/>
         <field name="binding_view_types">form</field>
     </record>
@@ -215,13 +215,13 @@
                             does not refuse the data: that is the Data tab.
                         </div>
                         <field name="menu_line_ids" nolabel="1">
-                            <tree editable="bottom" create="0" delete="0"
+                            <list editable="bottom" create="0" delete="0"
                                   decoration-muted="is_config">
                                 <field name="menu_id" column_invisible="1" force_save="1"/>
                                 <field name="label" readonly="1" force_save="1"/>
                                 <field name="is_config" readonly="1" force_save="1" optional="show"/>
                                 <field name="visible" widget="boolean_toggle"/>
-                            </tree>
+                            </list>
                         </field>
                     </page>
                     <page string="Data" name="data">
@@ -232,7 +232,7 @@
                             for every app.
                         </div>
                         <field name="model_line_ids" nolabel="1">
-                            <tree editable="bottom" create="0" delete="0"
+                            <list editable="bottom" create="0" delete="0"
                                   decoration-muted="not owned">
                                 <field name="model_id" column_invisible="1" force_save="1"/>
                                 <field name="owned" column_invisible="1" force_save="1"/>
@@ -247,17 +247,17 @@
                                 <field name="scope" readonly="not owner_field and scope != 'custom'"/>
                                 <field name="shared_with" readonly="1" force_save="1"/>
                                 <field name="parent_label" readonly="1" force_save="1" optional="hide"/>
-                            </tree>
+                            </list>
                         </field>
                     </page>
                     <page string="Reports" name="reports" invisible="not report_line_ids">
                         <field name="report_line_ids" nolabel="1">
-                            <tree editable="bottom" create="0" delete="0">
+                            <list editable="bottom" create="0" delete="0">
                                 <field name="report_id" readonly="1" force_save="1"
                                        options="{'no_open': True}"/>
                                 <field name="model_label" readonly="1" force_save="1"/>
                                 <field name="visible" widget="boolean_toggle"/>
-                            </tree>
+                            </list>
                         </field>
                     </page>
                     <page string="Actions" name="actions" invisible="not action_line_ids">
@@ -265,12 +265,12 @@
                             The entries of the Action menu of the data of this app.
                         </div>
                         <field name="action_line_ids" nolabel="1">
-                            <tree editable="bottom" create="0" delete="0">
+                            <list editable="bottom" create="0" delete="0">
                                 <field name="action_ref" readonly="1" force_save="1"
                                        options="{'no_open': True}"/>
                                 <field name="model_label" readonly="1" force_save="1"/>
                                 <field name="visible" widget="boolean_toggle"/>
-                            </tree>
+                            </list>
                         </field>
                     </page>
                 </notebook>
@@ -302,7 +302,7 @@
                         Tick the buttons to restrict. The others are left untouched.
                     </p>
                     <field name="line_ids" nolabel="1" readonly="0">
-                        <tree editable="bottom" create="false" delete="false">
+                        <list editable="bottom" create="false" delete="false">
                             <field name="selected" string="Restrict" widget="boolean_toggle"/>
                             <field name="button_label" string="Label" readonly="1"
                                    column_invisible="parent.target != 'buttons'"/>
@@ -320,7 +320,7 @@
                                    column_invisible="parent.target != 'elements'"/>
                             <field name="element_name" string="Name" readonly="1"
                                    column_invisible="parent.target != 'elements'"/>
-                        </tree>
+                        </list>
                     </field>
                 </div>
                 <footer>

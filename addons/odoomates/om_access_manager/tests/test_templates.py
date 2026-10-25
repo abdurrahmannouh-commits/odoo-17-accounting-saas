@@ -2,8 +2,6 @@
 # parts that must be skipped and reported.
 from odoo.tests import Form, TransactionCase, new_test_user, tagged
 
-from .audit import has_access
-
 from odoo.addons.om_access_manager.models.om_access_templates import TEMPLATES, TEMPLATES_BY_KEY
 
 
@@ -15,10 +13,6 @@ class TestTemplates(TransactionCase):
         super().setUpClass()
         cls.user = new_test_user(cls.env, 'om_access_template_user', groups='base.group_user')
         cls.discuss = cls.env.ref('mail.menu_root_discuss')
-        # Odoo 17 has no data menu under Discuss: give it its canned responses
-        cls.env['ir.ui.menu'].create({
-            'name': 'Canned Responses', 'parent_id': cls.discuss.id,
-            'action': f"ir.actions.act_window,{cls.env.ref('mail.mail_shortcode_action').id}"})
 
     def _create(self, key, **values):
         form = Form(self.env['om.access.template.wizard'])
@@ -48,15 +42,15 @@ class TestTemplates(TransactionCase):
         self.assertTrue(profile.global_readonly and profile.block_export and profile.block_import)
         self.assertIn('Created from the template Auditor', profile.note)
         Partner = self.env['res.partner'].with_user(self.user).browse()
-        self.assertTrue(has_access(Partner, 'read'))
-        self.assertFalse(has_access(Partner, 'write'))
+        self.assertTrue(Partner.has_access('read'))
+        self.assertFalse(Partner.has_access('write'))
 
     def test_a_template_for_any_app(self):
         profile = self._create('app_readonly', app_id=self.discuss, user_ids=self.user)
         self.assertEqual(profile.name, 'Discuss: App Read Only')
-        Channel = self.env['mail.shortcode'].with_user(self.user).browse()
-        self.assertTrue(has_access(Channel, 'read'))
-        self.assertFalse(has_access(Channel, 'write'))
+        Channel = self.env['discuss.channel'].with_user(self.user).browse()
+        self.assertTrue(Channel.has_access('read'))
+        self.assertFalse(Channel.has_access('write'))
 
     def test_missing_parts_are_skipped_and_reported(self):
         self._add_recipe({

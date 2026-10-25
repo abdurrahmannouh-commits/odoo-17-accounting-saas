@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import { registry } from "@web/core/registry";
 import { getExtensionInfo, sendReceipt } from "./extension_bridge";
 

@@ -2,8 +2,6 @@
 # the browser.
 from odoo.tests import Form, TransactionCase, new_test_user, tagged
 
-from .audit import has_access
-
 
 @tagged('post_install', '-at_install')
 class TestAppWizard(TransactionCase):
@@ -16,10 +14,6 @@ class TestAppWizard(TransactionCase):
             'name': 'App Profile', 'user_ids': [(6, 0, cls.user.ids)],
         })
         cls.discuss = cls.env.ref('mail.menu_root_discuss')
-        # Odoo 17 has no data menu under Discuss: give it its canned responses
-        cls.env['ir.ui.menu'].create({
-            'name': 'Canned Responses', 'parent_id': cls.discuss.id,
-            'action': f"ir.actions.act_window,{cls.env.ref('mail.mail_shortcode_action').id}"})
         cls.settings = cls.env.ref('base.menu_administration')
 
     def _wizard(self, app, level=None, own_records=None):
@@ -43,7 +37,7 @@ class TestAppWizard(TransactionCase):
     def test_the_wizard_lists_what_the_app_brings(self):
         wizard = self._wizard(self.discuss).save()
         self.assertEqual(wizard.menu_line_ids[:1].menu_id, self.discuss)
-        line = self._model_line(wizard, 'mail.shortcode')
+        line = self._model_line(wizard, 'discuss.channel')
         self.assertTrue(line.owned)
         self.assertTrue(line.perm_read and line.perm_unlink)
 
@@ -52,23 +46,23 @@ class TestAppWizard(TransactionCase):
         self.assertIn(self.discuss, self.profile.hidden_menu_ids)
         # only the app itself is stored: it hides everything below it
         self.assertFalse(self.profile.hidden_menu_ids - self.discuss)
-        row = self.profile.model_ids.filtered(lambda row: row.model_id.model == 'mail.shortcode')
+        row = self.profile.model_ids.filtered(lambda row: row.model_id.model == 'discuss.channel')
         self.assertFalse(row.perm_read or row.perm_create or row.perm_write or row.perm_unlink)
-        self.assertFalse(has_access(self.env['mail.shortcode'].with_user(self.user).browse(), 'read'))
+        self.assertFalse(self.env['discuss.channel'].with_user(self.user).browse().has_access('read'))
 
     def test_read_only_level(self):
         self._apply(self.discuss, 'readonly')
-        Channel = self.env['mail.shortcode'].with_user(self.user).browse()
-        self.assertTrue(has_access(Channel, 'read'))
+        Channel = self.env['discuss.channel'].with_user(self.user).browse()
+        self.assertTrue(Channel.has_access('read'))
         for operation in ('create', 'write', 'unlink'):
-            self.assertFalse(has_access(Channel, operation), operation)
+            self.assertFalse(Channel.has_access(operation), operation)
 
     def test_reopening_shows_the_profile_as_saved(self):
         self._apply(self.discuss, 'none')
         wizard = self._wizard(self.discuss).save()
         self.assertEqual(wizard.level, 'current')
         self.assertFalse(any(wizard.menu_line_ids.mapped('visible')))
-        self.assertFalse(self._model_line(wizard, 'mail.shortcode').perm_read)
+        self.assertFalse(self._model_line(wizard, 'discuss.channel').perm_read)
 
     def test_applying_twice_changes_nothing(self):
         def state():

@@ -1,6 +1,6 @@
 {
     'name': 'Customer Follow Up Management',
-    'version': '17.0.2.1.0',
+    'version': '1.1.0',
     'category': 'Accounting',
     'description': """Customer payment follow-ups: reminders by email and letter, customer statements, promises to pay
 and disputed invoices.""",
@@ -12,7 +12,7 @@ and disputed invoices.""",
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
-        'data/data.xml',
+        'data/mail_template_data.xml',
         'data/mail_activity_type_data.xml',
         'data/ir_cron.xml',
         'wizard/followup_print_view.xml',

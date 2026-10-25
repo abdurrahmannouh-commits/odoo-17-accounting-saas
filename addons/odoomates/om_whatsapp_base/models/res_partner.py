@@ -2,9 +2,7 @@ from odoo import _, api, fields, models
 
 
 class ResPartner(models.Model):
-    _name = 'res.partner'
-    # the sanitized number the WhatsApp messages are matched on, as the SMS app does
-    _inherit = ['mail.thread.phone', 'res.partner']
+    _inherit = 'res.partner'
     # a user who can read a contact can send it a WhatsApp, as later versions of Odoo allow
     _mail_post_access = 'read'
 

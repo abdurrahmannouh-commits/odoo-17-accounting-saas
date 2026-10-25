@@ -1,6 +1,8 @@
 from odoo import _, fields, models
 from odoo.exceptions import UserError
 
+from odoo.addons.mail.tools.discuss import Store
+
 # A late or repeated status update never moves a message back.
 STATUS_RANK = {'ready': 0, 'process': 0, 'pending': 1, 'sent': 2}
 
@@ -20,15 +22,12 @@ class MailNotification(models.Model):
         ('om_whatsapp_error', 'WhatsApp Error'),
     ])
 
-    def _notification_format(self):
-        formatted = super()._notification_format()
-        for values, notification in zip(formatted, self):
-            if notification.notification_type == 'om_whatsapp':
-                values.update({
-                    'failure_reason': notification.failure_reason,
-                    'om_whatsapp_read': notification.is_read and notification._om_whatsapp_tracks_read(),
-                })
-        return formatted
+    def _to_store_defaults(self, target):
+        is_whatsapp = lambda n: n.notification_type == 'om_whatsapp'  # noqa: E731
+        return super()._to_store_defaults(target) + [
+            Store.Attr('failure_reason', predicate=is_whatsapp),
+            Store.Attr('om_whatsapp_read', lambda n: n.is_read and n._om_whatsapp_tracks_read(), predicate=is_whatsapp),
+        ]
 
     def _om_whatsapp_get_status(self):
         self.ensure_one()

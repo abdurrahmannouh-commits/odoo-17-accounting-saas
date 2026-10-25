@@ -14,9 +14,9 @@
                         Settings app.
                     </p>
                     <field name="om_hidden_menu_ids">
-                        <tree>
+                        <list>
                             <field name="complete_name" string="Menu"/>
-                        </tree>
+                        </list>
                     </field>
                 </page>
             </page>

@@ -54,7 +54,7 @@ class OmWhatsappAccount(models.Model):
             return super()._om_whatsapp_send_automated(notifications)
         if len(notifications) == 1 and self._om_whatsapp_user_at_screen():
             action = self._om_whatsapp_send(notifications)
-            self.env['bus.bus']._sendone(self.env.user.partner_id, 'om_whatsapp/action', {'action': action})
+            self.env.user._bus_send('om_whatsapp/action', {'action': action})
             return None
         notifications._om_whatsapp_set_status('failed', _(
             "WhatsApp Web sends the messages of a user one by one, not by itself: send it again from the chatter."))

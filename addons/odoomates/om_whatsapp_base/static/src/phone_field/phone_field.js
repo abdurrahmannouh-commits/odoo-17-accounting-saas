@@ -1,7 +1,6 @@
-/** @odoo-module **/
-
 import { _t } from "@web/core/l10n/translation";
 import { onWillStart } from "@odoo/owl";
+import { user } from "@web/core/user";
 import { useService } from "@web/core/utils/hooks";
 import { patch } from "@web/core/utils/patch";
 import { formPhoneField, PhoneField, phoneField } from "@web/views/fields/phone/phone_field";
@@ -22,7 +21,6 @@ patch(PhoneField.prototype, {
     setup() {
         super.setup();
         this.action = useService("action");
-        const user = useService("user");
         onWillStart(async () => {
             this.canWhatsapp = await user.hasGroup(WHATSAPP_GROUP);
         });

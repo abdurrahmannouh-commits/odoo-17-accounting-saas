@@ -31,10 +31,8 @@ class AccountStatementImport(models.TransientModel):
 
     @api.depends('journal_id')
     def _compute_map_id(self):
-        # the journals without a map of their own read the layout of the import of 17.0 before the maps
-        default_map = self.env.ref('om_account_bank_statement_import.map_odoo17_layout', raise_if_not_found=False)
         for wizard in self:
-            wizard.map_id = wizard.journal_id.statement_import_map_id or default_map
+            wizard.map_id = wizard.journal_id.statement_import_map_id
 
     # -------------------------------------------------------------------------
     # Parsing
@@ -114,16 +112,6 @@ class AccountStatementImport(models.TransientModel):
                 currency=journal_currency.name,
             ))
 
-    def _find_partner(self, name, journal):
-        """ The partner of exactly this name, as the import of 17.0 set it: none when no or several partners
-        have it, the reconciliation finds it from the name then """
-        if not name:
-            return False
-        partners = self.env['res.partner'].search([
-            ('name', '=', name.strip()), ('company_id', 'in', [journal.company_id.id, False]),
-        ], limit=2)
-        return partners.id if len(partners) == 1 else False
-
     def _statement_line_values(self, transaction, journal, statement):
         unique_import_id = transaction.get('unique_import_id')
         if unique_import_id:
@@ -137,14 +125,9 @@ class AccountStatementImport(models.TransientModel):
             'amount': transaction['amount'],
             'unique_import_id': unique_import_id,
             'partner_name': transaction.get('partner_name'),
-            'partner_id': self._find_partner(transaction.get('partner_name'), journal),
             'account_number': transaction.get('account_number'),
             'transaction_type': transaction.get('transaction_type'),
             'narration': narration,
-            # the reference of the bank stays on the line, where the import of 17.0 put it and
-            # where it stays visible, and the details of the transaction go to the field this
-            # series added for them
-            'ref': transaction.get('ref') or False,
             'transaction_details': {
                 key: value for key, value in (
                     ('reference', transaction.get('ref')),
@@ -167,8 +150,8 @@ class AccountStatementImport(models.TransientModel):
 
         values = [self._statement_line_values(transaction, journal, statement) for transaction in transactions]
         import_ids = [line['unique_import_id'] for line in values if line['unique_import_id']]
-        already_imported = set(self.env['account.bank.statement.line'].sudo().search(
-            [('unique_import_id', 'in', import_ids)],
+        already_imported = set(self.env['account.bank.statement.line'].sudo().search_fetch(
+            [('unique_import_id', 'in', import_ids)], ['unique_import_id'],
         ).mapped('unique_import_id')) if import_ids else set()
         new_values = [line for line in values
                       if not line['unique_import_id'] or line['unique_import_id'] not in already_imported]

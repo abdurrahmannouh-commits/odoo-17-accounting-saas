@@ -147,9 +147,7 @@ class CurrencyRevaluation(models.TransientModel):
         date of the revaluation, the amounts always positive """
         if not lines:
             return {}
-        # the matchings are read with SQL: write the pending changes first
-        self.env.flush_all()
-        self.env.cr.execute(SQL(
+        rows = self.env.execute_query(SQL(
             """
               SELECT part.debit_move_id AS line_id,
                      SUM(part.debit_amount_currency) AS amount_currency,
@@ -173,7 +171,6 @@ class CurrencyRevaluation(models.TransientModel):
             """,
             ids=lines.ids, date=self.date,
         ))
-        rows = self.env.cr.fetchall()
         return {row[0]: (row[1], row[2]) for row in rows}
 
     # -------------------------------------------------------------------------

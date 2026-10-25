@@ -28,23 +28,20 @@ class TestMoreSwitches(HttpCase):
     def test_the_search_bar_switches_reach_the_web_client(self):
         self.profile.write({'block_custom_filter': True, 'block_favorites': True})
         self.authenticate(self.user.login, self.password)
-        page = self.url_open('/web').text
+        page = self.url_open('/odoo').text
         self.assertIn('o_om_no_custom_filter', page)
         self.assertIn('o_om_no_favorites', page)
         self.assertNotIn('o_om_no_custom_group', page)
 
     def test_saving_a_search_is_refused(self):
         self.authenticate(self.user.login, self.password)
-        # Odoo 17 saves a search with create_or_replace, for one user
-        values = {'name': 'Mine', 'model_id': 'res.partner', 'domain': '[]', 'user_id': self.user.id}
-        self._call('ir.filters', 'create_or_replace', [values])
+        values = {'name': 'Mine', 'model_id': 'res.partner', 'domain': '[]', 'user_ids': [self.user.id]}
+        self._call('ir.filters', 'create_filter', [values])
         self.profile.block_favorites = True
         with self.assertRaises(JsonRpcException):
-            self._call('ir.filters', 'create_or_replace', [dict(values, name='Another')])
+            self._call('ir.filters', 'create_filter', [dict(values, name='Another')])
 
     def test_changing_properties_is_refused(self):
-        if 'properties' not in self.env['res.partner']._fields:
-            self.skipTest("Odoo 17 contacts have no properties")
         self.profile.block_properties = True
         definition = [{'name': 'om_prop', 'string': 'Prop', 'type': 'char', 'definition_changed': True}]
         partner = self.partner.with_user(self.user)
@@ -72,7 +69,7 @@ class TestMoreSwitches(HttpCase):
             'mode': 'keep', 'no_export': True})
         self.authenticate(self.user.login, self.password)
         found = self.make_jsonrpc_request('/web/export/get_fields', {
-            'model': 'res.partner', 'import_compat': False})
+            'model': 'res.partner', 'domain': [], 'import_compat': False})
         self.assertNotIn('email', [field['id'] for field in found])
         self.assertIn('name', [field['id'] for field in found])
         # still shown on the screens
@@ -85,8 +82,7 @@ class TestMoreSwitches(HttpCase):
 
     def test_date_presets(self):
         presets = self.env['om.access.profile.model']._preset_domains('res.partner')
-        self.assertEqual(presets['month'], (
-            'domain', "[('create_date', '>=', (context_today().replace(day=1)).strftime('%Y-%m-%d'))]"))
+        self.assertEqual(presets['month'], ('domain', "[('create_date', '>=', 'today =1d')]"))
         line = self.env['om.access.profile.model'].create({
             'profile_id': self.profile.id, 'model_id': self.env['ir.model']._get('res.partner').id,
             'domain': presets['month'][1]})

@@ -1,7 +1,6 @@
-/** @odoo-module **/
-
-import { Chatter } from "@mail/core/web/chatter";
+import { Chatter } from "@mail/chatter/web_portal/chatter";
 import { onWillStart } from "@odoo/owl";
+import { user } from "@web/core/user";
 import { useService } from "@web/core/utils/hooks";
 import { patch } from "@web/core/utils/patch";
 import { openWhatsappComposer, WHATSAPP_GROUP } from "../whatsapp_composer";
@@ -10,7 +9,6 @@ patch(Chatter.prototype, {
     setup() {
         super.setup();
         this.action = useService("action");
-        const user = useService("user");
         onWillStart(async () => {
             this.canWhatsapp = await user.hasGroup(WHATSAPP_GROUP);
         });

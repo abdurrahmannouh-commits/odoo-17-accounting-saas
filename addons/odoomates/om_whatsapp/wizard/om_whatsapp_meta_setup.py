@@ -76,7 +76,7 @@ class OmWhatsappMetaSetup(models.TransientModel):
     @api.depends('step')
     def _compute_progress(self):
         labels = dict(self._fields['step']._description_selection(self.env))
-        labels.update(app=_("Your App"), token=_("Token"), done=_("Connected"))
+        labels.update(app=self.env._("Your App"), token=self.env._("Token"), done=self.env._("Connected"))
         for setup in self:
             current = next((index for index, (_stage, steps) in enumerate(STAGES) if setup.step in steps), None)
             if current is None:
@@ -102,10 +102,10 @@ class OmWhatsappMetaSetup(models.TransientModel):
         if not self.app_id:
             self.app_id_check = False
         elif 10 <= len(app_id) <= 20:
-            self.app_id_check = self._check_html(True, _("Looks like an App ID."))
+            self.app_id_check = self._check_html(True, self.env._("Looks like an App ID."))
         else:
             self.app_id_check = self._check_html(
-                False, _("An App ID is a number of 15 digits or so, at the top of the page of your app."))
+                False, self.env._("An App ID is a number of 15 digits or so, at the top of the page of your app."))
 
     @api.onchange('app_secret')
     def _onchange_app_secret(self):
@@ -118,10 +118,10 @@ class OmWhatsappMetaSetup(models.TransientModel):
             app = self._api().get_app()
         except MetaApiError:
             self.secret_check = self._check_html(
-                False, _("Meta does not know this App Secret with this App ID: copy it again, from the same app."))
+                False, self.env._("Meta does not know this App Secret with this App ID: copy it again, from the same app."))
             return
         self.app_name = app.get('name')
-        self.secret_check = self._check_html(True, _("App %(app)s found.", app=app.get('name')))
+        self.secret_check = self._check_html(True, self.env._("App %(app)s found.", app=app.get('name')))
 
     @api.onchange('access_token')
     def _onchange_access_token(self):
@@ -137,8 +137,8 @@ class OmWhatsappMetaSetup(models.TransientModel):
             return
         expiry = self._token_expiry(token)
         hours = expiry and max(int((expiry - datetime.now()).total_seconds() // 3600), 0)
-        self.token_check = self._check_html(True, _(
-            "Valid, with both permissions; it works %(hours)s more hours.", hours=hours) if expiry else _(
+        self.token_check = self._check_html(True, self.env._(
+            "Valid, with both permissions; it works %(hours)s more hours.", hours=hours) if expiry else self.env._(
             "Valid, with both permissions; it never expires."))
 
     @api.depends('app_id')
@@ -164,8 +164,7 @@ class OmWhatsappMetaSetup(models.TransientModel):
     def _check_account(self, account):
         if not self.env.user.has_group('om_whatsapp_base.group_om_whatsapp_manager'):
             raise AccessError(_("Only WhatsApp managers connect accounts to Meta."))
-        account.check_access_rights('write')
-        account.check_access_rule('write')
+        account.check_access('write')
 
     def _reopen(self):
         return {
@@ -242,8 +241,7 @@ class OmWhatsappMetaSetup(models.TransientModel):
         """ The token, then the numbers it may use: with one, Odoo connects at
         once. """
         self.ensure_one()
-        self.account_id.check_access_rights('write')
-        self.account_id.check_access_rule('write')
+        self.account_id.check_access('write')
         self.access_token = (self.access_token or '').strip()
         if not self._waba_ids(self._check_token()):
             return self._go('waba')
@@ -254,8 +252,7 @@ class OmWhatsappMetaSetup(models.TransientModel):
     def action_check_waba(self):
         """ The WhatsApp account the token did not name, given by hand. """
         self.ensure_one()
-        self.account_id.check_access_rights('write')
-        self.account_id.check_access_rule('write')
+        self.account_id.check_access('write')
         self.waba_id = re.sub(r'\D', '', self.waba_id or '')
         if not self.waba_id:
             raise UserError(_("Copy the WhatsApp Business Account ID from the API Setup page of your app."))
@@ -385,11 +382,11 @@ class OmWhatsappMetaSetup(models.TransientModel):
                 steps.append(('ok', label, run()))
             except MetaApiError as error:
                 steps.append(('fail' if blocking else 'warn', label,
-                              _("Meta says: %(error)s", error=account._meta_explain(error))))
+                              self.env._("Meta says: %(error)s", error=account._meta_explain(error))))
 
         def register():
             api.register_phone_number(number.phone_number_id, account.meta_pin)
-            return _("Two-step verification PIN %(pin)s: keep it, Meta asks for it to move the number.",
+            return self.env._("Two-step verification PIN %(pin)s: keep it, Meta asks for it to move the number.",
                               pin=account.meta_pin)
 
         def webhook():
@@ -403,14 +400,14 @@ class OmWhatsappMetaSetup(models.TransientModel):
 
         def test_message():
             if not self.test_number:
-                return _("No number given: none sent.")
+                return self.env._("No number given: none sent.")
             account._meta_send_template(self.test_number, 'hello_world')
-            return _("To %(number)s: reply to it, the reply comes to Odoo.", number=self.test_number)
+            return self.env._("To %(number)s: reply to it, the reply comes to Odoo.", number=self.test_number)
 
         # a number registered before (the test number of Meta, another tool) is refused: the test message tells
-        step(_("Number registered for the Cloud API"), register, blocking=False)
-        step(_("Messages of WhatsApp sent to this Odoo"), webhook)
-        step(_("Test message sent"), test_message)
+        step(self.env._("Number registered for the Cloud API"), register, blocking=False)
+        step(self.env._("Messages of WhatsApp sent to this Odoo"), webhook)
+        step(self.env._("Test message sent"), test_message)
         problems = [f'{label}: {note}' for status, label, note in steps if status == 'fail']
         account.write({
             'meta_state': 'error' if problems else 'connected',
@@ -454,12 +451,12 @@ class OmWhatsappMetaSetup(models.TransientModel):
             for status, label, note in steps
         )
         facts = [
-            (_("Quality"), account.meta_quality_rating),
-            (_("Daily limit"), account.meta_messaging_limit),
-            (_("Token"), _(
+            (self.env._("Quality"), account.meta_quality_rating),
+            (self.env._("Daily limit"), account.meta_messaging_limit),
+            (self.env._("Token"), self.env._(
                 "works %(hours)s more hours",
                 hours=max(int((account.meta_token_expires - fields.Datetime.now()).total_seconds() // 3600), 0))
-             if account.meta_token_expires else _("never expires")),
+             if account.meta_token_expires else self.env._("never expires")),
         ]
         chips = Markup('').join(
             Markup('<span class="o_om_whatsapp_chip">%s: <b>%s</b></span>') % (label, value)

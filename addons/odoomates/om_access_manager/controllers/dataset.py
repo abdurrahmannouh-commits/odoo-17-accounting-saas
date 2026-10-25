@@ -32,19 +32,9 @@ class DataSetAccess(DataSet):
         return super().call_kw(model, method, args, kwargs, path=path)
 
     @http.route()
-    def call_button(self, model, method, args, kwargs):
+    def call_button(self, model, method, args, kwargs, path=None):
         if method not in PROTECTED_METHODS:
             request.env['om.access.profile']._check_button(model, 'object', method, _record_ids(args))
         if preview_of_request():
             raise preview_allowed()
-        return super().call_button(model, method, args, kwargs)
-
-    @http.route()
-    def resequence(self, model, ids, field='sequence', offset=0, context=None):
-        # Odoo 17 reorders the rows here, not through web_resequence: a field
-        # the profile hides or makes read-only is not reordered either
-        Model = request.env[model]
-        rules = Model._om_field_rules()
-        if rules and field in Model._om_locked(rules, model):
-            Model._om_refuse(model, field)
-        return super().resequence(model, ids, field=field, offset=offset, context=context)
+        return super().call_button(model, method, args, kwargs, path=path)

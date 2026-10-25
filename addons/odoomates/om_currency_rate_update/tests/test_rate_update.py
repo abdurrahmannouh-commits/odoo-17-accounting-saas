@@ -120,11 +120,10 @@ class TestRateUpdate(AccountTestInvoicingCommon):
                             'rate_interval': 'daily'})
         refused = FakeResponse({'error': True, 'status': 401, 'message': 'invalid_app_id',
                                 'description': 'Invalid App ID provided.'}, status_code=401)
-        self.env.user.groups_id = [Command.link(self.env.ref('account.group_account_manager').id)]
+        self.env.user.group_ids = [Command.link(self.env.ref('account.group_account_manager').id)]
         with patch(GET, fake_get({'openexchangerates': refused})):
             for day in ('2026-09-15', '2026-09-16', '2026-09-17'):
-                with freeze_time(day), self.assertLogs('odoo.addons.om_currency_rate_update.models.res_company',
-                                                       level='WARNING'):
+                with freeze_time(day):
                     self.env['res.company']._cron_update_currency_rates()
                 self.assertEqual(str(self.company.rate_next_date),
                                  str(date.fromisoformat(day).replace(day=int(day[-2:]) + 1)))

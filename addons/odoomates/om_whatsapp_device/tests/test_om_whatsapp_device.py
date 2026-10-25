@@ -8,6 +8,7 @@ from unittest.mock import patch
 from odoo import Command, fields
 from odoo.exceptions import AccessError, UserError
 from odoo.tests import HttpCase, TransactionCase, new_test_user, tagged
+from odoo.tools import str2bool
 
 from odoo.addons.om_whatsapp_device.models import om_whatsapp_account as device_module
 
@@ -133,7 +134,7 @@ class TestOmWhatsappDeviceBridgeProcess(DeviceCase):
         self.assertEqual(options['env']['OM_WA_SECRET'], self.account._device_bridge_secret())
         self.assertEqual((options['env']['OM_WA_HOST'], options['env']['OM_WA_PORT']), ('127.0.0.1', '8077'))
         self.assertTrue(options['start_new_session'])
-        self.assertEqual(self.env['ir.config_parameter'].sudo().get_param('om_whatsapp_device.autostart'), 'True')
+        self.assertTrue(str2bool(self.env['ir.config_parameter'].sudo().get_param('om_whatsapp_device.autostart'), False))
         with self.assertRaises(AccessError):
             self.account.with_user(self.manager).action_device_start_bridge()
 
@@ -143,7 +144,7 @@ class TestOmWhatsappDeviceBridgeProcess(DeviceCase):
             bridge.running = False
             self.env['om.whatsapp.account']._cron_device_check()
             self.assertEqual(self.account.device_state, 'offline')
-            self.env['ir.config_parameter'].sudo().set_param('om_whatsapp_device.autostart', 'True')
+            self.env['ir.config_parameter'].sudo().set_param('om_whatsapp_device.autostart', True)
             with patch.object(type(self.account), '_device_start_bridge_process') as start:
                 self.env['om.whatsapp.account']._cron_device_check()
             self.assertTrue(start.called)
@@ -178,7 +179,8 @@ class TestOmWhatsappDeviceSend(DeviceCase):
             self._link(bridge)
             self.account._om_whatsapp_receive('+32470123456', 'Is it ready?', 'IN1')
             message = self.env['mail.message'].search([('om_whatsapp_id', '=', 'IN1')], limit=1)
-            message.with_user(self.manager).sudo()._message_reaction('👍', 'add')
+            message.with_user(self.manager).sudo()._message_reaction(
+                '👍', 'add', self.manager.partner_id, self.env['mail.guest'])
         self.assertEqual(bridge.reactions, [{'to': '+32470123456', 'id': 'IN1', 'from_me': False, 'emoji': '👍'}])
         self.assertFalse(bridge.sent, "a reaction is not a message of the day")
 

@@ -7,8 +7,6 @@ from lxml import etree
 from odoo.exceptions import AccessDenied, AccessError, UserError, ValidationError
 from odoo.tests import TransactionCase, tagged
 
-from .audit import has_access
-
 
 @tagged('post_install', '-at_install')
 class TestAccessProfile(TransactionCase):
@@ -41,7 +39,7 @@ class TestAccessProfile(TransactionCase):
             'name': 'Profiled User',
             'login': 'om_access_profiled',
             'password': cls.password,
-            'groups_id': [(6, 0, [cls.env.ref('base.group_user').id, cls.test_group.id])],
+            'group_ids': [(6, 0, [cls.env.ref('base.group_user').id, cls.test_group.id])],
         })
         cls.Profile = cls.env['om.access.profile']
 
@@ -59,14 +57,14 @@ class TestAccessProfile(TransactionCase):
     def test_profile_creates_and_syncs_its_group(self):
         profile = self._profile()
         self.assertTrue(profile.group_id, "the technical group is created with the profile")
-        self.assertIn(self.user, profile.group_id.users)
+        self.assertIn(self.user, profile.group_id.user_ids)
 
         other = self.env['res.users'].create({
             'name': 'Other', 'login': 'om_access_other',
-            'groups_id': [(6, 0, [self.env.ref('base.group_user').id])],
+            'group_ids': [(6, 0, [self.env.ref('base.group_user').id])],
         })
         profile.user_ids = [(4, other.id)]
-        self.assertIn(other, profile.group_id.users)
+        self.assertIn(other, profile.group_id.user_ids)
 
         group = profile.group_id
         profile.unlink()
@@ -75,7 +73,7 @@ class TestAccessProfile(TransactionCase):
     def test_no_profile_means_no_restriction(self):
         self.assertFalse(self._rules().enabled)
         for operation in ('read', 'write', 'create', 'unlink'):
-            self.assertTrue(has_access(self._partner().browse(), operation), operation)
+            self.assertTrue(self._partner().browse().has_access(operation), operation)
 
     def test_superuser_and_admin_are_exempt(self):
         self._profile(global_readonly=True, apply_to_admin=True, user_ids=[
@@ -88,7 +86,7 @@ class TestAccessProfile(TransactionCase):
                 "%s must never be restricted" % xmlid)
 
     def test_settings_users_are_exempt_unless_asked(self):
-        self.user.groups_id = [(4, self.env.ref('base.group_system').id)]
+        self.user.group_ids = [(4, self.env.ref('base.group_system').id)]
         profile = self._profile(global_readonly=True)
         self.assertFalse(self._rules().enabled)
         profile.apply_to_admin = True
@@ -101,25 +99,25 @@ class TestAccessProfile(TransactionCase):
             'perm_unlink': False,
         })])
         partners = self._partner()
-        self.assertTrue(has_access(partners.browse(), 'read'))
-        self.assertTrue(has_access(partners.browse(), 'write'))
-        self.assertFalse(has_access(partners.browse(), 'create'))
-        self.assertFalse(has_access(partners.browse(), 'unlink'))
+        self.assertTrue(partners.browse().has_access('read'))
+        self.assertTrue(partners.browse().has_access('write'))
+        self.assertFalse(partners.browse().has_access('create'))
+        self.assertFalse(partners.browse().has_access('unlink'))
         with self.assertRaises(AccessError):
             partners.create({'name': 'Refused'})
 
     def test_global_readonly(self):
         self._profile(global_readonly=True)
         partners = self._partner()
-        self.assertTrue(has_access(partners.browse(), 'read'))
+        self.assertTrue(partners.browse().has_access('read'))
         for operation in ('write', 'create', 'unlink'):
-            self.assertFalse(has_access(partners.browse(), operation), operation)
+            self.assertFalse(partners.browse().has_access(operation), operation)
 
     def test_denied_create_removes_the_button_from_the_view(self):
         self._profile(model_ids=[(0, 0, {
             'model_id': self.partner_model.id, 'perm_create': False,
         })])
-        arch = etree.fromstring(self._partner().get_view(view_type='tree')['arch'])
+        arch = etree.fromstring(self._partner().get_view(view_type='list')['arch'])
         self.assertEqual(arch.get('create'), 'False',
                          "core derives the Create button from has_access()")
 
@@ -144,18 +142,18 @@ class TestAccessProfile(TransactionCase):
         self._profile(name='Strict', model_ids=[(0, 0, {
             'model_id': self.partner_model.id, 'perm_unlink': False,
         })])
-        self.assertFalse(has_access(self._partner().browse(), 'unlink'))
+        self.assertFalse(self._partner().browse().has_access('unlink'))
         # a second additive profile that says nothing about partners gives the
         # right back, which is what a permissive union means
         self._profile(name='Quiet')
-        self.assertTrue(has_access(self._partner().browse(), 'unlink'))
+        self.assertTrue(self._partner().browse().has_access('unlink'))
 
     def test_an_override_profile_always_wins(self):
         self._profile(name='Permissive')
         self._profile(name='Blanket', strictness='override', global_readonly=True)
         partners = self._partner()
-        self.assertTrue(has_access(partners.browse(), 'read'))
-        self.assertFalse(has_access(partners.browse(), 'write'))
+        self.assertTrue(partners.browse().has_access('read'))
+        self.assertFalse(partners.browse().has_access('write'))
 
     def test_hidden_menus_include_their_children(self):
         root = self.env['ir.ui.menu'].create({'name': 'Root Menu'})
@@ -195,7 +193,7 @@ class TestAccessProfile(TransactionCase):
 
     def test_action_button_is_blocked_by_its_action_id(self):
         action = self.env['ir.actions.act_window'].create({
-            'name': 'Test Action', 'res_model': 'res.partner', 'view_mode': 'tree',
+            'name': 'Test Action', 'res_model': 'res.partner', 'view_mode': 'list',
         })
         self._profile(button_ids=[(0, 0, {
             'model_id': self.partner_model.id,
@@ -355,17 +353,17 @@ class TestAccessProfile(TransactionCase):
             'domain_unlink': "[('name', '=', 'B')]",
         })])
         partners = self._partner()
-        self.assertTrue(has_access(keep_draft.with_user(self.user), 'unlink'))
+        self.assertTrue(keep_draft.with_user(self.user).has_access('unlink'))
         other = self.env['res.partner'].create({'name': 'C', 'ref': 'keep'})
-        self.assertFalse(has_access(other.with_user(self.user), 'unlink'))
-        self.assertTrue(has_access(other.with_user(self.user), 'read'))
+        self.assertFalse(other.with_user(self.user).has_access('unlink'))
+        self.assertTrue(other.with_user(self.user).has_access('read'))
         self.assertFalse(partners.search([('ref', '!=', 'keep')]))
 
     def test_block_import(self):
         self._profile(block_import=True)
         with self.assertRaises(UserError):
             self._partner().load(['name'], [['Imported']])
-        arch = etree.fromstring(self._partner().get_view(view_type='tree')['arch'])
+        arch = etree.fromstring(self._partner().get_view(view_type='list')['arch'])
         self.assertEqual(arch.get('import'), '0')
 
     def test_hide_notebook_tab(self):
@@ -421,27 +419,27 @@ class TestAccessProfile(TransactionCase):
         action = {
             'type': 'ir.actions.act_window',
             'res_model': 'res.partner',
-            'views': [[False, 'tree'], [False, 'kanban'], [False, 'form']],
-            'view_mode': 'tree,kanban,form',
+            'views': [[False, 'list'], [False, 'kanban'], [False, 'form']],
+            'view_mode': 'list,kanban,form',
         }
         result = self.Profile.with_user(self.user)._filter_action_views(dict(action))
-        self.assertEqual([view[1] for view in result['views']], ['tree', 'form'])
-        self.assertEqual(result['view_mode'], 'tree,form')
+        self.assertEqual([view[1] for view in result['views']], ['list', 'form'])
+        self.assertEqual(result['view_mode'], 'list,form')
 
     def test_the_last_view_type_of_an_action_is_never_dropped(self):
         self._profile(element_ids=[(0, 0, {
             'model_id': self.partner_model.id,
             'element_type': 'view',
-            'element_name': 'tree',
+            'element_name': 'list',
         })])
         action = {
             'type': 'ir.actions.act_window',
             'res_model': 'res.partner',
-            'views': [[False, 'tree']],
-            'view_mode': 'tree',
+            'views': [[False, 'list']],
+            'view_mode': 'list',
         }
         result = self.Profile.with_user(self.user)._filter_action_views(dict(action))
-        self.assertEqual([view[1] for view in result['views']], ['tree'])
+        self.assertEqual([view[1] for view in result['views']], ['list'])
 
     def test_scan_wizard_finds_and_applies_view_elements(self):
         profile = self._profile()
@@ -483,23 +481,23 @@ class TestAccessProfile(TransactionCase):
         user = self.user.with_user(self.user)
         # the credentials are valid, so an AccessDenied can only come from the
         # flag and not from the password check of super()
-        user._check_credentials(credential['password'], {'interactive': False})
+        user._check_credentials(credential, {'interactive': False})
         self._profile(block_rpc=True)
         with self.assertRaises(AccessDenied):
-            user._check_credentials(credential['password'], {'interactive': False})
+            user._check_credentials(credential, {'interactive': False})
         # the browser is left alone
-        user._check_credentials(credential['password'], {'interactive': True})
+        user._check_credentials(credential, {'interactive': True})
 
     def test_block_login_refuses_every_sign_in(self):
         credential = {
             'login': self.user.login, 'password': self.password, 'type': 'password',
         }
         user = self.user.with_user(self.user)
-        user._check_credentials(credential['password'], {'interactive': True})
+        user._check_credentials(credential, {'interactive': True})
         self._profile(block_login=True)
         for interactive in (True, False):
             with self.assertRaises(AccessDenied):
-                user._check_credentials(credential['password'], {'interactive': interactive})
+                user._check_credentials(credential, {'interactive': interactive})
 
     def test_block_login_changes_the_session_token(self):
         token = self.user._compute_session_token('sid')
@@ -512,7 +510,7 @@ class TestAccessProfile(TransactionCase):
 
     def test_block_login_spares_the_last_administrator(self):
         # drop the exemption of the built-in administrator to reach this case
-        admins = self.env.ref('base.group_system').users
+        admins = self.env.ref('base.group_system').all_user_ids
         Profile = type(self.env['om.access.profile'])
         with patch.object(Profile, '_exempt_user_ids', lambda self: ()):
             with self.assertRaises(ValidationError):
@@ -522,7 +520,7 @@ class TestAccessProfile(TransactionCase):
                           user_ids=[(6, 0, (admins - admins[:1]).ids)])
 
     def test_block_export(self):
-        self.user.groups_id = [(4, self.env.ref('base.group_allow_export').id)]
+        self.user.group_ids = [(4, self.env.ref('base.group_allow_export').id)]
         self._profile(block_export=True)
         self.assertFalse(self.user.with_user(self.user).has_group('base.group_allow_export'))
         with self.assertRaises(UserError):

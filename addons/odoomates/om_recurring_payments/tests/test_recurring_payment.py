@@ -3,21 +3,10 @@ from datetime import date
 from freezegun import freeze_time
 
 from odoo import Command
-from odoo.exceptions import AccessError, UserError, ValidationError
+from odoo.exceptions import UserError, ValidationError
 from odoo.tests import new_test_user, tagged
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
-
-
-def _has_access(records, operation):
-    """ has_access() of Odoo 18 and later: the access rights and the record rules """
-    if not records.check_access_rights(operation, raise_exception=False):
-        return False
-    try:
-        records.check_access_rule(operation)
-    except AccessError:
-        return False
-    return True
 
 
 @tagged('post_install', '-at_install')
@@ -26,6 +15,7 @@ class TestRecurringPayment(AccountTestInvoicingCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.company_data_2 = cls.setup_other_company()
         cls.bank_journal = cls.company_data['default_journal_bank']
         cls.template = cls._create_template()
 
@@ -181,11 +171,11 @@ class TestRecurringPayment(AccountTestInvoicingCommon):
         administrator = new_test_user(self.env, login='recurring_admin',
                                       groups='account.group_account_manager,account.group_account_user')
         for model in models:
-            self.assertTrue(_has_access(self.env[model].with_user(administrator), 'create'), model)
+            self.assertTrue(self.env[model].with_user(administrator).has_access('create'), model)
 
         billing_user = new_test_user(self.env, login='recurring_billing', groups='account.group_account_invoice')
         for model in models:
-            self.assertFalse(_has_access(self.env[model].with_user(billing_user), 'read'), model)
+            self.assertFalse(self.env[model].with_user(billing_user).has_access('read'), model)
 
     def test_deleted_payment_makes_the_line_due_again(self):
         self.template.journal_state = 'draft'
@@ -280,7 +270,7 @@ class TestRecurringPayment(AccountTestInvoicingCommon):
         line.action_create_payment()
         self.env['recurring.payment'].action_generate_payment()
         self.assertEqual(line.payment_id, payment)
-        self.assertEqual(self.env['account.payment'].search_count([('ref', '=', recurring_payment.name)]), 1)
+        self.assertEqual(self.env['account.payment'].search_count([('memo', '=', recurring_payment.name)]), 1)
 
     def test_translations_are_loaded(self):
         self.env['res.lang']._activate_lang('es_MX')

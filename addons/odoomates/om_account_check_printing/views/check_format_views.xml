@@ -52,7 +52,7 @@
                                 on plain paper, hold it against a cheque and adjust the positions.
                             </p>
                             <field name="line_ids">
-                                <tree editable="bottom">
+                                <list editable="bottom">
                                     <field name="sequence" widget="handle"/>
                                     <field name="field"/>
                                     <field name="text" invisible="field != 'text'" required="field == 'text'"/>
@@ -67,7 +67,7 @@
                                     <field name="letter_spacing" optional="hide"/>
                                     <field name="rotation" optional="hide"/>
                                     <field name="border" optional="hide"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="MICR Line" name="micr">
@@ -108,13 +108,13 @@
         <field name="name">account.check.format.list</field>
         <field name="model">account.check.format</field>
         <field name="arch" type="xml">
-            <tree string="Cheque Formats">
+            <list string="Cheque Formats">
                 <field name="sequence" widget="handle"/>
                 <field name="name"/>
                 <field name="paper_size"/>
                 <field name="country_ids" widget="many2many_tags" optional="show"/>
                 <field name="company_id" groups="base.group_multi_company"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -138,7 +138,7 @@
     <record id="action_check_format" model="ir.actions.act_window">
         <field name="name">Cheque Formats</field>
         <field name="res_model">account.check.format</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Create a cheque format</p>
             <p>Place the date, payee and amounts where the cheques of your bank expect them.</p>

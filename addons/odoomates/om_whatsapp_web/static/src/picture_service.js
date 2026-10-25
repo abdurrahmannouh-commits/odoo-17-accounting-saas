@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import { registry } from "@web/core/registry";
 import { getExtensionInfo, getPicture } from "./extension_bridge";
 import { whatsappStatus } from "./status_service";

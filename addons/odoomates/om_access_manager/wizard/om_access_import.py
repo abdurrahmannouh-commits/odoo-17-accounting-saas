@@ -30,6 +30,6 @@ class OmAccessImport(models.TransientModel):
             'type': 'ir.actions.act_window',
             'name': _("Imported Profiles"),
             'res_model': 'om.access.profile',
-            'view_mode': 'tree,form',
+            'view_mode': 'list,form',
             'domain': [('id', 'in', profiles.ids)],
         }

@@ -11,8 +11,7 @@ class MailNotification(models.Model):
         """ Only the users of the account move its messages, queued (ready) or
         taken by a browser (process); they may not own the notifications,
         hence the sudo once checked. """
-        self.mail_message_id.check_access_rights('read')
-        self.mail_message_id.check_access_rule('read')
+        self.mail_message_id.check_access('read')
         for notification in self.sudo():
             account = notification.mail_message_id.om_whatsapp_account_id
             if (notification.notification_type != 'om_whatsapp' or notification.notification_status not in statuses

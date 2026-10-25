@@ -1,16 +1,15 @@
 # The profiles a user carries, and the export group this module hides on purpose.
-import hashlib
-
-from odoo import SUPERUSER_ID, _, api, fields, models, tools
+from odoo import _, api, fields, models
 from odoo.exceptions import AccessDenied
 from odoo.http import request
-from odoo.tools.translate import _lt
+from odoo.tools import LazyTranslate
 
 from odoo.addons.om_user_audit.models.client_call import client_address
 
 from .login_tools import utc_now
 
 EXPORT_GROUP = 'base.group_allow_export'
+_lt = LazyTranslate(__name__)
 LOGIN_REFUSALS = {
     'hours': _lt("Your access profile only allows signing in during your working hours."),
     'network': _lt("Your access profile does not allow signing in from this network."),
@@ -43,21 +42,18 @@ class ResUsers(models.Model):
         help="A user may carry several profiles. Additive profiles combine "
              "permissively, override profiles always subtract.")
 
-    @classmethod
-    def _login(cls, db, login, password, user_agent_env):
-        # Odoo 17 signs in on a cursor of its own: so is the stamp written
-        uid = super()._login(db, login, password, user_agent_env)
+    def _login(self, credential, user_agent_env):
+        auth_info = super()._login(credential, user_agent_env)
+        uid = auth_info.get('uid')
         if uid and request:
-            with cls.pool.cursor() as cr:
-                env = api.Environment(cr, SUPERUSER_ID, {})
-                rules = env['om.access.profile']._resolve(uid)
-                if rules.enabled and rules.has_flag('single_session'):
-                    # an older session than the user's stamp ends on its next
-                    # request (ir_http.py)
-                    stamp = utc_now().timestamp()
-                    request.session[LOGIN_STAMP_KEY] = stamp
-                    env['res.users'].browse(uid).om_access_login_stamp = stamp
-        return uid
+            rules = self.env['om.access.profile']._resolve(uid)
+            if rules.enabled and rules.has_flag('single_session'):
+                # an older session than the user's stamp ends on its next
+                # request (ir_http.py)
+                stamp = utc_now().timestamp()
+                request.session[LOGIN_STAMP_KEY] = stamp
+                self.env['res.users'].sudo().browse(uid).om_access_login_stamp = stamp
+        return auth_info
 
     @api.depends('access_profile_ids', 'access_allowed_ids')
     def _compute_access_effective(self):
@@ -83,7 +79,7 @@ class ResUsers(models.Model):
             # the guard against locking every administrator out applies here too
             self.sudo().access_profile_ids._check_last_administrator()
             self.env.registry.clear_cache('default')
-        elif vals.get('active') is False or 'groups_id' in vals:
+        elif vals.get('active') is False or 'group_ids' in vals:
             # archiving, or taking out of Access Management, the last access
             # manager the profiles leave able to undo them
             self.env['om.access.profile'].sudo().search([])._check_last_administrator()
@@ -94,7 +90,6 @@ class ResUsers(models.Model):
             self.env.registry.clear_cache('default')
         return result
 
-    @api.model
     def has_group(self, group_ext_id):
         result = super().has_group(group_ext_id)
         if not result or group_ext_id != EXPORT_GROUP:
@@ -108,10 +103,9 @@ class ResUsers(models.Model):
             return False
         return result
 
-    def _check_credentials(self, password, env):
-        result = super()._check_credentials(password, env)
-        # Odoo 17 checks the credentials of XML-RPC calls on an empty recordset
-        for user in self or self.env.user:
+    def _check_credentials(self, credential, env):
+        result = super()._check_credentials(credential, env)
+        for user in self:
             rules = self.env['om.access.profile']._resolve(user.id)
             if not rules.enabled:
                 continue
@@ -120,7 +114,7 @@ class ResUsers(models.Model):
                 raise AccessDenied(_("Your access profile does not allow you to sign in."))
             reason = rules.login_refusal(utc_now(), client_address())
             if reason:
-                raise AccessDenied(str(LOGIN_REFUSALS[reason]))
+                raise AccessDenied(self.env._(LOGIN_REFUSALS[reason]))
             # 'interactive' is False for XML-RPC/JSON-RPC sign-ins, True for the browser
             if not env.get('interactive', True) and rules.has_flag('block_rpc'):
                 raise AccessDenied(_(
@@ -128,17 +122,15 @@ class ResUsers(models.Model):
                     "the external API."))
         return result
 
-    @tools.ormcache('sid')
-    def _compute_session_token(self, sid):
+    def _session_token_get_values(self):
         # The session token is checked on every request, so changing it while
-        # the login is blocked ends the sessions already open. Odoo 17 computes
-        # it in SQL from the columns of the user: change it here.
-        token = super()._compute_session_token(sid)
-        if token:
+        # the login is blocked ends the sessions already open.
+        values = super()._session_token_get_values()
+        if values:
             rules = self.env['om.access.profile']._resolve(self.id)
             if rules.enabled and rules.has_flag('block_login'):
-                token = hashlib.sha256(f'{token}:om_access_block_login'.encode()).hexdigest()
-        return token
+                values += (('om_access_block_login', True),)
+        return values
 
     @api.model
     def _get_access_profile_action(self):

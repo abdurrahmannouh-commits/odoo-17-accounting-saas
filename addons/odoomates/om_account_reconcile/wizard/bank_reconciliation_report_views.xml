@@ -6,7 +6,6 @@
         <field name="model">om.bank.reconciliation.report</field>
         <field name="arch" type="xml">
             <form string="Bank Reconciliation Statement">
-                <field name="company_id" invisible="1"/>
                 <p class="text-muted">
                     What the bank has told you, plus what you have recorded that the bank has
                     not seen yet, gives the cash your books believe you hold.
@@ -46,6 +45,6 @@
               action="action_bank_reconciliation_report"
               parent="menu_reconciliation"
               sequence="40"
-              groups="account.group_account_user"/>
+              groups="account.group_account_basic"/>
 
 </odoo>

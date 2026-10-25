@@ -4,7 +4,8 @@
 from odoo import api, models
 
 READ_METHODS = frozenset({
-    'read', 'web_read', 'search_read', 'web_search_read', 'web_read_group', 'read_group',
+    'read', 'web_read', 'search_read', 'web_search_read', 'web_read_group', 'formatted_read_group',
+    'read_group',
 })
 SKIPPED_FIELDS = frozenset({'write_date', 'write_uid', 'create_date', 'create_uid', '__last_update'})
 VALUE_LENGTH = 200
@@ -148,16 +149,16 @@ class Base(models.AbstractModel):
         return result
 
     @api.model
-    def web_read_group(self, domain, fields, groupby, *args, **kwargs):
-        result = super().web_read_group(domain, fields, groupby, *args, **kwargs)
+    def web_read_group(self, domain, groupby=(), aggregates=(), *args, **kwargs):
+        result = super().web_read_group(domain, groupby, aggregates, *args, **kwargs)
         if isinstance(result, dict):
-            self._om_audit_read('web_read_group', [], [groupby] if isinstance(groupby, str) else groupby, count=len(result.get('groups', ())))
+            self._om_audit_read('web_read_group', [], groupby, count=len(result.get('groups', ())))
         return result
 
     @api.model
-    def read_group(self, domain, fields, groupby, *args, **kwargs):
-        result = super().read_group(domain, fields, groupby, *args, **kwargs)
-        self._om_audit_read('read_group', [], [groupby] if isinstance(groupby, str) else groupby, count=len(result))
+    def formatted_read_group(self, domain, groupby=(), aggregates=(), *args, **kwargs):
+        result = super().formatted_read_group(domain, groupby, aggregates, *args, **kwargs)
+        self._om_audit_read('formatted_read_group', [], groupby, count=len(result))
         return result
 
     def export_data(self, fields_to_export):

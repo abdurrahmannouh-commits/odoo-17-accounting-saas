@@ -4,13 +4,13 @@
         <field name="name">om.whatsapp.account.list</field>
         <field name="model">om.whatsapp.account</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="sequence" widget="handle"/>
                 <field name="name"/>
                 <field name="phone"/>
                 <field name="provider"/>
                 <field name="company_id" groups="base.group_multi_company"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -56,7 +56,7 @@
     <record id="om_whatsapp_account_action" model="ir.actions.act_window">
         <field name="name">WhatsApp Accounts</field>
         <field name="res_model">om.whatsapp.account</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Add a WhatsApp account</p>
             <p>An account is a WhatsApp number your users send from, and how messages reach it.</p>

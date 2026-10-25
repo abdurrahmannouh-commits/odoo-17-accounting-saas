@@ -1,50 +1,32 @@
-/** @odoo-module **/
-
 import { _t } from "@web/core/l10n/translation";
-import { sprintf } from "@web/core/utils/strings";
 import * as spreadsheet from "@odoo/o-spreadsheet";
-import { ServerData } from "@spreadsheet/data_sources/server_data";
+import { EvaluationError } from "@odoo/o-spreadsheet";
+import { OdooUIPlugin } from "@spreadsheet/plugins";
 import { toServerDateString } from "@spreadsheet/helpers/helpers";
 
 const { functionRegistry, featurePluginRegistry } = spreadsheet.registries;
 const { arg, toBoolean, toJsDate, toString } = spreadsheet.helpers;
 
-const DATA_SOURCE_ID = "OM_ACCOUNTING_BALANCES";
-// the day 0 of the spreadsheets
-const SPREADSHEET_EPOCH = Date.UTC(1899, 11, 30);
-
 /**
- * The balances of the account types, fetched in batches like the accounting formulas of Odoo
+ * The balances of the account types over any period, for the companies selected in the company switcher. The
+ * accounting formulas of Odoo read one company only, over a year, a quarter, a month or a fiscal year to date.
  */
-class OmAccountingDataSource {
-    constructor(services) {
-        this.serverData = new ServerData(services.orm, {
-            whenDataIsFetched: () => services.notify(),
-        });
-    }
+export class OmAccountingPlugin extends OdooUIPlugin {
+    static getters = /** @type {const} */ (["getOmAccountBalance"]);
 
-    getBalance(accountTypes, dateFrom, dateTo, includeUnposted) {
-        return this.serverData.batch.get("account.move.line", "om_spreadsheet_fetch_balance", {
-            account_types: accountTypes,
-            date_from: dateFrom,
-            date_to: dateTo,
-            include_unposted: includeUnposted,
-        }).balance;
-    }
-}
-
-/**
- * The balances of the account types over any period, for the companies selected in the company switcher, and the
- * dates of the date filters. The accounting formulas of Odoo read one company only, over a year, a quarter or a
- * month; ODOO.FILTER.VALUE of Odoo 17 gives the text of a date filter, not its dates.
- */
-export class OmAccountingPlugin extends spreadsheet.UIPlugin {
     constructor(config) {
         super(config);
-        this.dataSources = config.custom.dataSources;
-        if (this.dataSources) {
-            this.dataSources.add(DATA_SOURCE_ID, OmAccountingDataSource);
+        /** @type {import("@spreadsheet/data_sources/server_data").ServerData} */
+        this._serverData = config.custom.odooDataProvider?.serverData;
+    }
+
+    get serverData() {
+        if (!this._serverData) {
+            throw new Error(
+                "'serverData' is not defined, please make sure a 'OdooDataProvider' instance is provided to the model."
+            );
         }
+        return this._serverData;
     }
 
     /**
@@ -55,56 +37,27 @@ export class OmAccountingPlugin extends spreadsheet.UIPlugin {
      * @returns {number}
      */
     getOmAccountBalance(accountTypes, dateFrom, dateTo, includeUnposted) {
-        return (
-            this.dataSources &&
-            this.dataSources
-                .get(DATA_SOURCE_ID)
-                .getBalance(accountTypes, dateFrom, dateTo, includeUnposted)
-        );
-    }
-
-    /**
-     * @param {string} label the label of a date filter
-     * @returns {{start: number, end: number} | undefined} the first and the last day of its period, as spreadsheet
-     *  dates, or undefined when it is not set
-     */
-    getOmFilterPeriod(label) {
-        const filter = this.getters
-            .getGlobalFilters()
-            .find((globalFilter) => globalFilter.label === label && globalFilter.type === "date");
-        if (!filter) {
-            throw new Error(sprintf(_t("There is no date filter named %s."), label));
-        }
-        const domain = this.getters.getGlobalFilterDomain(filter.id, { chain: "date", type: "date" });
-        const period = {};
-        for (const term of domain.toList()) {
-            if (Array.isArray(term) && term[0] === "date") {
-                const day = toSpreadsheetDate(term[2]);
-                if (term[1] === ">=") {
-                    period.start = day;
-                } else if (term[1] === "<=") {
-                    period.end = day;
-                }
+        const result = this.serverData.batch.get(
+            "account.move.line",
+            "om_spreadsheet_fetch_balance",
+            {
+                account_types: accountTypes,
+                date_from: dateFrom,
+                date_to: dateTo,
+                include_unposted: includeUnposted,
             }
-        }
-        return period.start !== undefined && period.end !== undefined ? period : undefined;
+        );
+        return result.balance;
     }
 }
-
-OmAccountingPlugin.getters = ["getOmAccountBalance", "getOmFilterPeriod"];
 
 featurePluginRegistry.add("omAccountingBalances", OmAccountingPlugin);
-
-function toSpreadsheetDate(serverDate) {
-    const [year, month, day] = serverDate.slice(0, 10).split("-").map(Number);
-    return Math.round((Date.UTC(year, month - 1, day) - SPREADSHEET_EPOCH) / 86400000);
-}
 
 function toServerDate(value, locale) {
     if (value?.value === undefined || value.value === null || value.value === "") {
         return false;
     }
-    return toServerDateString(toJsDate(value.value, locale));
+    return toServerDateString(toJsDate(value, locale));
 }
 
 functionRegistry.add("OM.ACCOUNT.BALANCE", {
@@ -125,53 +78,29 @@ functionRegistry.add("OM.ACCOUNT.BALANCE", {
     ],
     category: "Odoo",
     returns: ["NUMBER"],
-    computeValueAndFormat: function (
+    compute: function (
         accountTypes,
         dateFrom = { value: "" },
         dateTo = { value: "" },
         includeUnposted = { value: false }
     ) {
-        const types = toString(accountTypes?.value)
+        const types = toString(accountTypes)
             .split(",")
             .map((type) => type.trim())
             .filter(Boolean)
             .sort();
         if (!types.length) {
-            throw new Error(_t("Give at least one account type."));
+            return new EvaluationError(_t("Give at least one account type."));
         }
         const balance = this.getters.getOmAccountBalance(
             types,
             toServerDate(dateFrom, this.locale),
             toServerDate(dateTo, this.locale),
-            toBoolean(includeUnposted.value)
+            toBoolean(includeUnposted)
         );
         return {
             value: balance,
             format: this.getters.getCompanyCurrencyFormat(null) || "#,##0.00",
         };
     },
-});
-
-functionRegistry.add("OM.FILTER.START", {
-    description: _t("The first day of the period of a date filter, empty when the filter is not set."),
-    args: [arg("filter_name (string)", _t("The label of the date filter."))],
-    category: "Odoo",
-    returns: ["DATE"],
-    compute: function (filterName) {
-        const period = this.getters.getOmFilterPeriod(toString(filterName));
-        return period ? period.start : "";
-    },
-    computeFormat: () => "mm/dd/yyyy",
-});
-
-functionRegistry.add("OM.FILTER.END", {
-    description: _t("The last day of the period of a date filter, empty when the filter is not set."),
-    args: [arg("filter_name (string)", _t("The label of the date filter."))],
-    category: "Odoo",
-    returns: ["DATE"],
-    compute: function (filterName) {
-        const period = this.getters.getOmFilterPeriod(toString(filterName));
-        return period ? period.end : "";
-    },
-    computeFormat: () => "mm/dd/yyyy",
 });

@@ -6,18 +6,6 @@ from odoo.tests import new_test_user, tagged
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
-
-def _has_access(records, operation):
-    """ has_access() of Odoo 18: the access rights and the record rules """
-    if not records.check_access_rights(operation, raise_exception=False):
-        return False
-    try:
-        records.check_access_rule(operation)
-    except AccessError:
-        return False
-    return True
-
-
 @tagged('post_install', '-at_install')
 @freeze_time('2026-06-30')
 class TestFollowupFixes(AccountTestInvoicingCommon):
@@ -123,7 +111,7 @@ class TestFollowupFixes(AccountTestInvoicingCommon):
         accountant = new_test_user(self.env, login='followup_accountant', groups='account.group_account_user',
                                    company_id=self.env.company.id)
         partner = self.partner_a.with_user(accountant)
-        self.assertFalse(_has_access(partner, 'write'))
+        self.assertFalse(partner.has_access('write'))
 
         self.assertTrue(partner._followup_send_email())
         message = self.partner_a.message_ids[:1]

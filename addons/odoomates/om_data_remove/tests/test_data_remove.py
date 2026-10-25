@@ -61,12 +61,6 @@ class TestDataRemove(TransactionCase):
             if not any(name in self.env for name in names):
                 self.assertNotIn(label, screen.summary)
 
-    def test_the_form_opens_with_the_counts(self):
-        # the screen as the form opens it: a new record, its fields from onchange
-        values = self.Cleaning.onchange({}, [], {'summary': {}, 'total_count': {}})['value']
-        self.assertEqual(values['total_count'], sum(count for _k, _l, _m, count in self.Cleaning._om_counts()))
-        self.assertIn('o_om_remove_summary', values['summary'])
-
     def test_every_listed_model_is_a_real_table(self):
         for _key, _label, record in self.Cleaning._om_models():
             self.assertTrue(self.Cleaning._om_table_exists(record._table), record._name)

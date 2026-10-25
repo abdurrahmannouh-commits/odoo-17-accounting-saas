@@ -1,6 +1,5 @@
 # Working hours, allowed networks, one session per user, through real sign-ins
 # so both the sign-in check and the end of an open session are covered.
-import contextlib
 import re
 from datetime import datetime, timezone
 from unittest.mock import patch
@@ -54,7 +53,7 @@ class TestSignIn(HttpCase):
         # raw requests: write what the test changed before the server reads it
         self.env.flush_all()
         # the test server answers other clients than the test opener only when told
-        with self._as_test_client(browser):
+        with self.allow_requests(all_requests=True):
             page = browser.get(f'{url}/web/login?db={self.env.cr.dbname}', timeout=30)
             field = re.search(r'<input[^>]*csrf_token[^>]*>', page.text).group(0)
             browser.post(f'{url}/web/login', data={
@@ -67,16 +66,9 @@ class TestSignIn(HttpCase):
         self.env.invalidate_all()
         return self.env['om.user.audit.log'].sudo().search([('user_id', '=', self.user.id), ('event', '=', event)])
 
-    @contextlib.contextmanager
-    def _as_test_client(self, browser):
-        """ Odoo 17 serves other clients than the test opener when they carry
-        the key of the test. """
-        browser.cookies.set('test_request_key', self.http_request_key)
-        yield
-
     def _signed_in(self, browser):
         self.env.flush_all()
-        with self._as_test_client(browser):
+        with self.allow_requests(all_requests=True):
             response = browser.post(f'{self.base_url()}/web/session/check', json={
                 'jsonrpc': '2.0', 'method': 'call', 'params': {}}, timeout=30)
         return 'error' not in response.json()

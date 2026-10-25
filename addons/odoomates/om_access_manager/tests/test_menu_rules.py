@@ -22,7 +22,7 @@ class TestMenuRules(TransactionCase):
         ])
         cls.user = cls.env['res.users'].create({
             'name': 'Menu Rules User', 'login': 'om_access_menu_rules',
-            'groups_id': [(6, 0, [cls.env.ref('base.group_user').id, group.id])],
+            'group_ids': [(6, 0, [cls.env.ref('base.group_user').id, group.id])],
         })
         Menu = cls.env['ir.ui.menu']
         cls.shop = Menu.create({'name': 'OM Shop'})
@@ -229,7 +229,7 @@ class TestMenuRules(TransactionCase):
         """ Rules that, all combined, lock every access manager out of the
         access profiles or of the app: refused. """
         Profile = type(self.env['om.access.profile'])
-        admins = self.env.ref('om_access_manager.group_access_manager').users
+        admins = self.env.ref('om_access_manager.group_access_manager').all_user_ids
         settings = self.env.ref('om_access_manager.om_access_root_menu')
         with patch.object(Profile, '_exempt_user_ids', lambda self: ()):
             reader = self.env['om.access.profile'].create({

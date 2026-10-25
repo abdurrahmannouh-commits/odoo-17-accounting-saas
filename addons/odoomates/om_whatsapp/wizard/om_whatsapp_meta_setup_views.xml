@@ -194,12 +194,12 @@
                 <div invisible="step != 'number'">
                     <h3>Which number?</h3>
                     <field name="number_ids" readonly="1" nolabel="1">
-                        <tree>
+                        <list>
                             <field name="display_phone_number"/>
                             <field name="verified_name"/>
                             <field name="waba_name"/>
                             <field name="quality_rating"/>
-                        </tree>
+                        </list>
                     </field>
                     <group>
                         <field name="number_id" options="{'no_create': True, 'no_open': True}"/>

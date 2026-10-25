@@ -7,7 +7,6 @@ from datetime import datetime, timezone
 import requests
 from lxml import etree
 
-from odoo import _
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -25,11 +24,6 @@ class RateProvider:
     def __init__(self, company):
         self.company = company
 
-    @property
-    def env(self):
-        # _() of Odoo 16 reads the language of the messages from self.env
-        return self.company.env
-
     def _get_key(self):
         return self.company.sudo()[self.key_field] if self.key_field else False
 
@@ -42,12 +36,12 @@ class RateProvider:
         try:
             response = requests.get(url, params=params, timeout=TIMEOUT)
         except requests.RequestException as error:
-            raise UserError(_('%(provider)s could not be reached: %(error)s',
+            raise UserError(self.company.env._('%(provider)s could not be reached: %(error)s',
                               provider=self.name, error=self._hide_key(str(error)))) from error
         try:
             return response.json()
         except ValueError as error:
-            raise UserError(_('%(provider)s answered with an unexpected response (HTTP %(status)s).',
+            raise UserError(self.company.env._('%(provider)s answered with an unexpected response (HTTP %(status)s).',
                               provider=self.name, status=response.status_code)) from error
 
     def fetch(self):
@@ -66,12 +60,12 @@ class EcbProvider(RateProvider):
             response.raise_for_status()
             root = etree.fromstring(response.content)
         except (requests.RequestException, etree.XMLSyntaxError) as error:
-            raise UserError(_(
+            raise UserError(self.company.env._(
                 '%(provider)s could not be reached: %(error)s', provider=self.name, error=error)) from error
         namespace = {'ecb': 'http://www.ecb.int/vocabulary/2002-08-01/eurofxref'}
         day = root.find('.//ecb:Cube[@time]', namespace)
         if day is None:
-            raise UserError(_('%s answered without rates.', self.name))
+            raise UserError(self.company.env._('%s answered without rates.', self.name))
         rates = {cube.get('currency'): float(cube.get('rate')) for cube in day.findall('ecb:Cube', namespace)}
         return datetime.strptime(day.get('time'), '%Y-%m-%d').date(), 'EUR', rates
 
@@ -84,7 +78,7 @@ class FrankfurterProvider(RateProvider):
     def fetch(self):
         data = self._get_json(self.url, base='EUR')
         if not isinstance(data.get('rates'), dict):
-            raise UserError(_('%(provider)s answered without rates: %(message)s', provider=self.name,
+            raise UserError(self.company.env._('%(provider)s answered without rates: %(message)s', provider=self.name,
                               message=data.get('message') or data))
         return datetime.strptime(data['date'], '%Y-%m-%d').date(), data['base'], data['rates']
 
@@ -99,10 +93,10 @@ class OpenExchangeRatesProvider(RateProvider):
     def fetch(self):
         key = self._get_key()
         if not key:
-            raise UserError(_('Enter the App ID of Open Exchange Rates in the settings.'))
+            raise UserError(self.company.env._('Enter the App ID of Open Exchange Rates in the settings.'))
         data = self._get_json(self.url, app_id=key)
         if data.get('error') or not isinstance(data.get('rates'), dict):
-            raise UserError(_('%(provider)s refused the request: %(message)s', provider=self.name,
+            raise UserError(self.company.env._('%(provider)s refused the request: %(message)s', provider=self.name,
                               message=data.get('description') or data.get('message') or data))
         day = datetime.fromtimestamp(data['timestamp'], tz=timezone.utc).date()
         return day, data['base'], data['rates']
@@ -122,7 +116,7 @@ class ExchangeRateApiProvider(RateProvider):
             data = self._get_json('https://open.er-api.com/v6/latest/USD')
         rates = data.get('conversion_rates') or data.get('rates')
         if data.get('result') != 'success' or not isinstance(rates, dict):
-            raise UserError(_('%(provider)s refused the request: %(message)s', provider=self.name,
+            raise UserError(self.company.env._('%(provider)s refused the request: %(message)s', provider=self.name,
                               message=data.get('error-type') or data))
         day = datetime.fromtimestamp(data['time_last_update_unix'], tz=timezone.utc).date()
         return day, data['base_code'], rates

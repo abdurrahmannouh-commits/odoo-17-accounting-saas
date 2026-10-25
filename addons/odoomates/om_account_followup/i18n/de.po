@@ -49,8 +49,7 @@ msgstr ""
 "Bei Fragen zu diesem Thema zögern Sie nicht\n"
 "unsere Buchhaltung zu kontaktieren.\n"
 "\n"
-"Mit freundlichen Grüßen,\n"
-"            "
+"Mit freundlichen Grüßen,"
 
 #. module: om_account_followup
 #: model:followup.line,description:om_account_followup.demo_followup_line1
@@ -1362,8 +1361,8 @@ msgstr "oder"
 #: model:mail.template,subject:om_account_followup.email_template_om_account_followup_level0
 #: model:mail.template,subject:om_account_followup.email_template_om_account_followup_level1
 #: model:mail.template,subject:om_account_followup.email_template_om_account_followup_level2
-msgid "{{ user.env.company.name }} Payment Reminder"
-msgstr "{{ user.env.company.name }} Zahlungserinnerung"
+msgid "{{ env.company.name }} Payment Reminder"
+msgstr "{{ env.company.name }} Zahlungserinnerung"
 
 #. module: om_account_followup
 #: model_terms:ir.ui.view,arch_db:om_account_followup.view_partner_inherit_followup_form

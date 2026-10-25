@@ -19,38 +19,33 @@ class ResUsers(models.Model):
     def _compute_om_audit_counts(self):
         Log = self.env['om.user.audit.log'].sudo()
         logs = dict(Log._read_group([('user_id', 'in', self.ids)], ['user_id'], ['__count']))
-        sessions = dict(self.env['om.user.audit.session'].sudo()._read_group(
-            [('user_id', 'in', self.ids), ('revoked', '=', False)], ['user_id'], ['__count']))
+        sessions = dict(self.env['res.device'].sudo()._read_group(
+            [('user_id', 'in', self.ids)], ['user_id'], ['__count']))
         for user in self:
             user.om_audit_log_count = logs.get(user, 0)
             user.om_session_count = sessions.get(user, 0)
 
-    @classmethod
-    def _login(cls, db, login, password, user_agent_env):
-        # Odoo 17 signs in on a cursor of its own: so is the log written
+    def _login(self, credential, user_agent_env):
+        Log = self.env['om.user.audit.log']
         values = {'ip': client_address() or False}
         if request:
             values['user_agent'] = (request.httprequest.user_agent.string or '')[:500] or False
         interactive = (user_agent_env or {}).get('interactive', True)
         try:
-            uid = super()._login(db, login, password, user_agent_env)
+            auth_info = super()._login(credential, user_agent_env)
         except AccessDenied as error:
-            login = login or ''
-            with cls.pool.cursor() as cr:
-                env = api.Environment(cr, SUPERUSER_ID, {})
-                user = env['res.users'].with_context(active_test=False).search([('login', '=', login)], limit=1)
-                env['om.user.audit.log']._om_log(
-                    'login_failed', separate=True, user_id=user.id or False, login=login[:100],
-                    detail=str(error.args[0]) if error.args and error.args[0] else False, **values)
+            login = credential.get('login') or ''
+            user = self.sudo().with_context(active_test=False).search([('login', '=', login)], limit=1)
+            Log._om_log('login_failed', separate=True, user_id=user.id or False, login=login[:100],
+                        detail=str(error.args[0]) if error.args and error.args[0] else False, **values)
             raise
+        uid = auth_info.get('uid')
         if uid and uid != SUPERUSER_ID:
-            with cls.pool.cursor() as cr:
-                env = api.Environment(cr, SUPERUSER_ID, {})
-                env['om.user.audit.log']._om_log('login', user_id=uid, login=login,
-                                                 detail=False if interactive else 'API', **values)
-                if interactive:
-                    env['res.users'].browse(uid)._om_sign_in_mail(values)
-        return uid
+            Log._om_log('login', user_id=uid, login=credential.get('login'),
+                        detail=False if interactive else 'API', **values)
+            if interactive:
+                self.env['res.users'].sudo().browse(uid)._om_sign_in_mail(values)
+        return auth_info
 
     def _om_sign_in_mail(self, values):
         """ Tell the user, the administrators or both, as the settings say. """
@@ -71,7 +66,7 @@ class ResUsers(models.Model):
         if target in ('user', 'both') and self.email:
             recipients |= self.partner_id
         if target in ('admins', 'both'):
-            admins = self.env.ref('base.group_system').users.filtered(
+            admins = self.env.ref('base.group_system').all_user_ids.filtered(
                 lambda user: user.email and user != self and user.id != SUPERUSER_ID)
             recipients |= admins.partner_id
         if not recipients:
@@ -104,5 +99,42 @@ class ResUsers(models.Model):
         return action
 
     def action_om_end_sessions(self):
-        self.env['om.user.audit.session'].sudo().search([('user_id', 'in', self.ids), ('revoked', '=', False)]).action_om_end()
+        self.env['res.device'].sudo().search([('user_id', 'in', self.ids)]).action_om_end()
         return True
+
+
+class ResDevice(models.Model):
+    _inherit = 'res.device'
+
+    om_idle = fields.Boolean(string='Idle', compute='_compute_om_idle')
+
+    @api.depends('last_activity')
+    def _compute_om_idle(self):
+        minutes = self.env['ir.config_parameter'].sudo().get_int('om_user_audit.idle_minutes')
+        limit = fields.Datetime.now() - timedelta(minutes=minutes or 60)
+        for session in self:
+            session.om_idle = bool(session.last_activity and session.last_activity < limit)
+
+    def action_om_end(self):
+        """ End the sessions, whoever they belong to (Settings users only). """
+        if not self.env.user.has_group('base.group_system'):
+            raise AccessDenied()
+        Log = self.env['om.user.audit.log']
+        for session in self:
+            Log._om_log('session_end', user_id=session.user_id.id, ip=session.ip_address,
+                        detail=f'by {self.env.user.login}')
+        self.sudo()._revoke()
+        return True
+
+    @api.model
+    def _cron_end_idle(self):
+        minutes = self.env['ir.config_parameter'].sudo().get_int('om_user_audit.idle_minutes')
+        if minutes <= 0:
+            return
+        # the device activity is only refreshed hourly: the requests do the precise check
+        limit = fields.Datetime.now() - timedelta(minutes=max(minutes, 60) + 60)
+        sessions = self.sudo().search([('last_activity', '<', limit)])
+        Log = self.env['om.user.audit.log']
+        for session in sessions:
+            Log._om_log('session_end', user_id=session.user_id.id, ip=session.ip_address, detail='idle')
+        sessions._revoke()

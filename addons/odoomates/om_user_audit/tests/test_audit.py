@@ -127,11 +127,12 @@ class TestAuditHttp(AuditMixin, HttpCase):
         self.assertEqual(len(self._logs(user_id=self.user.id, event='logout')), 1)
 
     def test_a_failed_sign_in_survives_the_rollback(self):
-        # Odoo 17 signs in on a cursor of its own, and the failure is logged on
-        # another: go through the sign-in form, as a person does
-        self.authenticate(None, None)
-        self.url_open('/web/login', data={
-            'login': self.user.login, 'password': 'wrong', 'csrf_token': http.Request.csrf_token(self)})
+        with self.assertRaises(AccessDenied):
+            self.env['res.users'].with_context(active_test=False)._login(
+                {'login': self.user.login, 'password': 'wrong', 'type': 'password'}, {'interactive': True})
+        # what a rollback does: drop the commit hooks and their data, then run the rollback hooks
+        self.env.cr.postcommit.clear()
+        self.env.cr.postrollback.run()
         failed = self._logs(event='login_failed', login=self.user.login)
         self.assertEqual((len(failed), failed.user_id), (1, self.user))
 
@@ -147,7 +148,7 @@ class TestAuditHttp(AuditMixin, HttpCase):
         session = self.authenticate(self.user.login, self.password)
         session[SEEN_KEY] = time.time() - 600
         root.session_store.save(session)
-        response = self.url_open('/web', allow_redirects=False)
+        response = self.url_open('/odoo', allow_redirects=False)
         self.assertIn('/web/login', response.headers.get('Location', ''))
         self.assertEqual(len(self._logs(user_id=self.user.id, event='session_end')), 1)
 
@@ -160,13 +161,14 @@ class TestAuditHttp(AuditMixin, HttpCase):
         self.assertEqual(response.status_code, 303)
 
     def test_ending_a_session(self):
-        self.authenticate(self.user.login, self.password)
-        self.url_open('/web')
+        # the test sessions leave no device trace unless asked to
+        self.authenticate(self.user.login, self.password, session_extra={'_trace_disable': False})
+        self.url_open('/odoo')
         self.env.invalidate_all()
-        sessions = self.env['om.user.audit.session'].sudo().search([('user_id', '=', self.user.id)])
+        sessions = self.env['res.device'].sudo().search([('user_id', '=', self.user.id)])
         self.assertTrue(sessions)
         sessions.with_user(self.env.ref('base.user_admin')).action_om_end()
-        response = self.url_open('/web', allow_redirects=False)
+        response = self.url_open('/odoo', allow_redirects=False)
         self.assertIn('/web/login', response.headers.get('Location', ''))
         self.assertEqual(len(self._logs(user_id=self.user.id, event='session_end')), 1)
 

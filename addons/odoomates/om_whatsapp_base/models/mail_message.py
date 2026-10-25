@@ -75,10 +75,9 @@ class MailMessage(models.Model):
             message.has_om_whatsapp_error = message in failed
 
     def _search_has_om_whatsapp_error(self, operator, operand):
-        if operator not in ('=', '!='):
-            raise UserError(_("Search the failed WhatsApp messages with = or !=."))
-        failed = (operator == '=') == bool(operand)
-        return [('notification_ids', 'any' if failed else 'not any', [
+        if operator != 'in':
+            return NotImplemented
+        return [('notification_ids', 'any', [
             ('notification_status', '=', 'exception'),
             ('notification_type', '=', 'om_whatsapp'),
         ])]
@@ -221,35 +220,15 @@ class MailMessage(models.Model):
     # REACTIONS
     # ------------------------------------------------------------
 
-    def _bus_send_reaction_group(self, content):
-        """ The reactions ``content`` of this message as they are now, to its
-        open pages: another person's reaction may have changed with it. """
-        self.ensure_one()
-        reactions = self.env['mail.message.reaction'].sudo().search(
-            [('message_id', '=', self.id), ('content', '=', content)])
-        groups = [('DELETE', {'content': content, 'message': {'id': self.id}})]
-        if reactions:
-            groups.append(('ADD', {
-                'content': content,
-                'count': len(reactions),
-                'message': {'id': self.id},
-                'personas': [('ADD', {'id': partner.id, 'type': 'partner', 'name': partner.name,
-                                      'write_date': partner.write_date})
-                             for partner in reactions.partner_id],
-            }))
-        self.env['bus.bus']._sendone(self._bus_notification_target(), 'mail.record/insert',
-                                     {'Message': {'id': self.id, 'reactions': groups}})
-
-    def _message_reaction(self, content, action):
+    def _message_reaction(self, content, action, partner, guest, store=None):
         """ A user of the account who reacts to a WhatsApp message in Odoo
         reacts in WhatsApp too. WhatsApp keeps one reaction per person: a new
         one replaces the one before, on the copies of the message as well;
         taking it back takes it back there. """
         account = self.om_whatsapp_account_id
-        partner, guest = self.env['res.partner']._get_current_persona()
         if (self.message_type != 'om_whatsapp' or not self.om_whatsapp_id or not account or guest
                 or partner not in account.user_ids.partner_id):
-            return super()._message_reaction(content, action)
+            return super()._message_reaction(content, action, partner, guest, store=store)
         Reaction = self.env['mail.message.reaction'].sudo()
         if action == 'add':
             before = Reaction.search([('message_id', '=', self.id), ('partner_id', '=', partner.id), ('content', '!=', content)])
@@ -257,7 +236,7 @@ class MailMessage(models.Model):
             before.unlink()
             for old in contents:
                 self._bus_send_reaction_group(old)
-        super()._message_reaction(content, action)
+        super()._message_reaction(content, action, partner, guest, store=store)
         emoji = Reaction.search([('message_id', '=', self.id), ('partner_id', '=', partner.id)], limit=1).content or ''
         for copy in self._om_whatsapp_copies() - self:
             previous = Reaction.search([('message_id', '=', copy.id), ('partner_id', '=', partner.id)])
@@ -288,8 +267,7 @@ class MailMessage(models.Model):
 
     def action_om_whatsapp_retry(self):
         """ Send the failed or cancelled messages again, by the author. """
-        self.check_access_rights('read')
-        self.check_access_rule('read')
+        self.check_access('read')
         notifications = self._om_whatsapp_notifications().filtered(
             lambda n: n.notification_status in ('exception', 'canceled') and n.om_whatsapp_number)
         if not notifications:
@@ -299,7 +277,6 @@ class MailMessage(models.Model):
         return notifications._om_whatsapp_send()
 
     def action_om_whatsapp_cancel(self):
-        self.check_access_rights('read')
-        self.check_access_rule('read')
+        self.check_access('read')
         self._om_whatsapp_notifications().filtered(
             lambda n: n.notification_status == 'ready')._om_whatsapp_set_status('cancel')

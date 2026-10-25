@@ -27,13 +27,14 @@ class ActionAccess(Action):
             if record and record._name.startswith('ir.actions.'):
                 return record.id
             return None
-        # Odoo 17 actions have no path
-        return None
+        record = request.env['ir.actions.actions'].sudo().search(
+            [('path', '=', action_id)], limit=1)
+        return record.id or None
 
     @http.route()
-    def load(self, action_id, additional_context=None):
+    def load(self, action_id, context=None):
         request.env['om.access.profile']._check_action(self._resolve_action_id(action_id))
-        result = super().load(action_id, additional_context=additional_context)
+        result = super().load(action_id, context=context)
         # filtered here: the action is built under sudo, where this module steps aside
         return request.env['om.access.profile']._filter_action_views(result)
 

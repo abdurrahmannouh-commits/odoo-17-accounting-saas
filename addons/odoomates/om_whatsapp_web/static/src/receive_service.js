@@ -1,7 +1,6 @@
-/** @odoo-module **/
-
 import { _t } from "@web/core/l10n/translation";
 import { registry } from "@web/core/registry";
+import { user } from "@web/core/user";
 import { fetchMedia, getExtensionInfo, inboxDone, onInboxWake, onStatusWake, takeInbox } from "./extension_bridge";
 
 const ACCOUNT = "om.whatsapp.account";
@@ -113,8 +112,8 @@ export class WhatsappReceiver {
  * when it has read something, and every POLL_DELAY anyway.
  */
 export const whatsappReceiveService = {
-    dependencies: ["orm", "notification", "user"],
-    start(env, { orm, notification, user }) {
+    dependencies: ["orm", "notification"],
+    start(env, { orm, notification }) {
         const receiver = new WhatsappReceiver(orm, notification);
         let ready = false;
         let lastPing = 0;

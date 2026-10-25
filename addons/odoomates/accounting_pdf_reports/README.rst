@@ -1,8 +1,8 @@
 ====================================
-Odoo 17 Accounting Financial Reports
+Odoo 19 Accounting Financial Reports
 ====================================
 
-This Module will provide all the financial reports for odoo 17
+This Module will provide all the financial reports for odoo 19
 community edition
 
 Tax Report
@@ -11,6 +11,9 @@ Tax Report
 * Print a Tax Report for a period picked from shortcuts (this or last month,
   quarter or fiscal year) or for any custom date range.
 * Count a cash basis tax in the period of the payment, not of the invoice.
+* Print the taxes withheld on payments (Community's
+  ``l10n_account_withholding_tax``) in a Withholding section of their own,
+  their base counted once.
 * Close a tax period: a draft entry that clears the tax accounts of the period
   against a tax payable or receivable account.
 

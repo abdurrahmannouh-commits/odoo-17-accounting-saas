@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import { Composer } from "@mail/core/common/composer";
 import { useState } from "@odoo/owl";
 import { patch } from "@web/core/utils/patch";
@@ -15,7 +13,7 @@ patch(Composer.prototype, {
         const thread = this.thread;
         if (
             !this.props.placeholder &&
-            thread?.type === "om_whatsapp" &&
+            thread?.channel_type === "om_whatsapp" &&
             thread.om_whatsapp_provider === "web" &&
             this.omWhatsappStatus.blocking
         ) {

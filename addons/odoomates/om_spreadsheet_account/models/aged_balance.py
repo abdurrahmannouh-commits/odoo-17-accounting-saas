@@ -40,7 +40,7 @@ class OmSpreadsheetAgedBalance(models.Model):
     partner_type = fields.Selection(
         [('customer', 'Customer'), ('vendor', 'Vendor')], string='Partner Type', readonly=True)
     bucket = fields.Selection(BUCKETS, string='Age', readonly=True)
-    days_overdue = fields.Integer(string='Days Overdue', readonly=True, group_operator='max')
+    days_overdue = fields.Integer(string='Days Overdue', readonly=True, aggregator='max')
     amount_residual = fields.Monetary(string='Amount Due', readonly=True)
 
     def init(self):

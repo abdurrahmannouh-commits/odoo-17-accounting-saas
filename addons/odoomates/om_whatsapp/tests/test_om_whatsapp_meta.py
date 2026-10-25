@@ -8,6 +8,7 @@ from odoo import Command, fields
 from odoo.exceptions import AccessError, UserError
 from odoo.tests import HttpCase, TransactionCase, new_test_user, tagged
 
+from odoo.addons.mail.tools.discuss import Store
 from odoo.addons.om_whatsapp.tools import MetaApi, MetaApiError
 
 from .fake_meta import APP_ID, APP_SECRET, PERMANENT_TOKEN, PHONE_ID, TOKEN, WABA_ID, fake_meta
@@ -341,12 +342,6 @@ class TestOmWhatsappMetaSend(MetaCase):
         """ The contact writes: free text is allowed for 24 hours. """
         self.account._om_whatsapp_receive(number, 'Hello', f'wamid.in-{number}')
 
-    @staticmethod
-    def _messages(meta):
-        """ What went to Meta, without the read receipts: on Odoo 17, a reply
-        marks the conversation read, as WhatsApp does. """
-        return [payload for payload in meta.sent if 'status' not in payload]
-
     def _notification(self):
         return self.env['mail.notification'].search([
             ('notification_type', '=', 'om_whatsapp'), ('res_partner_id', '=', self.alice.id),
@@ -360,8 +355,8 @@ class TestOmWhatsappMetaSend(MetaCase):
             meta.sent.clear()
             self._composer().action_send()
             notification = self._notification()
-            self.assertEqual(self._messages(meta), [{'to': '32470123456', 'type': 'text',
-                                                     'text': {'body': 'Your order is ready', 'preview_url': True}}])
+            self.assertEqual(meta.sent, [{'to': '32470123456', 'type': 'text',
+                                          'text': {'body': 'Your order is ready', 'preview_url': True}}])
             self.assertEqual(notification.notification_status, 'pending')
             self.assertEqual(notification.mail_message_id.om_whatsapp_id, 'wamid.2')
 
@@ -392,8 +387,9 @@ class TestOmWhatsappMetaSend(MetaCase):
             meta.sent.clear()
             message = self.env['mail.message'].search([('om_whatsapp_id', '=', 'wamid.in-+32470123456')], limit=1)
             message = message.with_user(self.manager).sudo()
-            message._message_reaction('👍', 'add')
-            message._message_reaction('👍', 'remove')
+            guest = self.env['mail.guest']
+            message._message_reaction('👍', 'add', self.manager.partner_id, guest)
+            message._message_reaction('👍', 'remove', self.manager.partner_id, guest)
         reaction = {'to': '32470123456', 'recipient_type': 'individual', 'type': 'reaction'}
         self.assertEqual(meta.sent, [
             {**reaction, 'reaction': {'message_id': 'wamid.in-+32470123456', 'emoji': '👍'}},
@@ -409,7 +405,7 @@ class TestOmWhatsappMetaSend(MetaCase):
                                                         ('model', '=', 'discuss.channel')], limit=1)
             channel = self.env['discuss.channel'].browse(received.res_id)
             channel.with_user(self.manager).message_post(body='Yes, Friday', message_type='comment', parent_id=received.id)
-        self.assertEqual(self._messages(meta)[0]['context'], {'message_id': 'wamid.in-+32470123456'})
+        self.assertEqual(meta.sent[0]['context'], {'message_id': 'wamid.in-+32470123456'})
 
     def test_read_receipt(self):
         """ Read in Odoo: Meta marks the last message read; played is read. """
@@ -461,7 +457,7 @@ class TestOmWhatsappMetaSend(MetaCase):
             channel.om_whatsapp_last_incoming = fields.Datetime.now() - timedelta(hours=25)
             with self.assertRaisesRegex(UserError, '24 hours'):
                 channel.with_user(self.manager).message_post(body='Still there?', message_type='comment')
-        self.assertEqual([payload['text']['body'] for payload in self._messages(meta)[1:]], ['Yes, tomorrow'])
+        self.assertEqual([payload['text']['body'] for payload in meta.sent[1:]], ['Yes, tomorrow'])
 
     def test_window_end_reaches_the_conversation(self):
         """ The end of the 24 hours goes to Discuss, and again when the
@@ -471,11 +467,14 @@ class TestOmWhatsappMetaSend(MetaCase):
             self._open_window()
         channel = self.env['discuss.channel'].search([('om_whatsapp_number', '=', '+32470123456')])
         channel.om_whatsapp_last_incoming = fields.Datetime.now() - timedelta(hours=1)
-        until = channel._om_whatsapp_window_values()['om_whatsapp_free_text_until']
+        result = Store().add(channel, channel._om_whatsapp_window_fields()).get_result()
+        until = result['discuss.channel'][0]['om_whatsapp_free_text_until']
         self.assertEqual(until, fields.Datetime.to_string(channel.om_whatsapp_last_incoming + timedelta(hours=24)))
-        with patch.object(type(self.env['bus.bus']), '_sendone', autospec=True) as send:
+        Channel = type(channel)
+        with patch.object(Channel, '_om_whatsapp_window_fields', autospec=True,
+                          side_effect=Channel._om_whatsapp_window_fields) as window:
             channel.om_whatsapp_last_incoming = fields.Datetime.now()
-        self.assertIn('om_whatsapp_free_text_until', send.call_args.args[3]['Thread'])
+        window.assert_called_once()
 
 
 @tagged('post_install', '-at_install')

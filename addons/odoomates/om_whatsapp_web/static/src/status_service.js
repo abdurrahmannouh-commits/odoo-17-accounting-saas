@@ -1,8 +1,7 @@
-/** @odoo-module **/
-
 import { reactive } from "@odoo/owl";
 import { _t } from "@web/core/l10n/translation";
 import { registry } from "@web/core/registry";
+import { user } from "@web/core/user";
 import { getExtensionInfo, getStatus, onStatusWake, openWhatsappTab } from "./extension_bridge";
 
 const ACCOUNT = "om.whatsapp.account";
@@ -111,8 +110,8 @@ export const whatsappStatus = reactive({
  * every CHECK_DELAY while the page is seen.
  */
 export const whatsappStatusService = {
-    dependencies: ["orm", "user"],
-    start(env, { orm, user }) {
+    dependencies: ["orm"],
+    start(env, { orm }) {
         let told = { me: undefined, at: 0, answer: null };
         const tellServer = async (me) => {
             if (told.answer && told.me === me && Date.now() - told.at < SERVER_DELAY) {

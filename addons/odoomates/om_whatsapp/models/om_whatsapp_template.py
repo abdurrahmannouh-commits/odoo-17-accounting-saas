@@ -171,8 +171,7 @@ class OmWhatsappTemplate(models.Model):
 
     def action_meta_submit(self):
         """ Submit the template to Meta for approval, or its changes. """
-        self.check_access_rights('write')
-        self.check_access_rule('write')
+        self.check_access('write')
         for template in self:
             account = template._meta_account()
             text, _expressions = template._meta_check()
@@ -219,8 +218,7 @@ class OmWhatsappTemplate(models.Model):
 
     def action_meta_sync(self):
         """ The status of the templates in Meta, now. """
-        self.check_access_rights('write')
-        self.check_access_rule('write')
+        self.check_access('write')
         for account in self.account_id.filtered(lambda a: a.provider == 'meta' and a.meta_waba_id):
             account._meta_sync_templates()
         return True

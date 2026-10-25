@@ -81,9 +81,7 @@ class OmWhatsappAccount(models.Model):
     device_secret = fields.Char('Secret of the Bridge', compute='_compute_device_secret',
                                 groups='base.group_system')
 
-    _sql_constraints = [
-        ('device_key_unique', 'unique (device_key)', 'A session is the session of one account.'),
-    ]
+    _device_key_unique = models.Constraint('unique (device_key)', 'A session is the session of one account.')
 
     @api.depends('provider')
     def _compute_capabilities(self):
@@ -242,7 +240,7 @@ class OmWhatsappAccount(models.Model):
         if not self.env.user._is_system():
             raise AccessError(_("Only an administrator of Odoo starts the WhatsApp Bridge."))
         self._device_start_bridge_process()
-        self.env['ir.config_parameter'].sudo().set_param('om_whatsapp_device.autostart', 'True')
+        self.env['ir.config_parameter'].sudo().set_param('om_whatsapp_device.autostart', True)
         for _wait in range(20):
             try:
                 self._device_bridge().health()
@@ -298,7 +296,7 @@ class OmWhatsappAccount(models.Model):
             try:
                 account._device_write_state(account._device_bridge().status(account.device_key), checked=True)
             except BridgeError as error:
-                autostart = str2bool(self.env['ir.config_parameter'].sudo().get_param('om_whatsapp_device.autostart', 'False'), False)
+                autostart = str2bool(self.env['ir.config_parameter'].sudo().get_param('om_whatsapp_device.autostart'), False)
                 if autostart and not restarted:
                     restarted = True
                     try:
@@ -366,8 +364,8 @@ class OmWhatsappAccount(models.Model):
             room = account.device_daily_limit - account._device_sent_today()
             for notification in queued.filtered(lambda n: n.mail_message_id.om_whatsapp_account_id == account)[:max(room, 0)]:
                 account._device_send(notification)
-                if 'lastcall' in self.env.context:
-                    self.env.cr.commit()
+                if self.env.context.get('cron_id'):
+                    self.env['ir.cron']._commit_progress(1, remaining=0)
 
     def _om_whatsapp_picture_device(self, number):
         """ The profile picture of ``number``, read by the bridge: base64, or False. """

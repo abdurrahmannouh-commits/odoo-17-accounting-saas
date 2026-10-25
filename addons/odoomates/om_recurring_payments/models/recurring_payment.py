@@ -2,8 +2,8 @@ import logging
 
 from dateutil.relativedelta import relativedelta
 from odoo import models, fields, api, _
-from odoo.exceptions import UserError, ValidationError
-from odoo.tools import SQL, format_date
+from odoo.exceptions import LockError, UserError, ValidationError
+from odoo.tools import format_date
 
 _logger = logging.getLogger(__name__)
 
@@ -54,12 +54,10 @@ class RecurringPayment(models.Model):
             rec.has_error = any(rec.line_ids.mapped('error_message'))
 
     def _search_has_error(self, operator, value):
-        # Odoo 17 gives the operator as written: ('=', True) is ('in', [True]) for the ORM of 19
-        if operator in ('=', '!='):
-            operator, value = ('in' if operator == '=' else 'not in'), [value]
         if operator not in ('in', 'not in'):
-            raise UserError(_('Operator %s is not supported for this search.', operator))
-        domain = [('line_ids', 'any', [('error_message', '!=', False)])]
+            return NotImplemented
+        failed = self.env['recurring.payment.line']._search([('error_message', '!=', False)])
+        domain = [('line_ids', 'any', failed)]
         return domain if (operator == 'in') == (True in value) else ['!'] + domain
 
     @api.depends('template_id')
@@ -224,14 +222,9 @@ class RecurringPaymentLine(models.Model):
 
     def action_create_payment(self):
         # a concurrent click or cron run holding the line makes this one fail instead of paying twice
-        ids = tuple(self.ids)
-        locked = []
-        if ids:
-            self.env.cr.execute(SQL(
-                "SELECT id FROM %s WHERE id IN %s FOR UPDATE SKIP LOCKED", SQL.identifier(self._table), ids,
-            ))
-            locked = self.env.cr.fetchall()
-        if len(locked) != len(ids):
+        try:
+            self.lock_for_update()
+        except LockError:
             raise UserError(_('The payment of this line is already being created, please try again in a moment.'))
         for line in self:
             if line.state != 'draft':
@@ -245,7 +238,7 @@ class RecurringPaymentLine(models.Model):
                 'journal_id': line.journal_id.id,
                 'company_id': line.company_id.id,
                 'date': line.date,
-                'ref': line.recurring_payment_id.name,
+                'memo': line.recurring_payment_id.name,
                 'partner_id': line.partner_id.id,
             }
             payment = self.env['account.payment'].create(vals)

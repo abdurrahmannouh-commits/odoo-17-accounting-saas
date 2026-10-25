@@ -1,6 +1,6 @@
 {
-    'name': 'Odoo 17 Bank Statement Import',
-    'version': '17.0.2.0.0',
+    'name': 'Odoo 19 Bank Statement Import',
+    'version': '1.0.0',
     'category': 'Accounting',
     'summary': 'Import the bank statements of your bank: CAMT, MT940, OFX, QIF, CSV and Excel',
     'description': """
@@ -19,11 +19,10 @@ the file stays attached to the statement. The statements are then reconciled as 
     'data': [
         'security/ir.model.access.csv',
         'security/security.xml',
-        'data/statement_import_map_data.xml',
         'views/account_statement_import_map_views.xml',
         'wizard/account_statement_import_views.xml',
-        'views/account_bank_statement_views.xml',
         'views/account_journal_views.xml',
+        'views/account_bank_statement_views.xml',
     ],
     'images': ['static/description/banner.gif'],
 }

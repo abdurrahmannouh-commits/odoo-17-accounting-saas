@@ -25,7 +25,7 @@
         <field name="name">om.access.profile.list</field>
         <field name="model">om.access.profile</field>
         <field name="arch" type="xml">
-            <tree string="Access Profiles">
+            <list string="Access Profiles">
                 <header>
                     <button name="%(om_access_manager.om_access_template_wizard_action)d" type="action"
                             string="New from Template" class="btn-secondary" display="always"/>
@@ -39,7 +39,7 @@
                 <field name="hide_chatter_all" string="No Chatter" optional="hide"/>
                 <field name="block_export" string="No Export" optional="hide"/>
                 <field name="company_id" groups="base.group_multi_company" optional="hide"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -220,11 +220,11 @@
                                 <group string="Working Hours">
                                     <field name="login_tz"/>
                                     <field name="login_slot_ids" nolabel="1" colspan="2">
-                                        <tree editable="bottom">
+                                        <list editable="bottom">
                                             <field name="dayofweek"/>
                                             <field name="hour_from" widget="float_time"/>
                                             <field name="hour_to" widget="float_time"/>
-                                        </tree>
+                                        </list>
                                     </field>
                                     <div colspan="2" class="text-muted" invisible="login_slot_ids">
                                         No working hours: the users may sign in at any time.
@@ -249,14 +249,14 @@
                                 profile serves every cashier, each on their own point of sale.
                             </div>
                             <field name="allowed_ids" nolabel="1">
-                                <tree string="Allowed Records" editable="bottom">
+                                <list string="Allowed Records" editable="bottom">
                                     <field name="kind"/>
                                     <field name="res_model" column_invisible="1"/>
                                     <field name="per_user"/>
                                     <field name="res_id" widget="many2one_reference"
                                            invisible="per_user" required="not per_user"
                                            options="{'no_create': True}"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Models" name="models" groups="base.group_no_one">
@@ -271,7 +271,7 @@
                                 others. They are optional columns of this list.
                             </div>
                             <field name="model_ids" nolabel="1">
-                                <tree string="Models" editable="bottom">
+                                <list string="Models" editable="bottom">
                                     <field name="model_id" options="{'no_create': True}"/>
                                     <button name="action_open_rule" type="object" icon="fa-filter"
                                             title="Records, filters and presets"/>
@@ -295,7 +295,7 @@
                                     <field name="hide_send_message" optional="hide"/>
                                     <field name="hide_followers" optional="hide"/>
                                     <field name="hide_attachments" optional="hide"/>
-                                </tree>
+                                </list>
                             </field>
                             <div class="mt-3 mb-1 fw-bold">Rights set on menus</div>
                             <div class="text-muted mb-2">
@@ -303,7 +303,7 @@
                                 A line above, on the data itself, comes first.
                             </div>
                             <field name="menu_rule_ids" nolabel="1">
-                                <tree string="Rights set on menus" editable="bottom">
+                                <list string="Rights set on menus" editable="bottom">
                                     <field name="menu_id" options="{'no_create': True}"/>
                                     <field name="perm_read" string="Read"/>
                                     <field name="perm_write" string="Edit"/>
@@ -322,7 +322,7 @@
                                     <field name="hide_send_message" optional="hide"/>
                                     <field name="hide_followers" optional="hide"/>
                                     <field name="hide_attachments" optional="hide"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Buttons" name="buttons" groups="base.group_no_one">
@@ -335,7 +335,7 @@
                                 on the records that match it.
                             </div>
                             <field name="button_ids" nolabel="1">
-                                <tree string="Buttons" editable="bottom">
+                                <list string="Buttons" editable="bottom">
                                     <field name="model_id" options="{'no_create': True}"/>
                                     <field name="button_label" string="Label"/>
                                     <field name="button_type" string="Type"/>
@@ -344,7 +344,7 @@
                                     <field name="view_type" string="View"/>
                                     <field name="mode"/>
                                     <field name="condition" optional="show" placeholder="state == 'sale'"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Fields" name="fields" groups="base.group_no_one">
@@ -357,7 +357,7 @@
                                 the records that match it.
                             </div>
                             <field name="field_ids" nolabel="1">
-                                <tree string="Fields" editable="bottom">
+                                <list string="Fields" editable="bottom">
                                     <field name="model_id" options="{'no_create': True}"/>
                                     <field name="field_id" options="{'no_create': True}"/>
                                     <field name="mode"/>
@@ -366,7 +366,7 @@
                                     <field name="no_create" optional="show"/>
                                     <field name="no_export" optional="show"/>
                                     <field name="field_domain" string="Value Filter" optional="hide"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Pages" name="pages" groups="base.group_no_one">
@@ -377,13 +377,13 @@
                                 only for the records matching a condition.
                             </div>
                             <field name="page_element_ids" nolabel="1" context="{'default_element_type': 'page'}">
-                                <tree string="Pages" editable="bottom">
+                                <list string="Pages" editable="bottom">
                                     <field name="model_id" options="{'no_create': True}"/>
                                     <field name="element_name" string="Page"/>
                                     <field name="element_label" string="Label" optional="show"/>
                                     <field name="condition" optional="show"/>
                                     <field name="element_type" column_invisible="1"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Filters" name="filters" groups="base.group_no_one">
@@ -394,12 +394,12 @@
                                 removed from the screen.
                             </div>
                             <field name="filter_element_ids" nolabel="1" context="{'default_element_type': 'filter'}">
-                                <tree string="Filters" editable="bottom">
+                                <list string="Filters" editable="bottom">
                                     <field name="model_id" options="{'no_create': True}"/>
                                     <field name="element_type" string="Kind"/>
                                     <field name="element_name" string="Filter"/>
                                     <field name="element_label" string="Label" optional="show"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Views" name="views" groups="base.group_no_one">
@@ -408,12 +408,12 @@
                                 before the client asks for them; the last remaining one is always kept.
                             </div>
                             <field name="view_element_ids" nolabel="1" context="{'default_element_type': 'view'}">
-                                <tree string="Views" editable="bottom">
+                                <list string="Views" editable="bottom">
                                     <field name="model_id" options="{'no_create': True}"/>
                                     <field name="element_name" string="View Type"/>
                                     <field name="element_label" string="Label" optional="show"/>
                                     <field name="element_type" column_invisible="1"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Reports" name="reports" groups="base.group_no_one">
@@ -422,11 +422,11 @@
                                 another way.
                             </div>
                             <field name="hidden_report_ids" nolabel="1" options="{'no_create': True}">
-                                <tree string="Hidden Reports">
+                                <list string="Hidden Reports">
                                     <field name="name" string="Report"/>
                                     <field name="model" string="Printed from"/>
                                     <field name="report_type" optional="hide"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Action Menu" name="actions" groups="base.group_no_one">
@@ -436,16 +436,16 @@
                             </div>
                             <field name="hidden_action_ids" nolabel="1" options="{'no_create': True}"
                                    domain="[('binding_model_id', '!=', False)]">
-                                <tree string="Hidden Server Actions">
+                                <list string="Hidden Server Actions">
                                     <field name="name" string="Action"/>
                                     <field name="binding_model_id" string="Action menu of"/>
-                                </tree>
+                                </list>
                             </field>
                             <field name="hidden_window_action_ids" nolabel="1" options="{'no_create': True}">
-                                <tree string="Hidden Window Actions">
+                                <list string="Hidden Window Actions">
                                     <field name="name" string="Action"/>
                                     <field name="binding_model_id" string="Action menu of"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Temporary Users" name="assignments">
@@ -455,7 +455,7 @@
                                 zone; ended assignments are archived and kept here.
                             </div>
                             <field name="assignment_ids" nolabel="1">
-                                <tree string="Temporary Users" editable="bottom"
+                                <list string="Temporary Users" editable="bottom"
                                       decoration-muted="state == 'ended'" decoration-info="state == 'planned'">
                                     <field name="user_id" options="{'no_create': True}"/>
                                     <field name="date_from"/>
@@ -465,7 +465,7 @@
                                            decoration-success="state == 'active'"
                                            decoration-info="state == 'planned'"/>
                                     <field name="active" column_invisible="1"/>
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Options" name="options">
@@ -487,10 +487,7 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids"/>
-                    <field name="message_ids"/>
-                </div>
+                <chatter/>
             </form>
         </field>
     </record>
@@ -500,7 +497,7 @@
         <field name="model_id" ref="model_om_access_profile"/>
         <field name="binding_model_id" ref="model_om_access_profile"/>
         <field name="binding_view_types">form</field>
-        <field name="groups_id" eval="[(4, ref('om_access_manager.group_access_manager'))]"/>
+        <field name="group_ids" eval="[(4, ref('om_access_manager.group_access_manager'))]"/>
         <field name="state">code</field>
         <field name="code">action = records.action_copy_restrictions()</field>
     </record>
@@ -508,7 +505,7 @@
     <record id="om_access_profile_action" model="ir.actions.act_window">
         <field name="name">Access Profiles</field>
         <field name="res_model">om.access.profile</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Create your first access profile</p>
             <p>

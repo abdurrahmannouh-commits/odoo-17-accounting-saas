@@ -1,8 +1,6 @@
-/** @odoo-module **/
-
 import { Component } from "@odoo/owl";
 import { browser } from "@web/core/browser/browser";
-import { jsonrpc } from "@web/core/network/rpc_service";
+import { rpc } from "@web/core/network/rpc";
 import { registry } from "@web/core/registry";
 import { session } from "@web/session";
 
@@ -19,14 +17,8 @@ export class PreviewBanner extends Component {
     }
 
     async exit() {
-        const { url } = await jsonrpc("/om_access_manager/preview/stop");
-        const target = new URL(url, browser.location.href);
-        const here = new URL(browser.location.href);
+        const { url } = await rpc("/om_access_manager/preview/stop");
         browser.location.href = url;
-        if (target.pathname === here.pathname && target.search === here.search) {
-            // Odoo 17 URLs differ by their hash only: load the page again
-            browser.location.reload();
-        }
     }
 }
 

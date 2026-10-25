@@ -13,11 +13,11 @@ class IrHttp(models.AbstractModel):
     _inherit = 'ir.http'
 
     @classmethod
-    def _authenticate(cls, endpoint):
+    def _authenticate_explicit(cls, routing):
         uid = request and request.session.uid
         if uid:
             cls._om_check_idle(uid)
-        return super()._authenticate(endpoint)
+        return super()._authenticate_explicit(routing)
 
     @classmethod
     def _om_check_idle(cls, uid):
@@ -30,13 +30,7 @@ class IrHttp(models.AbstractModel):
             request.session.logout(keep_db=True)
             request.env = api.Environment(request.env.cr, None, request.env.context)
             return
-        refresh = not seen or now - seen > SEEN_PRECISION
-        if not env['om.user.audit.session']._om_note_request(uid, refresh):
-            # ended from the Sessions list, where it was logged
-            request.session.logout(keep_db=True)
-            request.env = api.Environment(request.env.cr, None, request.env.context)
-            return
-        if refresh:
+        if not seen or now - seen > SEEN_PRECISION:
             request.session[SEEN_KEY] = now
 
     @classmethod

@@ -11,7 +11,7 @@ class TestBalanceFormula(AccountTestInvoicingCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.other_company_data = cls.company_data_2
+        cls.other_company_data = cls.setup_other_company()
         cls.company = cls.company_data['company']
         cls.other_company = cls.other_company_data['company']
         cls.env.user.company_ids = [Command.link(cls.other_company.id)]

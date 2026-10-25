@@ -7,8 +7,7 @@ from odoo.tools.misc import format_date
 # lock date fields of the company set by each kind of closing
 LOCK_FIELDS = {
     'none': (),
-    # Odoo 17 has no sales and purchases lock dates: the lock of the entries for the non-advisers
-    'period': ('period_lock_date',),
+    'sale_purchase': ('sale_lock_date', 'purchase_lock_date'),
     'tax': ('tax_lock_date',),
     'fiscal': ('fiscalyear_lock_date',),
 }
@@ -32,11 +31,12 @@ class AccountPeriodClosing(models.Model):
     state = fields.Selection([('open', 'Open'), ('closed', 'Closed')], default='open', required=True, tracking=True)
     lock_type = fields.Selection(
         [('none', 'Do not lock'),
-         ('period', 'Lock the entries (except for the advisers)'),
+         ('sale_purchase', 'Lock the sales and purchases'),
          ('tax', 'Lock the taxes'),
-         ('fiscal', 'Lock everything, for all users')],
+         ('fiscal', 'Lock everything (except for the administrators)')],
         string='When Closed', required=True, default='fiscal', tracking=True,
-        help="The lock date set on the company when the period is closed.")
+        help="The lock date set on the company when the period is closed. The permanent lock is set from the "
+             "lock dates of the company.")
     check_ids = fields.One2many('account.period.closing.check', 'closing_id', string='Checklist')
     blocking_count = fields.Integer(compute='_compute_counts')
     warning_count = fields.Integer(compute='_compute_counts')
@@ -46,9 +46,8 @@ class AccountPeriodClosing(models.Model):
     closed_on = fields.Datetime(readonly=True, copy=False)
     previous_lock_dates = fields.Json(readonly=True, copy=False)
 
-    _sql_constraints = [
-        ('company_period_uniq', 'unique(company_id, date_from)', 'This period is already being closed.'),
-    ]
+    _company_period_uniq = models.Constraint(
+        'unique(company_id, date_from)', 'This period is already being closed.')
 
     @api.depends('date_from', 'date_to')
     def _compute_name(self):
@@ -230,7 +229,7 @@ class AccountPeriodClosing(models.Model):
             'name': definition['name'],
             'type': 'ir.actions.act_window',
             'res_model': definition['model'],
-            'view_mode': 'tree,form',
+            'view_mode': 'list,form',
             'views': [(False, 'list'), (False, 'form')],
             'domain': definition['domain'],
             'context': {'create': False},
@@ -293,6 +292,8 @@ class AccountPeriodClosing(models.Model):
                     restore[field_name] = fields.Date.to_date(value) if value else False
             if restore:
                 company.sudo().write(restore)
+            if company.hard_lock_date and company.hard_lock_date >= closing.date_from:
+                closing.message_post(body=_('The period stays locked: it is before the permanent lock date.'))
             closing.write({'state': 'open', 'closed_by_id': False, 'closed_on': False, 'previous_lock_dates': False})
             closing.message_post(body=_('Period reopened.'))
             closing.action_refresh()

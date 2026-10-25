@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -22,7 +22,6 @@ msgstr ""
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_fiscal_year.py:0
-#, python-format
 msgid "A closed fiscal year cannot be deleted. Reopen it first."
 msgstr ""
 
@@ -33,12 +32,15 @@ msgstr "Cierre del período de cuenta"
 
 #. module: om_fiscal_year
 #: model:ir.model.fields,help:om_fiscal_year.field_account_fiscal_year_closing__unaffected_earnings_account_id
-msgid "Account of type Current Year Earnings debited (or credited for a loss) by the closing entry."
+msgid ""
+"Account of type Current Year Earnings debited (or credited for a loss) by "
+"the closing entry."
 msgstr ""
 
 #. module: om_fiscal_year
 #: model:ir.model.fields,help:om_fiscal_year.field_res_company__retained_earnings_account_id
-msgid "Account receiving the earnings of the fiscal years when they are closed."
+msgid ""
+"Account receiving the earnings of the fiscal years when they are closed."
 msgstr ""
 
 #. module: om_fiscal_year
@@ -62,14 +64,46 @@ msgid "Adjust the prepaid expenses and the revenue received in advance"
 msgstr ""
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,field_description:om_fiscal_year.field_res_config_settings__fiscalyear_lock_date
-msgid "All Users Lock Date"
-msgstr ""
-
-#. module: om_fiscal_year
 #: model:res.groups,name:om_fiscal_year.group_fiscal_year
 msgid "Allow to define fiscal years of more or less than a year"
 msgstr "Permite definir años fiscales de más o menos de un año"
+
+#. module: om_fiscal_year
+#: model:ir.model.fields,help:om_fiscal_year.field_res_config_settings__hard_lock_date
+msgid ""
+"Any entry up to and including that date will be postponed to a later time, "
+"in accordance with its journal sequence. This lock date is irreversible and "
+"does not allow any exception."
+msgstr ""
+
+#. module: om_fiscal_year
+#: model:ir.model.fields,help:om_fiscal_year.field_res_config_settings__fiscalyear_lock_date
+msgid ""
+"Any entry up to and including that date will be postponed to a later time, "
+"in accordance with its journal's sequence."
+msgstr ""
+
+#. module: om_fiscal_year
+#: model:ir.model.fields,help:om_fiscal_year.field_res_config_settings__tax_lock_date
+msgid ""
+"Any entry with taxes up to and including that date will be postponed to a "
+"later time, in accordance with its journal's sequence. The tax lock date is "
+"automatically set when the tax closing entry is posted."
+msgstr ""
+
+#. module: om_fiscal_year
+#: model:ir.model.fields,help:om_fiscal_year.field_res_config_settings__purchase_lock_date
+msgid ""
+"Any purchase entry prior to and including this date will be postponed to a "
+"later date, in accordance with its journal's sequence."
+msgstr ""
+
+#. module: om_fiscal_year
+#: model:ir.model.fields,help:om_fiscal_year.field_res_config_settings__sale_lock_date
+msgid ""
+"Any sales entry prior to and including this date will be postponed to a "
+"later date, in accordance with its journal's sequence."
+msgstr ""
 
 #. module: om_fiscal_year
 #: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__message_attachment_count
@@ -79,26 +113,25 @@ msgstr ""
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_period_closing.py:0
-#, python-format
 msgid "Bank and cash accounts with a negative balance"
 msgstr ""
 
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_period_closing.py:0
-#, python-format
 msgid "Bank transactions not reconciled"
 msgstr ""
 
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_period_closing.py:0
-#, python-format
 msgid "Bills that might be duplicates"
 msgstr ""
 
 #. module: om_fiscal_year
-#: model:ir.model.fields.selection,name:om_fiscal_year.selection__account_period_closing_check__level__blocking model:ir.model.fields.selection,name:om_fiscal_year.selection__account_period_closing_check__status__blocking model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_period_closing_list
+#: model:ir.model.fields.selection,name:om_fiscal_year.selection__account_period_closing_check__level__blocking
+#: model:ir.model.fields.selection,name:om_fiscal_year.selection__account_period_closing_check__status__blocking
+#: model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_period_closing_list
 msgid "Blocking"
 msgstr ""
 
@@ -121,11 +154,14 @@ msgstr ""
 
 #. module: om_fiscal_year
 #: model:ir.model.fields,help:om_fiscal_year.field_account_fiscal_year_closing__date
-msgid "By default the first day after the fiscal year, so that the balance sheet at the end of the year still shows its earnings."
+msgid ""
+"By default the first day after the fiscal year, so that the balance sheet at"
+" the end of the year still shows its earnings."
 msgstr ""
 
 #. module: om_fiscal_year
-#: model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_fiscal_year_closing_form model_terms:ir.ui.view,arch_db:om_fiscal_year.view_change_lock_date
+#: model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_fiscal_year_closing_form
+#: model_terms:ir.ui.view,arch_db:om_fiscal_year.view_change_lock_date
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -150,7 +186,9 @@ msgid "Checked On"
 msgstr ""
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__check_ids model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_fiscal_year_closing_form model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_period_closing_form
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__check_ids
+#: model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_fiscal_year_closing_form
+#: model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_period_closing_form
 msgid "Checklist"
 msgstr ""
 
@@ -161,8 +199,10 @@ msgstr "De clic aquí para crear un nuevo año fiscal."
 
 #. module: om_fiscal_year
 #. odoo-python
-#: code:addons/om_fiscal_year/models/account_fiscal_year.py:0 model:ir.model,name:om_fiscal_year.model_account_fiscal_year_closing model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_fiscal_year_closing_form model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_fiscal_year_form
-#, python-format
+#: code:addons/om_fiscal_year/models/account_fiscal_year.py:0
+#: model:ir.model,name:om_fiscal_year.model_account_fiscal_year_closing
+#: model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_fiscal_year_closing_form
+#: model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_fiscal_year_form
 msgid "Close Fiscal Year"
 msgstr ""
 
@@ -177,7 +217,10 @@ msgid "Close a month"
 msgstr ""
 
 #. module: om_fiscal_year
-#: model:ir.model.fields.selection,name:om_fiscal_year.selection__account_fiscal_year__state__closed model:ir.model.fields.selection,name:om_fiscal_year.selection__account_period_closing__state__closed model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_fiscal_year_search model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_period_closing_search
+#: model:ir.model.fields.selection,name:om_fiscal_year.selection__account_fiscal_year__state__closed
+#: model:ir.model.fields.selection,name:om_fiscal_year.selection__account_period_closing__state__closed
+#: model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_fiscal_year_search
+#: model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_period_closing_search
 msgid "Closed"
 msgstr ""
 
@@ -192,14 +235,15 @@ msgid "Closed On"
 msgstr ""
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__closing_id model:ir.ui.menu,name:om_fiscal_year.menu_account_closing
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__closing_id
 msgid "Closing"
 msgstr ""
 
 #. module: om_fiscal_year
 #. odoo-python
-#: code:addons/om_fiscal_year/models/account_fiscal_year.py:0 model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__closing_move_id model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_fiscal_year_closing_form
-#, python-format
+#: code:addons/om_fiscal_year/models/account_fiscal_year.py:0
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__closing_move_id
+#: model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_fiscal_year_closing_form
 msgid "Closing Entry"
 msgstr ""
 
@@ -209,7 +253,8 @@ msgid "Closing Entry Date"
 msgstr ""
 
 #. module: om_fiscal_year
-#: model:ir.actions.act_window,name:om_fiscal_year.action_account_period_closing_task model:ir.ui.menu,name:om_fiscal_year.menu_account_period_closing_task
+#: model:ir.actions.act_window,name:om_fiscal_year.action_account_period_closing_task
+#: model:ir.ui.menu,name:om_fiscal_year.menu_account_period_closing_task
 msgid "Closing Tasks"
 msgstr ""
 
@@ -224,7 +269,11 @@ msgid "Companies"
 msgstr "Empresas"
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__company_id model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year_closing__company_id model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__company_id model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_task__company_id model:ir.model.fields,field_description:om_fiscal_year.field_change_lock_date__company_id
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__company_id
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year_closing__company_id
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__company_id
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_task__company_id
+#: model:ir.model.fields,field_description:om_fiscal_year.field_change_lock_date__company_id
 msgid "Company"
 msgstr "Empresa"
 
@@ -239,12 +288,22 @@ msgid "Count"
 msgstr ""
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__create_uid model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year_closing__create_uid model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__create_uid model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__create_uid model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_task__create_uid model:ir.model.fields,field_description:om_fiscal_year.field_change_lock_date__create_uid
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__create_uid
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year_closing__create_uid
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__create_uid
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__create_uid
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_task__create_uid
+#: model:ir.model.fields,field_description:om_fiscal_year.field_change_lock_date__create_uid
 msgid "Created by"
 msgstr "Creado Por"
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__create_date model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year_closing__create_date model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__create_date model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__create_date model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_task__create_date model:ir.model.fields,field_description:om_fiscal_year.field_change_lock_date__create_date
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__create_date
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year_closing__create_date
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__create_date
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__create_date
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_task__create_date
+#: model:ir.model.fields,field_description:om_fiscal_year.field_change_lock_date__create_date
 msgid "Created on"
 msgstr "Creado en"
 
@@ -256,7 +315,6 @@ msgstr ""
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_period_closing.py:0
-#, python-format
 msgid ""
 "Deal with these points before closing %(period)s:\n"
 "%(points)s"
@@ -268,7 +326,15 @@ msgid "Define fiscal years of more or less than one year"
 msgstr "Definir años fiscales de más o menos de un año"
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__display_name model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year_closing__display_name model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__display_name model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__display_name model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_task__display_name model:ir.model.fields,field_description:om_fiscal_year.field_change_lock_date__display_name
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__display_name
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year_closing__display_name
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_move__display_name
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__display_name
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__display_name
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_task__display_name
+#: model:ir.model.fields,field_description:om_fiscal_year.field_change_lock_date__display_name
+#: model:ir.model.fields,field_description:om_fiscal_year.field_res_company__display_name
+#: model:ir.model.fields,field_description:om_fiscal_year.field_res_config_settings__display_name
 msgid "Display Name"
 msgstr "Nombre en pantalla"
 
@@ -278,7 +344,9 @@ msgid "Do not lock"
 msgstr ""
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__done model:ir.model.fields.selection,name:om_fiscal_year.selection__account_period_closing_check__status__done model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_period_closing_form
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__done
+#: model:ir.model.fields.selection,name:om_fiscal_year.selection__account_period_closing_check__status__done
+#: model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_period_closing_form
 msgid "Done"
 msgstr ""
 
@@ -295,7 +363,6 @@ msgstr ""
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/wizard/fiscal_year_closing.py:0
-#, python-format
 msgid "Draft Entries"
 msgstr ""
 
@@ -312,7 +379,6 @@ msgstr ""
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_period_closing.py:0
-#, python-format
 msgid "Draft entries dated up to the end of the period"
 msgstr ""
 
@@ -322,7 +388,8 @@ msgid "Earnings to Transfer"
 msgstr ""
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__date_to model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__date_to
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__date_to
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__date_to
 msgid "End Date"
 msgstr "Fecha final"
 
@@ -333,12 +400,16 @@ msgstr "Fecha de finalización, incluida en el año fiscal."
 
 #. module: om_fiscal_year
 #: model:ir.model.fields,help:om_fiscal_year.field_account_fiscal_year__closing_move_id
-msgid "Entry transferring the earnings of the fiscal year to the retained earnings."
+msgid ""
+"Entry transferring the earnings of the fiscal year to the retained earnings."
 msgstr ""
 
 #. module: om_fiscal_year
 #: model:ir.model.fields,help:om_fiscal_year.field_account_fiscal_year_closing__retained_earnings_account_id
-msgid "Equity account receiving the earnings. Accounts of type Current Year Earnings cannot be used: their balance is not carried forward to the next fiscal years."
+msgid ""
+"Equity account receiving the earnings. Accounts of type Current Year "
+"Earnings cannot be used: their balance is not carried forward to the next "
+"fiscal years."
 msgstr ""
 
 #. module: om_fiscal_year
@@ -347,12 +418,17 @@ msgid "Fiscal Period Closing"
 msgstr "Cierre del período fiscal"
 
 #. module: om_fiscal_year
-#: model:ir.model,name:om_fiscal_year.model_account_fiscal_year model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year_closing__fiscal_year_id model_terms:ir.ui.view,arch_db:om_fiscal_year.res_config_settings_view_form
+#: model:ir.model,name:om_fiscal_year.model_account_fiscal_year
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year_closing__fiscal_year_id
+#: model_terms:ir.ui.view,arch_db:om_fiscal_year.res_config_settings_view_form
 msgid "Fiscal Year"
 msgstr "Año Fiscal"
 
 #. module: om_fiscal_year
-#: model:ir.actions.act_window,name:om_fiscal_year.actions_account_fiscal_year model:ir.model.fields,field_description:om_fiscal_year.field_res_config_settings__group_fiscal_year model:ir.ui.menu,name:om_fiscal_year.menu_fiscal_year model_terms:ir.ui.view,arch_db:om_fiscal_year.res_config_settings_view_form
+#: model:ir.actions.act_window,name:om_fiscal_year.actions_account_fiscal_year
+#: model:ir.model.fields,field_description:om_fiscal_year.field_res_config_settings__group_fiscal_year
+#: model:ir.ui.menu,name:om_fiscal_year.menu_fiscal_year
+#: model_terms:ir.ui.view,arch_db:om_fiscal_year.res_config_settings_view_form
 msgid "Fiscal Years"
 msgstr "Años Fiscales"
 
@@ -377,12 +453,31 @@ msgid "Followers (Partners)"
 msgstr ""
 
 #. module: om_fiscal_year
+#: model:ir.model.fields,field_description:om_fiscal_year.field_res_config_settings__fiscalyear_lock_date
+msgid "Global Lock Date"
+msgstr ""
+
+#. module: om_fiscal_year
+#: model:ir.model.fields,field_description:om_fiscal_year.field_change_lock_date__hard_lock_date
+#: model:ir.model.fields,field_description:om_fiscal_year.field_res_config_settings__hard_lock_date
+msgid "Hard Lock Date"
+msgstr ""
+
+#. module: om_fiscal_year
 #: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__has_message
 msgid "Has Message"
 msgstr ""
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__id model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year_closing__id model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__id model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__id model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_task__id model:ir.model.fields,field_description:om_fiscal_year.field_change_lock_date__id
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__id
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year_closing__id
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_move__id
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__id
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__id
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_task__id
+#: model:ir.model.fields,field_description:om_fiscal_year.field_change_lock_date__id
+#: model:ir.model.fields,field_description:om_fiscal_year.field_res_company__id
+#: model:ir.model.fields,field_description:om_fiscal_year.field_res_config_settings__id
 msgid "ID"
 msgstr "ID"
 
@@ -392,7 +487,8 @@ msgid "If checked, new messages require your attention."
 msgstr ""
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,help:om_fiscal_year.field_account_period_closing__message_has_error model:ir.model.fields,help:om_fiscal_year.field_account_period_closing__message_has_sms_error
+#: model:ir.model.fields,help:om_fiscal_year.field_account_period_closing__message_has_error
+#: model:ir.model.fields,help:om_fiscal_year.field_account_period_closing__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -412,18 +508,8 @@ msgid "Journal"
 msgstr ""
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,field_description:om_fiscal_year.field_change_lock_date__period_lock_date
-msgid "Journal Entries Lock Date"
-msgstr ""
-
-#. module: om_fiscal_year
 #: model:ir.model,name:om_fiscal_year.model_account_move
 msgid "Journal Entry"
-msgstr ""
-
-#. module: om_fiscal_year
-#: model:ir.model.fields,field_description:om_fiscal_year.field_res_config_settings__period_lock_date
-msgid "Journals Entries Lock Date"
 msgstr ""
 
 #. module: om_fiscal_year
@@ -432,18 +518,33 @@ msgid "Last Day"
 msgstr "Último día"
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__write_uid model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year_closing__write_uid model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__write_uid model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__write_uid model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_task__write_uid model:ir.model.fields,field_description:om_fiscal_year.field_change_lock_date__write_uid
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__write_uid
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year_closing__write_uid
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__write_uid
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__write_uid
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_task__write_uid
+#: model:ir.model.fields,field_description:om_fiscal_year.field_change_lock_date__write_uid
 msgid "Last Updated by"
 msgstr "Última actualización por"
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__write_date model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year_closing__write_date model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__write_date model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__write_date model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_task__write_date model:ir.model.fields,field_description:om_fiscal_year.field_change_lock_date__write_date
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__write_date
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year_closing__write_date
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__write_date
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__write_date
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_task__write_date
+#: model:ir.model.fields,field_description:om_fiscal_year.field_change_lock_date__write_date
 msgid "Last Updated on"
 msgstr "Ultima actualización en"
 
 #. module: om_fiscal_year
 #: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__level
 msgid "Level"
+msgstr ""
+
+#. module: om_fiscal_year
+#: model:ir.model.fields,help:om_fiscal_year.field_change_lock_date__hard_lock_date
+msgid "Like the \"Global Lock Date\", but no exceptions are possible."
 msgstr ""
 
 #. module: om_fiscal_year
@@ -458,7 +559,7 @@ msgstr "Bloquear Fechas"
 
 #. module: om_fiscal_year
 #: model:ir.model.fields.selection,name:om_fiscal_year.selection__account_period_closing__lock_type__fiscal
-msgid "Lock everything, for all users"
+msgid "Lock everything (except for the administrators)"
 msgstr ""
 
 #. module: om_fiscal_year
@@ -467,8 +568,8 @@ msgid "Lock the Fiscal Year"
 msgstr ""
 
 #. module: om_fiscal_year
-#: model:ir.model.fields.selection,name:om_fiscal_year.selection__account_period_closing__lock_type__period
-msgid "Lock the entries (except for the advisers)"
+#: model:ir.model.fields.selection,name:om_fiscal_year.selection__account_period_closing__lock_type__sale_purchase
+msgid "Lock the sales and purchases"
 msgstr ""
 
 #. module: om_fiscal_year
@@ -494,7 +595,6 @@ msgstr "Cierre de gestión"
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_period_closing.py:0
-#, python-format
 msgid ""
 "Mark these tasks as done before closing %(period)s:\n"
 "%(tasks)s"
@@ -502,7 +602,9 @@ msgstr ""
 
 #. module: om_fiscal_year
 #: model:account.period.closing.task,name:om_fiscal_year.closing_task_receivables_payables
-msgid "Match the payments with their invoices and review the aged receivables and payables"
+msgid ""
+"Match the payments with their invoices and review the aged receivables and "
+"payables"
 msgstr ""
 
 #. module: om_fiscal_year
@@ -516,34 +618,40 @@ msgid "Messages"
 msgstr ""
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__name model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__name model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__name model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_task__name
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__name
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__name
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__name
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_task__name
 msgid "Name"
 msgstr "Nombre"
 
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_period_closing.py:0
-#, python-format
 msgid "New Closing"
 msgstr ""
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,help:om_fiscal_year.field_change_lock_date__tax_lock_date model:ir.model.fields,help:om_fiscal_year.field_res_config_settings__tax_lock_date
-msgid "No users can edit journal entries related to a tax prior and inclusive of this date."
-msgstr "Ningún usuario puede editar asientos de diario relacionados con un impuesto anterior e inclusive a esta fecha."
-
-#. module: om_fiscal_year
-#: model:ir.model.fields,help:om_fiscal_year.field_res_config_settings__fiscalyear_lock_date
-msgid "No users, including Advisers, can edit accounts prior to and inclusive of this date. Use it for fiscal year locking for example."
+#: model:ir.model.fields,help:om_fiscal_year.field_change_lock_date__tax_lock_date
+msgid ""
+"No users can edit journal entries related to a tax prior and inclusive of "
+"this date."
 msgstr ""
+"Ningún usuario puede editar asientos de diario relacionados con un impuesto "
+"anterior e inclusive a esta fecha."
 
 #. module: om_fiscal_year
 #: model:ir.model.fields,help:om_fiscal_year.field_change_lock_date__fiscalyear_lock_date
-msgid "No users, including Advisers, can edit accounts prior to and inclusive of this date. Use it for fiscal year locking."
-msgstr "Ningún usuario, incluidos los Asesores, puede editar cuentas antes e inclusive de esta fecha. Úselo para bloquear el año fiscal."
+msgid ""
+"No users, including Advisers, can edit accounts prior to and inclusive of "
+"this date. Use it for fiscal year locking."
+msgstr ""
+"Ningún usuario, incluidos los Asesores, puede editar cuentas antes e "
+"inclusive de esta fecha. Úselo para bloquear el año fiscal."
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__note model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_task__note
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__note
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_task__note
 msgid "Note"
 msgstr ""
 
@@ -575,24 +683,21 @@ msgstr ""
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_fiscal_year.py:0
-#, python-format
 msgid "Only accounting administrators can close or reopen a fiscal year."
 msgstr ""
 
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_period_closing.py:0
-#, python-format
 msgid "Only accounting administrators can close or reopen a period."
 msgstr ""
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,help:om_fiscal_year.field_res_config_settings__period_lock_date
-msgid "Only users with the 'Adviser' role can edit accounts prior to and inclusive of this date. Use it for period locking inside an open fiscal year, for example."
-msgstr ""
-
-#. module: om_fiscal_year
-#: model:ir.model.fields.selection,name:om_fiscal_year.selection__account_fiscal_year__state__open model:ir.model.fields.selection,name:om_fiscal_year.selection__account_period_closing__state__open model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_fiscal_year_search model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_period_closing_form model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_period_closing_search
+#: model:ir.model.fields.selection,name:om_fiscal_year.selection__account_fiscal_year__state__open
+#: model:ir.model.fields.selection,name:om_fiscal_year.selection__account_period_closing__state__open
+#: model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_fiscal_year_search
+#: model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_period_closing_form
+#: model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_period_closing_search
 msgid "Open"
 msgstr ""
 
@@ -604,12 +709,13 @@ msgstr ""
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_period_closing.py:0
-#, python-format
 msgid "Payments and suspense items not matched"
 msgstr ""
 
 #. module: om_fiscal_year
-#: model:ir.actions.act_window,name:om_fiscal_year.action_account_period_closing model:ir.model,name:om_fiscal_year.model_account_period_closing model:ir.ui.menu,name:om_fiscal_year.menu_account_period_closing
+#: model:ir.actions.act_window,name:om_fiscal_year.action_account_period_closing
+#: model:ir.model,name:om_fiscal_year.model_account_period_closing
+#: model:ir.ui.menu,name:om_fiscal_year.menu_account_period_closing
 msgid "Period Closing"
 msgstr ""
 
@@ -626,28 +732,24 @@ msgstr ""
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_period_closing.py:0
-#, python-format
 msgid "Period closed, locked until %s."
 msgstr ""
 
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_period_closing.py:0
-#, python-format
 msgid "Period closed."
 msgstr ""
 
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_period_closing.py:0
-#, python-format
 msgid "Period reopened."
 msgstr ""
 
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_fiscal_year.py:0
-#, python-format
 msgid "Post or delete the draft journal entries of the fiscal year first."
 msgstr ""
 
@@ -657,8 +759,17 @@ msgid "Post the depreciation of the fixed assets"
 msgstr ""
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,help:om_fiscal_year.field_change_lock_date__period_lock_date
-msgid "Prevent posting of journal entries in this period."
+#: model:ir.model.fields,help:om_fiscal_year.field_change_lock_date__purchase_lock_date
+msgid ""
+"Prevents creation and modification of entries in purchase journals up to the"
+" defined date inclusive."
+msgstr ""
+
+#. module: om_fiscal_year
+#: model:ir.model.fields,help:om_fiscal_year.field_change_lock_date__sale_lock_date
+msgid ""
+"Prevents creation and modification of entries in sales journals up to the "
+"defined date inclusive."
 msgstr ""
 
 #. module: om_fiscal_year
@@ -668,7 +779,20 @@ msgstr ""
 
 #. module: om_fiscal_year
 #: model:ir.model.fields,help:om_fiscal_year.field_account_fiscal_year_closing__earnings
-msgid "Profit (positive) or loss (negative) of this fiscal year and of the previous ones not transferred to the retained earnings yet."
+msgid ""
+"Profit (positive) or loss (negative) of this fiscal year and of the previous"
+" ones not transferred to the retained earnings yet."
+msgstr ""
+
+#. module: om_fiscal_year
+#: model_terms:ir.ui.view,arch_db:om_fiscal_year.res_config_settings_view_form
+msgid "Purchase Lock Date"
+msgstr ""
+
+#. module: om_fiscal_year
+#: model:ir.model.fields,field_description:om_fiscal_year.field_change_lock_date__purchase_lock_date
+#: model:ir.model.fields,field_description:om_fiscal_year.field_res_config_settings__purchase_lock_date
+msgid "Purchase Lock date"
 msgstr ""
 
 #. module: om_fiscal_year
@@ -679,8 +803,8 @@ msgstr ""
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_fiscal_year.py:0
-#, python-format
-msgid "Reconcile the bank statement lines of the fiscal year before locking it."
+msgid ""
+"Reconcile the bank statement lines of the fiscal year before locking it."
 msgstr ""
 
 #. module: om_fiscal_year
@@ -699,44 +823,46 @@ msgid "Record the vendor bills received for the period"
 msgstr ""
 
 #. module: om_fiscal_year
-#: model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_fiscal_year_form model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_period_closing_form
+#: model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_fiscal_year_form
+#: model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_period_closing_form
 msgid "Reopen"
 msgstr ""
 
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_period_closing.py:0
-#, python-format
 msgid "Reopen a closed period before deleting it."
 msgstr ""
 
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_period_closing.py:0
-#, python-format
 msgid "Reopen the later closed periods first."
 msgstr ""
 
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_fiscal_year.py:0
-#, python-format
 msgid "Reopening of %s"
 msgstr ""
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__responsible_id model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_task__responsible_id
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__responsible_id
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_task__responsible_id
 msgid "Responsible"
 msgstr ""
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year_closing__retained_earnings_account_id model:ir.model.fields,field_description:om_fiscal_year.field_res_company__retained_earnings_account_id
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year_closing__retained_earnings_account_id
+#: model:ir.model.fields,field_description:om_fiscal_year.field_res_company__retained_earnings_account_id
 msgid "Retained Earnings Account"
 msgstr ""
 
 #. module: om_fiscal_year
 #: model:account.period.closing.task,name:om_fiscal_year.closing_task_review
-msgid "Review the Profit and Loss and the Balance Sheet against the previous period and the budget"
+msgid ""
+"Review the Profit and Loss and the Balance Sheet against the previous period"
+" and the budget"
 msgstr ""
 
 #. module: om_fiscal_year
@@ -750,29 +876,32 @@ msgid "SMS Delivery error"
 msgstr ""
 
 #. module: om_fiscal_year
+#: model:ir.model.fields,field_description:om_fiscal_year.field_change_lock_date__sale_lock_date
+#: model:ir.model.fields,field_description:om_fiscal_year.field_res_config_settings__sale_lock_date
+#: model_terms:ir.ui.view,arch_db:om_fiscal_year.res_config_settings_view_form
+msgid "Sales Lock Date"
+msgstr ""
+
+#. module: om_fiscal_year
 #: model_terms:ir.ui.view,arch_db:om_fiscal_year.view_change_lock_date
 msgid "Save"
 msgstr "Guardar"
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__sequence model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_task__sequence
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__sequence
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_task__sequence
 msgid "Sequence"
 msgstr ""
 
 #. module: om_fiscal_year
 #: model:ir.model.fields,help:om_fiscal_year.field_account_fiscal_year_closing__lock
-msgid "Set the global lock date to the end of the fiscal year once it is closed."
+msgid ""
+"Set the global lock date to the end of the fiscal year once it is closed."
 msgstr ""
 
 #. module: om_fiscal_year
-#. odoo-python
-#: code:addons/om_fiscal_year/models/res_company.py:0
-#, python-format
-msgid "Show unposted entries"
-msgstr ""
-
-#. module: om_fiscal_year
-#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__date_from model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__date_from
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__date_from
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing__date_from
 msgid "Start Date"
 msgstr "Fecha de inicio"
 
@@ -787,7 +916,8 @@ msgid "State"
 msgstr ""
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__state model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__status
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_fiscal_year__state
+#: model:ir.model.fields,field_description:om_fiscal_year.field_account_period_closing_check__status
 msgid "Status"
 msgstr ""
 
@@ -807,124 +937,122 @@ msgid "Tasks To Do"
 msgstr ""
 
 #. module: om_fiscal_year
-#: model:ir.model.fields,field_description:om_fiscal_year.field_change_lock_date__tax_lock_date model:ir.model.fields,field_description:om_fiscal_year.field_res_config_settings__tax_lock_date model_terms:ir.ui.view,arch_db:om_fiscal_year.res_config_settings_view_form
+#: model:ir.model.fields,field_description:om_fiscal_year.field_change_lock_date__tax_lock_date
+#: model:ir.model.fields,field_description:om_fiscal_year.field_res_config_settings__tax_lock_date
+#: model_terms:ir.ui.view,arch_db:om_fiscal_year.res_config_settings_view_form
 msgid "Tax Return Lock Date"
 msgstr ""
 
 #. module: om_fiscal_year
 #: model:account.period.closing.task,note:om_fiscal_year.closing_task_bank
-msgid "The balance of each bank account in the books matches its statement at the end of the period."
+msgid ""
+"The balance of each bank account in the books matches its statement at the "
+"end of the period."
 msgstr ""
 
 #. module: om_fiscal_year
 #: model_terms:ir.actions.act_window,help:om_fiscal_year.action_account_period_closing
-msgid "The checklist shows what is left to do in the period, then the period is closed and locked."
+msgid ""
+"The checklist shows what is left to do in the period, then the period is "
+"closed and locked."
 msgstr ""
 
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_fiscal_year.py:0
-#, python-format
 msgid "The closing entry cannot be dated before the end of the fiscal year."
 msgstr ""
 
 #. module: om_fiscal_year
 #: model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_fiscal_year_form
-msgid "The closing entry will be reversed. Lower the lock dates first if its date is locked. Do you want to reopen this fiscal year?"
+msgid ""
+"The closing entry will be reversed. Lower the lock dates first if its date "
+"is locked. Do you want to reopen this fiscal year?"
 msgstr ""
 
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_fiscal_year.py:0
-#, python-format
-msgid "The dates and the company of a closed fiscal year cannot be changed. Reopen it first."
+msgid ""
+"The dates and the company of a closed fiscal year cannot be changed. Reopen "
+"it first."
 msgstr ""
 
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_fiscal_year.py:0
-#, python-format
-msgid "The earnings are transferred from an account of type Current Year Earnings."
+msgid ""
+"The earnings are transferred from an account of type Current Year Earnings."
 msgstr ""
 
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_fiscal_year.py:0
-#, python-format
 msgid "The ending date must not be prior to the starting date."
 msgstr "La fecha de finalización no debe ser anterior a la fecha de inicio."
 
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_fiscal_year.py:0
-#, python-format
 msgid "The fiscal year %s is already closed."
 msgstr ""
 
 #. module: om_fiscal_year
 #: model:ir.model.fields,help:om_fiscal_year.field_account_period_closing__lock_type
-msgid "The lock date set on the company when the period is closed."
+msgid ""
+"The lock date set on the company when the period is closed. The permanent "
+"lock is set from the lock dates of the company."
 msgstr ""
 
 #. module: om_fiscal_year
 #: model_terms:ir.ui.view,arch_db:om_fiscal_year.view_account_period_closing_form
-msgid "The lock dates set by this closing go back to their previous value. Reopen the period?"
+msgid ""
+"The lock dates set by this closing go back to their previous value. Reopen "
+"the period?"
 msgstr ""
 
 #. module: om_fiscal_year
 #. odoo-python
-#: code:addons/om_fiscal_year/models/account_period_closing.py:0 code:addons/om_fiscal_year/models/account_period_closing.py:0
-#, python-format
+#: code:addons/om_fiscal_year/models/account_period_closing.py:0
 msgid "The period %s is closed."
 msgstr ""
 
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_period_closing.py:0
-#, python-format
 msgid "The period %s overlaps another closing."
 msgstr ""
 
 #. module: om_fiscal_year
 #. odoo-python
+#: code:addons/om_fiscal_year/models/account_period_closing.py:0
+msgid "The period stays locked: it is before the permanent lock date."
+msgstr ""
+
+#. module: om_fiscal_year
+#. odoo-python
 #: code:addons/om_fiscal_year/models/account_fiscal_year.py:0
-#, python-format
 msgid "The retained earnings account %s must be an Equity account."
 msgstr ""
 
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_period_closing.py:0
-#, python-format
 msgid "The start date of the closing must be before its end date."
 msgstr ""
 
 #. module: om_fiscal_year
 #. odoo-python
-#: code:addons/om_fiscal_year/models/res_company.py:0
-#, python-format
-msgid "There are still unposted entries in the period you want to lock. You should either post or delete them."
-msgstr ""
-
-#. module: om_fiscal_year
-#. odoo-python
-#: code:addons/om_fiscal_year/models/res_company.py:0
-#, python-format
-msgid "There are still unreconciled bank statement lines in the period you want to lock.You should either reconcile or delete them."
-msgstr ""
-
-#. module: om_fiscal_year
-#. odoo-python
 #: code:addons/om_fiscal_year/models/account_period_closing.py:0
-#, python-format
 msgid "This check no longer exists, refresh the checklist."
 msgstr ""
 
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_move.py:0
-#, python-format
-msgid "This entry closes the fiscal year %s. Reopen the fiscal year instead of changing it."
+msgid ""
+"This entry closes the fiscal year %s. Reopen the fiscal year instead of "
+"changing it."
 msgstr ""
 
 #. module: om_fiscal_year
@@ -950,7 +1078,6 @@ msgstr ""
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/wizard/fiscal_year_closing.py:0
-#, python-format
 msgid "Unreconciled Bank Transactions"
 msgstr ""
 
@@ -970,7 +1097,8 @@ msgid "View"
 msgstr ""
 
 #. module: om_fiscal_year
-#: model:ir.model.fields.selection,name:om_fiscal_year.selection__account_period_closing_check__level__warning model:ir.model.fields.selection,name:om_fiscal_year.selection__account_period_closing_check__status__warning
+#: model:ir.model.fields.selection,name:om_fiscal_year.selection__account_period_closing_check__level__warning
+#: model:ir.model.fields.selection,name:om_fiscal_year.selection__account_period_closing_check__status__warning
 msgid "Warning"
 msgstr ""
 
@@ -1007,39 +1135,48 @@ msgstr ""
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_fiscal_year.py:0
-#, python-format
 msgid "Year-end closing %s"
 msgstr ""
 
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/wizard/change_lock_date.py:0
-#, python-format
 msgid "You Are Not Allowed To Perform This Operation"
 msgstr "No tiene permiso para realizar esta operación"
 
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/models/account_fiscal_year.py:0
-#, python-format
-msgid "You can not have an overlap between two fiscal years, please correct the start and/or end dates of your fiscal years."
-msgstr "No puede haber superposición entre dos años fiscales, por favor corrija las fechas de inicio y/o finalización de sus años fiscales."
+msgid ""
+"You can not have an overlap between two fiscal years, please correct the "
+"start and/or end dates of your fiscal years."
+msgstr ""
+"No puede haber superposición entre dos años fiscales, por favor corrija las "
+"fechas de inicio y/o finalización de sus años fiscales."
 
 #. module: om_fiscal_year
 #. odoo-python
 #: code:addons/om_fiscal_year/wizard/change_lock_date.py:0
-#, python-format
 msgid "You cannot change the lock dates of another company."
 msgstr ""
 
 #. module: om_fiscal_year
+#. odoo-python
+#: code:addons/om_fiscal_year/models/account_period_closing.py:0
+msgid "company_id"
+msgstr ""
+
+#. module: om_fiscal_year
 #: model_terms:ir.actions.act_window,help:om_fiscal_year.action_account_period_closing_task
-msgid "e.g. accrue the electricity, review the payroll: they are added to the checklist of each new closing."
+msgid ""
+"e.g. accrue the electricity, review the payroll: they are added to the "
+"checklist of each new closing."
 msgstr ""
 
 #. module: om_fiscal_year
 #: model:account.period.closing.task,note:om_fiscal_year.closing_task_accruals
-msgid "e.g. the electricity, rent and services of the period not billed at its end."
+msgid ""
+"e.g. the electricity, rent and services of the period not billed at its end."
 msgstr ""
 
 #. module: om_fiscal_year
@@ -1047,6 +1184,12 @@ msgstr ""
 msgid ""
 "earlier fiscal year(s) are still open:\n"
 "                    their earnings not transferred yet are included in this closing."
+msgstr ""
+
+#. module: om_fiscal_year
+#. odoo-python
+#: code:addons/om_fiscal_year/models/account_period_closing.py:0
+msgid "id"
 msgstr ""
 
 #. module: om_fiscal_year

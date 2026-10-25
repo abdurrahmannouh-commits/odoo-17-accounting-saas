@@ -7,9 +7,11 @@ from urllib.parse import quote
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.http import request
-from odoo.tools.translate import _lt
+from odoo.tools.translate import LazyTranslate
 
+from odoo.addons.mail.tools.discuss import Store
 
+_lt = LazyTranslate(__name__)
 _logger = logging.getLogger(__name__)
 
 # the WhatsApp picture of a number without a contact is fetched again after this long
@@ -197,13 +199,13 @@ class OmWhatsappAccount(models.Model):
             expected = isinstance(error, UserError)
             _logger.warning("WhatsApp reaction to %s not sent: %s", message, error, exc_info=not expected)
             reason = error.args[0] if expected else _("an unexpected error, see the server log.")
-            self.env['bus.bus']._sendone(self.env.user.partner_id, 'simple_notification', {
+            self.env.user._bus_send('simple_notification', {
                 'type': 'danger',
                 'message': _("The reaction was not sent to WhatsApp: %(reason)s", reason=reason),
             })
             return
         if action:
-            self.env['bus.bus']._sendone(self.env.user.partner_id, 'om_whatsapp/action', {'action': action})
+            self.env.user._bus_send('om_whatsapp/action', {'action': action})
 
     def _om_whatsapp_send_receipt(self, number, whatsapp_ids, kind):
         """ Tell WhatsApp the messages ``whatsapp_ids`` of the chat of
@@ -226,7 +228,7 @@ class OmWhatsappAccount(models.Model):
             _logger.info("WhatsApp %s receipt of %s not sent: %s", kind, whatsapp_ids, error)
             return False
         if action:
-            self.env['bus.bus']._sendone(self.env.user.partner_id, 'om_whatsapp/action', {'action': action})
+            self.env.user._bus_send('om_whatsapp/action', {'action': action})
         return True
 
     # ------------------------------------------------------------
@@ -270,8 +272,7 @@ class OmWhatsappAccount(models.Model):
                 elif not partner.image_1920:
                     partner.image_1920 = data
                     # the conversation shows it: its open pages get the new avatar
-                    self.env['bus.bus']._sendone(channel, 'mail.record/insert', {'Thread': {
-                        'id': channel.id, 'model': 'discuss.channel', 'avatarCacheKey': channel._get_avatar_cache_key()}})
+                    Store(bus_channel=channel).add(channel, ['avatar_cache_key']).bus_send()
         except Exception as error:  # noqa: BLE001
             _logger.info("WhatsApp picture of %s not kept: %s", number, error)
             return False

@@ -34,7 +34,7 @@
                         <i t-attf-class="fa fa-fw {{row.expanded ? 'fa-caret-down' : 'fa-caret-right'}}"/>
                     </button>
                     <span t-else="" class="fa fa-fw me-1"/>
-                    <CheckBox value="!row.hidden and !row.notGiven" className="row.partial and !row.notGiven ? 'o_om_partial' : ''"
+                    <CheckBox value="!row.hidden and !row.notGiven" indeterminate="row.partial and !row.notGiven"
                               disabled="this.props.readonly or row.parentHidden"
                               onChange="(shown) => this.toggle(row.id, shown)"/>
                     <button type="button" class="btn btn-link p-0 text-start text-reset o_om_menu_tree_name"

@@ -16,8 +16,7 @@ class StatementController(Controller):
         ids = [int(partner_id) for partner_id in partner_ids.split(',') if partner_id.isdigit()]
         # the partners the user cannot read raise an access error
         partners = request.env['res.partner'].browse(ids).exists()
-        partners.check_access_rights('read')
-        partners.check_access_rule('read')
+        partners.check_access('read')
         if not partners:
             raise NotFound()
         content = partners._statement_xlsx(statement_type)

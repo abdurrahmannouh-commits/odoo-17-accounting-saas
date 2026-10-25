@@ -3,7 +3,7 @@ from odoo.tests import TransactionCase, tagged
 
 from odoo.addons.account.tests.common import AccountTestInvoicingHttpCommon
 from odoo.addons.om_spreadsheet_account.tests.common import (
-    built_dashboards, check_dashboards, shipped_dashboard,
+    built_dashboards, check_dashboards, check_sample, shipped_dashboard,
 )
 
 
@@ -15,6 +15,9 @@ class TestDashboardFiles(TransactionCase):
         for file_name, data in built_dashboards('om_spreadsheet_account_followup').items():
             with self.subTest(file=file_name):
                 self.assertEqual(shipped_dashboard('om_spreadsheet_account_followup', file_name), data)
+
+    def test_sample(self):
+        check_sample(self, 'om_spreadsheet_account_followup.dashboard_followups_forecast')
 
     def test_dashboard_after_the_accounting_ones(self):
         dashboard = self.env.ref('om_spreadsheet_account_followup.dashboard_followups_forecast')
@@ -30,7 +33,7 @@ class TestDashboardInBrowser(AccountTestInvoicingHttpCommon):
     def _accountant_admin(self):
         self.env.ref('base.user_admin').write({
             'company_id': self.env.company.id, 'company_ids': [Command.set(self.env.company.ids)],
-            'groups_id': [Command.link(self.env.ref('account.group_account_user').id),
+            'group_ids': [Command.link(self.env.ref('account.group_account_user').id),
                           Command.link(self.env.ref('account.group_account_manager').id)],
         })
 

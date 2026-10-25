@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-22 07:07+0000\n"
 "PO-Revision-Date: 2026-10-22 07:07+0000\n"
@@ -20,7 +20,6 @@ msgstr ""
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid " to "
 msgstr ""
 
@@ -29,7 +28,6 @@ msgstr ""
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid ", compared with "
 msgstr ""
 
@@ -37,7 +35,6 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
 #: model:ir.model.fields.selection,name:om_spreadsheet_account.selection__om_spreadsheet_aged_balance__bucket__1_30
-#, python-format
 msgid "1-30 Days"
 msgstr ""
 
@@ -45,7 +42,6 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
 #: model:ir.model.fields.selection,name:om_spreadsheet_account.selection__om_spreadsheet_aged_balance__bucket__31_60
-#, python-format
 msgid "31-60 Days"
 msgstr ""
 
@@ -53,7 +49,6 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
 #: model:ir.model.fields.selection,name:om_spreadsheet_account.selection__om_spreadsheet_aged_balance__bucket__61_90
-#, python-format
 msgid "61-90 Days"
 msgstr ""
 
@@ -71,7 +66,6 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
 #: model:ir.model.fields,field_description:om_spreadsheet_account.field_om_spreadsheet_aged_balance__bucket
-#, python-format
 msgid "Age"
 msgstr ""
 
@@ -88,21 +82,19 @@ msgstr ""
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/bank_cash_dashboard.json:0
-#, python-format
 msgid "Amount to reconcile"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
 msgid "Assets"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/balance_sheet_sample_dashboard.json:0
 msgid "Assets, Liabilities and Equity"
 msgstr ""
 
@@ -110,100 +102,85 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
 #: model:spreadsheet.dashboard,name:om_spreadsheet_account.dashboard_balance_sheet
-#, python-format
 msgid "Balance Sheet"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
 msgid "Balance at "
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/bank_cash_dashboard.json:0
-#, python-format
 msgid "Balance by Account"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
+#: code:addons/om_spreadsheet_account/data/files/accounting_overview_sample_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
 #: model:spreadsheet.dashboard,name:om_spreadsheet_account.dashboard_bank_cash
-#, python-format
 msgid "Bank and Cash"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/bank_cash_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/bank_cash_sample_dashboard.json:0
 msgid "Bank and Cash Balance"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/bank_cash_dashboard.json:0
-#, python-format
 msgid "Bank and cash balance"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
 msgid "Billed"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
 msgid "Capital and Reserves"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/bank_cash_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/bank_cash_sample_dashboard.json:0
 msgid "Cash In"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/bank_cash_dashboard.json:0
-#, python-format
-msgid "Cash In and Out"
-msgstr ""
-
-#. module: om_spreadsheet_account
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account/data/files/bank_cash_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/bank_cash_sample_dashboard.json:0
 msgid "Cash In and Out by Month"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/bank_cash_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/bank_cash_sample_dashboard.json:0
 msgid "Cash Out"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/bank_cash_dashboard.json:0
-#, python-format
 msgid "Cash in"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/bank_cash_dashboard.json:0
-#, python-format
 msgid "Cash out"
 msgstr ""
 
@@ -211,7 +188,6 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Change"
 msgstr ""
 
@@ -225,7 +201,6 @@ msgstr ""
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Compare With"
 msgstr ""
 
@@ -234,7 +209,6 @@ msgstr ""
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Compare with"
 msgstr ""
 
@@ -242,7 +216,6 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
 msgid "Compared with"
 msgstr ""
 
@@ -251,7 +224,6 @@ msgstr ""
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Comparison"
 msgstr ""
 
@@ -260,7 +232,6 @@ msgstr ""
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Comparison end"
 msgstr ""
 
@@ -269,7 +240,6 @@ msgstr ""
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Comparison fiscal year start"
 msgstr ""
 
@@ -278,7 +248,6 @@ msgstr ""
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Comparison start"
 msgstr ""
 
@@ -286,14 +255,12 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Cost of Revenue"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
 msgid "Credit Cards"
 msgstr ""
 
@@ -306,7 +273,6 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
 msgid "Current Assets"
 msgstr ""
 
@@ -314,22 +280,21 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
 msgid "Current Liabilities"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
+#: code:addons/om_spreadsheet_account/data/files/accounting_overview_sample_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/balance_sheet_sample_dashboard.json:0
 msgid "Current Ratio"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
 msgid "Current Year Earnings"
 msgstr ""
 
@@ -341,15 +306,7 @@ msgstr ""
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
 msgid "Customers"
-msgstr ""
-
-#. module: om_spreadsheet_account
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
-msgid "Customers by Age"
 msgstr ""
 
 #. module: om_spreadsheet_account
@@ -365,35 +322,33 @@ msgstr ""
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/receivables_payables_sample_dashboard.json:0
 msgid "Days Payables Outstanding"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/receivables_payables_sample_dashboard.json:0
 msgid "Days Sales Outstanding"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
 msgid "Days elapsed in the fiscal year"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/balance_sheet_sample_dashboard.json:0
 msgid "Debt to Equity"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Depreciation"
 msgstr ""
 
@@ -402,11 +357,11 @@ msgstr ""
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Description"
 msgstr ""
 
 #. module: om_spreadsheet_account
+#: model:ir.model.fields,field_description:om_spreadsheet_account.field_account_move_line__display_name
 #: model:ir.model.fields,field_description:om_spreadsheet_account.field_om_spreadsheet_aged_balance__display_name
 msgid "Display Name"
 msgstr ""
@@ -421,21 +376,19 @@ msgstr ""
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "End"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
 msgid "Equity"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/accounting_overview_sample_dashboard.json:0
 msgid "Expenses"
 msgstr ""
 
@@ -443,7 +396,6 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/bank_cash_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
 msgid "First month"
 msgstr ""
 
@@ -452,14 +404,12 @@ msgstr ""
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Fiscal year start"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
 msgid "Fixed Assets"
 msgstr ""
 
@@ -467,14 +417,12 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "From"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/static/src/om_accounting_functions.js:0
-#, python-format
 msgid ""
 "Get the balance of the accounts of the given types over a period, for the "
 "selected companies."
@@ -483,7 +431,6 @@ msgstr ""
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/static/src/om_accounting_functions.js:0
-#, python-format
 msgid "Give at least one account type."
 msgstr ""
 
@@ -491,19 +438,19 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Gross Margin"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
+#: code:addons/om_spreadsheet_account/data/files/accounting_overview_sample_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Gross Profit"
 msgstr ""
 
 #. module: om_spreadsheet_account
+#: model:ir.model.fields,field_description:om_spreadsheet_account.field_account_move_line__id
 #: model:ir.model.fields,field_description:om_spreadsheet_account.field_om_spreadsheet_aged_balance__id
 msgid "ID"
 msgstr ""
@@ -512,35 +459,32 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "In the period"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/profit_and_loss_sample_dashboard.json:0
 msgid "Income, Expenses and Net Profit by Month"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
 msgid "Invoiced"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/receivables_payables_sample_dashboard.json:0
 msgid "Invoiced and Billed by Month"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/bank_cash_dashboard.json:0
-#, python-format
 msgid "Journal"
 msgstr ""
 
@@ -558,7 +502,6 @@ msgstr ""
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
-#, python-format
 msgid "Key figures"
 msgstr ""
 
@@ -567,14 +510,12 @@ msgstr ""
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Last Year"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
 msgid "Liabilities"
 msgstr ""
 
@@ -584,7 +525,6 @@ msgstr ""
 #: code:addons/om_spreadsheet_account/data/files/bank_cash_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
 msgid "Month"
 msgstr ""
 
@@ -593,14 +533,12 @@ msgstr ""
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Months in the period"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/bank_cash_dashboard.json:0
-#, python-format
 msgid "Net"
 msgstr ""
 
@@ -608,29 +546,26 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Net Margin"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
+#: code:addons/om_spreadsheet_account/data/files/accounting_overview_sample_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Net Profit"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
 msgid "Non-current Assets"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
 msgid "Non-current Liabilities"
 msgstr ""
 
@@ -638,35 +573,31 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
 #: model:ir.model.fields.selection,name:om_spreadsheet_account.selection__om_spreadsheet_aged_balance__bucket__not_due
-#, python-format
 msgid "Not Due"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/receivables_payables_sample_dashboard.json:0
 msgid "Open Balances by Age"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Operating Expenses"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Other Expenses"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Other Income"
 msgstr ""
 
@@ -674,36 +605,19 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
 #: model:ir.model.fields.selection,name:om_spreadsheet_account.selection__om_spreadsheet_aged_balance__bucket__over_90
-#, python-format
 msgid "Over 90 Days"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
 msgid "Overdue"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
-msgid "Overdue Customers"
-msgstr ""
-
-#. module: om_spreadsheet_account
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
-msgid "Overdue Vendors"
-msgstr ""
-
-#. module: om_spreadsheet_account
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
 #: model:ir.model.fields,field_description:om_spreadsheet_account.field_om_spreadsheet_aged_balance__partner_id
-#, python-format
 msgid "Partner"
 msgstr ""
 
@@ -715,9 +629,10 @@ msgstr ""
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
+#: code:addons/om_spreadsheet_account/data/files/accounting_overview_sample_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/receivables_payables_sample_dashboard.json:0
 msgid "Payables"
 msgstr ""
 
@@ -728,7 +643,6 @@ msgstr ""
 #: code:addons/om_spreadsheet_account/data/files/bank_cash_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
 msgid "Period"
 msgstr ""
 
@@ -736,14 +650,12 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/bank_cash_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
 msgid "Period start"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
 msgid "Prepayments"
 msgstr ""
 
@@ -752,14 +664,12 @@ msgstr ""
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Previous Period"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
 msgid "Previous Years Unallocated Earnings"
 msgstr ""
 
@@ -768,7 +678,6 @@ msgstr ""
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Previous period"
 msgstr ""
 
@@ -776,37 +685,35 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
 #: model:spreadsheet.dashboard,name:om_spreadsheet_account.dashboard_profit_and_loss
-#, python-format
 msgid "Profit and Loss"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
 msgid "Purchases of the fiscal year"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/balance_sheet_sample_dashboard.json:0
 msgid "Quick Ratio"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
 msgid "Ratios"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
+#: code:addons/om_spreadsheet_account/data/files/accounting_overview_sample_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/receivables_payables_sample_dashboard.json:0
 msgid "Receivables"
 msgstr ""
 
@@ -818,22 +725,21 @@ msgstr ""
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
+#: code:addons/om_spreadsheet_account/data/files/accounting_overview_sample_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Revenue"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/accounting_overview_sample_dashboard.json:0
 msgid "Revenue and Expenses by Month"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
 msgid "Revenue of the fiscal year"
 msgstr ""
 
@@ -842,14 +748,12 @@ msgstr ""
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Same Period Last Year"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/static/src/om_accounting_functions.js:0
-#, python-format
 msgid "Set to TRUE to include unposted entries."
 msgstr ""
 
@@ -858,175 +762,125 @@ msgstr ""
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Start"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
 msgid "Structure"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/static/src/om_accounting_functions.js:0
-#, python-format
 msgid "The account types, separated by a comma, e.g. \"income,income_other\"."
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/static/src/om_accounting_functions.js:0
-#, python-format
-msgid ""
-"The first day of the period of a date filter, empty when the filter is not "
-"set."
-msgstr ""
-
-#. module: om_spreadsheet_account
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account/static/src/om_accounting_functions.js:0
-#, python-format
 msgid "The first day. Empty: from the beginning."
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/static/src/om_accounting_functions.js:0
-#: code:addons/om_spreadsheet_account/static/src/om_accounting_functions.js:0
-#, python-format
-msgid "The label of the date filter."
-msgstr ""
-
-#. module: om_spreadsheet_account
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account/static/src/om_accounting_functions.js:0
-#, python-format
-msgid ""
-"The last day of the period of a date filter, empty when the filter is not "
-"set."
-msgstr ""
-
-#. module: om_spreadsheet_account
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account/static/src/om_accounting_functions.js:0
-#, python-format
 msgid "The last day. Empty: up to now."
-msgstr ""
-
-#. module: om_spreadsheet_account
-#. odoo-javascript
-#: code:addons/om_spreadsheet_account/static/src/om_accounting_functions.js:0
-#, python-format
-msgid "There is no date filter named %s."
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "To"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/bank_cash_dashboard.json:0
-#, python-format
 msgid "To Reconcile by Journal"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
 msgid "Top Overdue Customers"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
 msgid "Top Overdue Vendors"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
-#: code:addons/om_spreadsheet_account/data/files/bank_cash_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
 msgid "Total"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/balance_sheet_sample_dashboard.json:0
 msgid "Total Assets"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
 msgid "Total Current Assets"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
 msgid "Total Current Liabilities"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/balance_sheet_sample_dashboard.json:0
 msgid "Total Equity"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Total Expenses"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/profit_and_loss_dashboard.json:0
-#, python-format
 msgid "Total Income"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/balance_sheet_sample_dashboard.json:0
 msgid "Total Liabilities"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
 msgid "Total Liabilities and Equity"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/bank_cash_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/bank_cash_sample_dashboard.json:0
 msgid "Transactions to Reconcile"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/bank_cash_dashboard.json:0
-#, python-format
 msgid "Transactions to reconcile"
 msgstr ""
 
@@ -1038,35 +892,28 @@ msgstr ""
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
 msgid "Vendors"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
-#: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
-msgid "Vendors by Age"
-msgstr ""
-
-#. module: om_spreadsheet_account
-#. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/bank_cash_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/bank_cash_sample_dashboard.json:0
 msgid "amount"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/receivables_payables_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/receivables_payables_sample_dashboard.json:0
 msgid "overdue"
 msgstr ""
 
 #. module: om_spreadsheet_account
 #. odoo-javascript
 #: code:addons/om_spreadsheet_account/data/files/accounting_overview_dashboard.json:0
+#: code:addons/om_spreadsheet_account/data/files/accounting_overview_sample_dashboard.json:0
 #: code:addons/om_spreadsheet_account/data/files/balance_sheet_dashboard.json:0
-#, python-format
+#: code:addons/om_spreadsheet_account/data/files/balance_sheet_sample_dashboard.json:0
 msgid "vs comparison"
 msgstr ""

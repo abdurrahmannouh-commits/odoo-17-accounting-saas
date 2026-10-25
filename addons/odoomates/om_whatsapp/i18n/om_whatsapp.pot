@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 20.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-23 18:52+0000\n"
-"PO-Revision-Date: 2026-10-23 18:52+0000\n"
+"POT-Creation-Date: 2026-10-23 16:55+0000\n"
+"PO-Revision-Date: 2026-10-23 16:55+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,37 +18,18 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
-#, python-format
 msgid "%(account)s is connected to Meta."
 msgstr ""
 
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
-#: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
-#: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
-#, python-format
 msgid "%(account)s is not connected to Meta."
-msgstr ""
-
-#. module: om_whatsapp
-#. odoo-javascript
-#: code:addons/om_whatsapp/static/src/window_status/window_status.js:0
-#, python-format
-msgid "%(hours)s h %(minutes)s min"
-msgstr ""
-
-#. module: om_whatsapp
-#. odoo-javascript
-#: code:addons/om_whatsapp/static/src/window_status/window_status.js:0
-#, python-format
-msgid "%(minutes)s min"
 msgstr ""
 
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
-#, python-format
 msgid ""
 "%(number)s is the number of the account %(account)s: connect again from that"
 " account, or archive it first."
@@ -57,7 +38,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
-#, python-format
 msgid "(The file could not be downloaded from Meta: %(error)s)"
 msgstr ""
 
@@ -197,7 +177,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid ""
 "An App ID is a number of 15 digits or so, at the top of the page of your app"
 " in Meta."
@@ -206,7 +185,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid ""
 "An App ID is a number of 15 digits or so, at the top of the page of your "
 "app."
@@ -225,7 +203,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid "App %(app)s found."
 msgstr ""
 
@@ -288,7 +265,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_template.py:0
-#, python-format
 msgid "Changed: submit it again."
 msgstr ""
 
@@ -312,7 +288,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid "Choose the number to send from."
 msgstr ""
 
@@ -356,7 +331,6 @@ msgstr ""
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
 #: model_terms:ir.ui.view,arch_db:om_whatsapp.om_whatsapp_account_view_form_inherit_meta
 #: model_terms:ir.ui.view,arch_db:om_whatsapp.om_whatsapp_meta_setup_view_form
-#, python-format
 msgid "Connect to Meta"
 msgstr ""
 
@@ -365,7 +339,6 @@ msgstr ""
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
 #: model:ir.model.fields.selection,name:om_whatsapp.selection__om_whatsapp_account__meta_state__connected
 #: model_terms:ir.ui.view,arch_db:om_whatsapp.om_whatsapp_meta_setup_view_form
-#, python-format
 msgid "Connected"
 msgstr ""
 
@@ -402,7 +375,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid ""
 "Copy the WhatsApp Business Account ID from the API Setup page of your app."
 msgstr ""
@@ -434,7 +406,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid "Daily limit"
 msgstr ""
 
@@ -461,8 +432,12 @@ msgid "Discussion Channel"
 msgstr ""
 
 #. module: om_whatsapp
+#: model:ir.model.fields,field_description:om_whatsapp.field_discuss_channel__display_name
+#: model:ir.model.fields,field_description:om_whatsapp.field_om_whatsapp_account__display_name
+#: model:ir.model.fields,field_description:om_whatsapp.field_om_whatsapp_composer__display_name
 #: model:ir.model.fields,field_description:om_whatsapp.field_om_whatsapp_meta_setup__display_name
 #: model:ir.model.fields,field_description:om_whatsapp.field_om_whatsapp_meta_setup_number__display_name
+#: model:ir.model.fields,field_description:om_whatsapp.field_om_whatsapp_template__display_name
 #: model:ir.model.fields,field_description:om_whatsapp.field_om_whatsapp_template_variable__display_name
 msgid "Display Name"
 msgstr ""
@@ -485,17 +460,13 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-javascript
 #: code:addons/om_whatsapp/static/src/window_status/window_status.js:0
-#, python-format
-msgid "Free text for %(time)s"
+msgid "Free text for %(hours)s h %(minutes)s min"
 msgstr ""
 
 #. module: om_whatsapp
 #. odoo-javascript
 #: code:addons/om_whatsapp/static/src/window_status/window_status.js:0
-#, python-format
-msgid ""
-"Free text for %(time)s: WhatsApp accepts free text within 24 hours of the "
-"last message of the contact; templates after."
+msgid "Free text for %(minutes)s min"
 msgstr ""
 
 #. module: om_whatsapp
@@ -513,7 +484,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid "Give the number to send the test message to."
 msgstr ""
 
@@ -535,8 +505,12 @@ msgid "I created my app"
 msgstr ""
 
 #. module: om_whatsapp
+#: model:ir.model.fields,field_description:om_whatsapp.field_discuss_channel__id
+#: model:ir.model.fields,field_description:om_whatsapp.field_om_whatsapp_account__id
+#: model:ir.model.fields,field_description:om_whatsapp.field_om_whatsapp_composer__id
 #: model:ir.model.fields,field_description:om_whatsapp.field_om_whatsapp_meta_setup__id
 #: model:ir.model.fields,field_description:om_whatsapp.field_om_whatsapp_meta_setup_number__id
+#: model:ir.model.fields,field_description:om_whatsapp.field_om_whatsapp_template__id
 #: model:ir.model.fields,field_description:om_whatsapp.field_om_whatsapp_template_variable__id
 msgid "ID"
 msgstr ""
@@ -687,7 +661,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid "Looks like an App ID."
 msgstr ""
 
@@ -706,7 +679,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid "Make the Connection Permanent"
 msgstr ""
 
@@ -718,7 +690,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid "Messages of WhatsApp sent to this Odoo"
 msgstr ""
 
@@ -756,7 +727,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
-#, python-format
 msgid ""
 "Meta calls %(url)s without saying which database: this Odoo server has "
 "several, and Meta gets a 404. Keep this one for its address: in the "
@@ -767,7 +737,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
-#, python-format
 msgid ""
 "Meta cannot reach %(url)s: the webhook needs this Odoo on a public https "
 "address. For a local Odoo, run a tunnel (cloudflared or ngrok), set its "
@@ -779,7 +748,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid ""
 "Meta does not know this App Secret with this App ID: copy it again, from the"
 " same app."
@@ -788,7 +756,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid ""
 "Meta does not know this App Secret with this App ID: copy the App Secret again (Show, then copy), from the same app.\n"
 "\n"
@@ -798,7 +765,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid ""
 "Meta finds no WhatsApp account %(waba)s for this token: copy the WhatsApp Business Account ID again from the API Setup page of the same app.\n"
 "\n"
@@ -808,14 +774,12 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_template.py:0
-#, python-format
 msgid "Meta refused %(template)s: %(error)s"
 msgstr ""
 
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_template.py:0
-#, python-format
 msgid ""
 "Meta refuses a text that starts or ends with a field: add a word before or "
 "after it."
@@ -824,7 +788,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid ""
 "Meta says this token is not valid any more: a temporary token lasts 24 "
 "hours. Make a new one on the page of Meta, and paste it again."
@@ -833,13 +796,7 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
-#: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
-#: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid "Meta says: %(error)s"
 msgstr ""
 
@@ -860,14 +817,12 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
-#, python-format
 msgid "Meta sends the messages of WhatsApp to %(url)s."
 msgstr ""
 
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_template.py:0
-#, python-format
 msgid "Meta takes 1024 characters at most in the text of a template."
 msgstr ""
 
@@ -901,14 +856,12 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid "No number given: none sent."
 msgstr ""
 
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
-#, python-format
 msgid "No number is chosen: connect again."
 msgstr ""
 
@@ -939,7 +892,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid "Number registered for the Cloud API"
 msgstr ""
 
@@ -978,14 +930,12 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid "Only WhatsApp managers connect accounts to Meta."
 msgstr ""
 
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
-#, python-format
 msgid "Only WhatsApp managers manage the connection to Meta."
 msgstr ""
 
@@ -1032,14 +982,12 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid "Paste the App Secret, copied from the settings of your app."
 msgstr ""
 
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid "Paste the token copied from the page of Meta."
 msgstr ""
 
@@ -1073,7 +1021,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
 #: model:ir.model.fields,field_description:om_whatsapp.field_om_whatsapp_meta_setup_number__quality_rating
-#, python-format
 msgid "Quality"
 msgstr ""
 
@@ -1113,7 +1060,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_template.py:0
-#, python-format
 msgid "Sample %(index)s"
 msgstr ""
 
@@ -1152,8 +1098,15 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
-#, python-format
 msgid "Send a Test Message"
+msgstr ""
+
+#. module: om_whatsapp
+#: model:ir.module.module,description:base.module_om_whatsapp
+msgid ""
+"Send and receive WhatsApp messages in Odoo through the official WhatsApp "
+"Cloud API of Meta: templates with PDFs, automation rules, conversations in "
+"Discuss, from the server."
 msgstr ""
 
 #. module: om_whatsapp
@@ -1164,7 +1117,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_template.py:0
-#, python-format
 msgid ""
 "Set a Meta account, connected, on the template: its templates are approved "
 "in its WhatsApp business account."
@@ -1205,21 +1157,12 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-javascript
 #: code:addons/om_whatsapp/static/src/window_status/window_status.js:0
-#, python-format
-msgid "Templates"
-msgstr ""
-
-#. module: om_whatsapp
-#. odoo-javascript
-#: code:addons/om_whatsapp/static/src/window_status/window_status.js:0
-#, python-format
 msgid "Templates only"
 msgstr ""
 
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
-#, python-format
 msgid ""
 "Templates synchronized with Meta; %(count)s new one(s), archived until their"
 " fields are set."
@@ -1233,14 +1176,12 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid "Test message sent"
 msgstr ""
 
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid ""
 "Test message sent to %(number)s: reply to it, the reply comes to the "
 "WhatsApp tab of Odoo."
@@ -1261,7 +1202,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid ""
 "The WhatsApp account has no number yet: Meta gives a test number on the API "
 "Setup page of the app; your own number is added in WhatsApp Manager."
@@ -1270,7 +1210,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
-#, python-format
 msgid ""
 "The access token is not valid any more: click Make it Permanent, or connect "
 "again with a new temporary token."
@@ -1279,7 +1218,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-javascript
 #: code:addons/om_whatsapp/static/src/window_status/window_status.js:0
-#, python-format
 msgid ""
 "The contact has not written in the last 24 hours: WhatsApp accepts only an "
 "approved template until they answer."
@@ -1288,7 +1226,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
-#, python-format
 msgid ""
 "The contact has not written in the last 24 hours: send an approved template."
 msgstr ""
@@ -1304,7 +1241,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_template.py:0
-#, python-format
 msgid "The footer cannot have fields."
 msgstr ""
 
@@ -1317,14 +1253,12 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
-#, python-format
 msgid "The message is empty."
 msgstr ""
 
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_template.py:0
-#, python-format
 msgid "The name in Meta has lowercase letters, digits and underscores only."
 msgstr ""
 
@@ -1342,7 +1276,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
-#, python-format
 msgid ""
 "The token expired: click Make it Permanent, or connect again with a new "
 "token."
@@ -1356,14 +1289,12 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
-#, python-format
 msgid "The webhook of the app is not this Odoo: connect again."
 msgstr ""
 
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid ""
 "This token does not reach the WhatsApp account %(account)s: give it to the "
 "system user (Assign assets), then make the token again."
@@ -1372,14 +1303,12 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid "This token expires: when you make it, choose the expiration Never."
 msgstr ""
 
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid ""
 "This token lacks the permissions %(permissions)s: tick them when you make "
 "it."
@@ -1388,7 +1317,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid ""
 "This token was made for the app %(token_app)s, not for your app %(app)s: in "
 "the Graph API Explorer, choose %(app)s as Meta App, then generate the token "
@@ -1398,16 +1326,13 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid "To %(number)s: reply to it, the reply comes to Odoo."
 msgstr ""
 
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
 #: model:ir.model.fields.selection,name:om_whatsapp.selection__om_whatsapp_meta_setup__step__token
-#, python-format
 msgid "Token"
 msgstr ""
 
@@ -1429,7 +1354,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid ""
 "Two-step verification PIN %(pin)s: keep it, Meta asks for it to move the "
 "number."
@@ -1457,14 +1381,12 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid "Valid, with both permissions; it never expires."
 msgstr ""
 
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid "Valid, with both permissions; it works %(hours)s more hours."
 msgstr ""
 
@@ -1511,6 +1433,18 @@ msgid "WhatsApp Business Account ID"
 msgstr ""
 
 #. module: om_whatsapp
+#: model:ir.module.module,summary:base.module_om_whatsapp
+msgid ""
+"WhatsApp Cloud API, Meta WhatsApp, WhatsApp Business API, WhatsApp "
+"Automation, WhatsApp Invoice"
+msgstr ""
+
+#. module: om_whatsapp
+#: model:ir.module.module,shortdesc:base.module_om_whatsapp
+msgid "WhatsApp Connector Meta"
+msgstr ""
+
+#. module: om_whatsapp
 #: model:ir.model.fields,field_description:om_whatsapp.field_om_whatsapp_account__meta_verified_name
 msgid "WhatsApp Name"
 msgstr ""
@@ -1523,6 +1457,14 @@ msgstr ""
 #. module: om_whatsapp
 #: model:ir.model,name:om_whatsapp.model_om_whatsapp_template_variable
 msgid "WhatsApp Template Variable"
+msgstr ""
+
+#. module: om_whatsapp
+#. odoo-javascript
+#: code:addons/om_whatsapp/static/src/window_status/window_status.js:0
+msgid ""
+"WhatsApp accepts free text within 24 hours of the last message of the "
+"contact; templates after."
 msgstr ""
 
 #. module: om_whatsapp
@@ -1575,7 +1517,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
-#, python-format
 msgid ""
 "While you use the test number of Meta, it sends only to the numbers of its "
 "list. In your app: WhatsApp › API Setup, open the To list, Manage phone "
@@ -1587,7 +1528,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid "Your App"
 msgstr ""
 
@@ -1620,7 +1560,6 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/models/om_whatsapp_account.py:0
-#, python-format
 msgid "[Location] %(place)s https://maps.google.com/?q=%(lat)s,%(long)s"
 msgstr ""
 
@@ -1647,13 +1586,11 @@ msgstr ""
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid "never expires"
 msgstr ""
 
 #. module: om_whatsapp
 #. odoo-python
 #: code:addons/om_whatsapp/wizard/om_whatsapp_meta_setup.py:0
-#, python-format
 msgid "works %(hours)s more hours"
 msgstr ""

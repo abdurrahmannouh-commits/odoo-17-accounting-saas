@@ -4,8 +4,9 @@
 # anything else is refused when the rule is saved.
 import ast
 
-from odoo.tools.translate import _lt
+from odoo.tools import LazyTranslate
 
+_lt = LazyTranslate(__name__)
 OPERATORS = {
     ast.Eq: '=', ast.NotEq: '!=', ast.Lt: '<', ast.LtE: '<=', ast.Gt: '>', ast.GtE: '>=',
     ast.In: 'in', ast.NotIn: 'not in',
@@ -14,7 +15,7 @@ CONSTANTS = {'True': True, 'False': False, 'None': False}
 
 
 class ConditionError(ValueError):
-    """ Its message is a lazy translation: str(error.args[0]). """
+    """ Its message is a lazy translation: env._(error.args[0]). """
 
 
 def _parse(expression):

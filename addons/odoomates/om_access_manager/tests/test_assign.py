@@ -3,8 +3,6 @@
 from odoo.exceptions import UserError
 from odoo.tests import TransactionCase, new_test_user, tagged
 
-from .audit import has_access
-
 
 @tagged('post_install', '-at_install')
 class TestAssign(TransactionCase):
@@ -42,7 +40,7 @@ class TestAssign(TransactionCase):
     def test_assigning_applies_the_profile(self):
         self._assign('add', self.readonly)
         Partner = self.env['res.partner'].with_user(self.users[0]).browse()
-        self.assertFalse(has_access(Partner, 'write'))
+        self.assertFalse(Partner.has_access('write'))
 
     def test_add_needs_profiles(self):
         with self.assertRaises(UserError):

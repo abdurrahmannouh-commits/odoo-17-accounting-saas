@@ -1,8 +1,8 @@
 =============================
-Odoo 17 Accounting Dashboards
+Odoo 19 Accounting Dashboards
 =============================
 
-This module adds accounting dashboards to the Dashboards app of Odoo 17 Community Edition. They are
+This module adds accounting dashboards to the Dashboards app of Odoo 19 Community Edition. They are
 spreadsheets computed from the account types, so they work with any chart of accounts, and they sit in
 the Finance section next to the Invoicing dashboard of Odoo.
 
@@ -29,6 +29,7 @@ Features
 * All the figures add up the companies selected in the company switcher.
 * The OM.ACCOUNT.BALANCE spreadsheet formula gives the balance of account types over any period for
   the selected companies, e.g. =OM.ACCOUNT.BALANCE("income,income_other", "01/01/2026", "03/31/2026").
+* A database without accounting entries yet shows sample dashboards.
 * Accounting auditors and administrators see the dashboards; billing users see the receivables and
   payables only.
 * The Assets, Budgets and Follow-ups and Cash Forecast dashboards come with the modules
@@ -64,6 +65,8 @@ for the figures to land in the right lines.
 
 The dashboards are written by ``tools/build_dashboards.py``. After changing a dashboard there, run
 ``python3 om_spreadsheet_account/tools/build_dashboards.py`` to write the files of ``data/files`` again.
+The samples are exported from a database with demo data by ``tools/export_samples.py``, which needs
+Playwright.
 
 Usage
 =====

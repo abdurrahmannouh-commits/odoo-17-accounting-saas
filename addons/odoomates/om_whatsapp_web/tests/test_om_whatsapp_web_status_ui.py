@@ -24,14 +24,14 @@ class TestOmWhatsappWebStatusUi(HttpCase):
     def setUpClass(cls):
         super().setUpClass()
         admin = cls.env.ref('base.user_admin')
-        admin.groups_id = [Command.link(cls.env.ref('om_whatsapp_base.group_om_whatsapp_manager').id)]
+        admin.group_ids = [Command.link(cls.env.ref('om_whatsapp_base.group_om_whatsapp_manager').id)]
         cls.account = cls.env['om.whatsapp.account'].create({
             'name': 'Browser', 'provider': 'web', 'user_ids': [Command.set(admin.ids)],
         })
 
     def test_red_dots_without_the_extension(self):
         action = 'om_whatsapp_base.om_whatsapp_account_action'
-        self.browser_js(f'/web#action={action}&id={self.account.id}&view_type=form', WAIT_FOR + """
+        self.browser_js(f'/odoo/action-{action}/{self.account.id}', WAIT_FOR + """
             (async () => {
                 const status = await waitFor(".o_om_whatsapp_web_status");
                 if (!status.querySelector(".o_om_whatsapp_dot_disconnected")) {
@@ -41,7 +41,7 @@ class TestOmWhatsappWebStatusUi(HttpCase):
                 console.log("test successful");
             })().catch((error) => console.error(error.message));
         """, login='admin')
-        self.browser_js(f'/web#action={action}&view_type=list', WAIT_FOR + """
+        self.browser_js(f'/odoo/action-{action}', WAIT_FOR + """
             (async () => {
                 await waitFor(".o_list_view .o_data_row .o_om_whatsapp_dot_disconnected");
                 console.log("test successful");

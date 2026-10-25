@@ -27,4 +27,4 @@ class OmAccessConditionMixin(models.AbstractModel):
                 condition_domain(line.condition, self.env[line.model_id.model], self.env.uid)
             except ConditionError as error:
                 raise ValidationError(_("%(rule)s: %(error)s", rule=line.display_name,
-                                        error=str(error.args[0]))) from error
+                                        error=self.env._(error.args[0]))) from error

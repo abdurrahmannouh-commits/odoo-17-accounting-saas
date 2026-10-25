@@ -2,13 +2,12 @@
 <templates xml:space="preserve">
 
     <t t-name="om_whatsapp_web.StatusSystray">
-        <Dropdown t-if="status.ready and status.hasAccount" position="'bottom-end'"
-                  togglerClass="'o_nav_entry o_om_whatsapp_systray position-relative'" tooltip="title">
-            <t t-set-slot="toggler">
+        <Dropdown t-if="status.ready and status.hasAccount" position="'bottom-end'">
+            <button type="button" class="o_nav_entry o_om_whatsapp_systray position-relative" t-att-data-tooltip="title">
                 <i class="fa fa-whatsapp fs-5" role="img" t-att-aria-label="title"/>
                 <span t-attf-class="o_om_whatsapp_dot o_om_whatsapp_dot_{{ status.level }}"/>
-            </t>
-            <t t-set-slot="default">
+            </button>
+            <t t-set-slot="content">
                 <div class="o_om_whatsapp_systray_content px-3 py-2" style="min-width: 290px; max-width: 360px;">
                     <div class="d-flex align-items-center gap-2 fw-bold mb-1">
                         <span t-attf-class="o_om_whatsapp_dot o_om_whatsapp_dot_{{ status.level }}"/>

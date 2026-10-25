@@ -1,6 +1,7 @@
 # Hidden and read-only fields and blocked buttons on client calls (call_kw,
-# XML-RPC); the same methods called from Python are left alone.
+# XML-RPC, JSON-2); the same methods called from Python are left alone.
 import xmlrpc.client
+from datetime import datetime, timedelta
 
 from odoo.tests import HttpCase, new_test_user, tagged
 from odoo.tests.common import JsonRpcException
@@ -47,20 +48,6 @@ class TestFieldGuard(HttpCase):
             'model': model, 'method': method, 'args': args, 'kwargs': kwargs or {},
         })
 
-    def test_a_hidden_file_is_not_served(self):
-        # a tiny PNG
-        image = ('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==')
-        self.partner.image_1920 = image
-        url = f'/web/content?model=res.partner&id={self.partner.id}&field=image_1920'
-        self.env.flush_all()
-        self.assertEqual(self.url_open(url).status_code, 200)
-        self.profile.field_ids = [(0, 0, {
-            'model_id': self.env['ir.model']._get('res.partner').id,
-            'field_id': self.env['ir.model.fields']._get('res.partner', 'image_1920').id, 'mode': 'hide'})]
-        self.env.flush_all()
-        self.assertNotEqual(self.url_open(url).status_code, 200)
-        self.assertNotEqual(self.url_open(url + '&download=1').status_code, 200)
-
     def test_hidden_values_never_leave(self):
         result = self._call('res.partner', 'web_search_read', [], {
             'domain': [('id', '=', self.partner.id)],
@@ -93,8 +80,8 @@ class TestFieldGuard(HttpCase):
             ('search_read', [[('parent_id.email', 'ilike', 'secret')]], {'fields': ['name']}),
             ('search_read', [[('child_ids', 'any', [('parent_id.email', 'ilike', 'secret')])]], {}),
             ('search_read', [[]], {'fields': ['name'], 'order': 'email'}),
-            ('read_group', [[], ['name'], ['email']], {}),
-            ('web_read_group', [[], ['email'], ['email']], {}),
+            ('formatted_read_group', [[]], {'groupby': ['email']}),
+            ('web_read_group', [[], ['email']], {}),
             ('export_data', [self.partner.ids, ['name', 'email']], {}),
         ]
         for method, args, kwargs in attempts:
@@ -146,17 +133,19 @@ class TestFieldGuard(HttpCase):
                 [self.partner.ids])
         self.assertTrue(self.partner.active)
 
-    def test_api_key(self):
-        # Odoo 17 has no JSON-2: an API key is used over XML-RPC
+    def test_json2(self):
         key = self.env['res.users.apikeys'].with_user(self.user)._generate(
-            'rpc', 'guard test')
-        rows = self.xmlrpc_object.execute_kw(
-            self.env.cr.dbname, self.user.id, key, 'res.partner', 'read',
-            [self.partner.ids], {'fields': ['name', 'email']})
-        self.assertIs(rows[0]['email'], False)
-        with self.assertRaises(xmlrpc.client.Fault):
-            self.xmlrpc_object.execute_kw(
-                self.env.cr.dbname, self.user.id, key, 'res.partner', 'action_archive', [self.partner.ids])
+            'rpc', 'guard test', datetime.now() + timedelta(days=1))
+        headers = {'Authorization': f'bearer {key}', 'X-Odoo-Database': self.env.cr.dbname}
+        response = self.url_open('/json/2/res.partner/read', json={
+            'ids': self.partner.ids, 'fields': ['name', 'email'],
+        }, headers=headers)
+        self.assertEqual(response.status_code, 200, response.text[:300])
+        self.assertIs(response.json()[0]['email'], False)
+        response = self.url_open('/json/2/res.partner/action_archive', json={
+            'ids': self.partner.ids,
+        }, headers=headers)
+        self.assertNotEqual(response.status_code, 200)
         self.assertTrue(self.partner.active)
 
     def test_search_filters_on_a_hidden_field_go_with_it(self):

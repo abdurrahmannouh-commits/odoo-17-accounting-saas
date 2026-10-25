@@ -1,0 +1,22 @@
+# Caddy Configuration for Odoo Multi-Tenant SaaS
+
+# 1. Local Development / Testing Mode
+:80 {
+    reverse_proxy web:8069 {
+        header_up Host {host}
+        header_up X-Real-IP {remote}
+        header_up X-Forwarded-For {remote}
+        header_up X-Forwarded-Proto {scheme}
+    }
+}
+
+# 2. Production Wildcard Subdomain Template (Uncomment when you connect your domain):
+# *.yourdomain.com {
+#     tls your-email@domain.com
+#     reverse_proxy web:8069 {
+#         header_up Host {host}
+#         header_up X-Real-IP {remote}
+#         header_up X-Forwarded-For {remote}
+#         header_up X-Forwarded-Proto {scheme}
+#     }
+# }

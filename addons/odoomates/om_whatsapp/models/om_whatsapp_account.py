@@ -74,9 +74,8 @@ class OmWhatsappAccount(models.Model):
         'Token Expires', readonly=True, copy=False,
         help="A temporary token of Meta works 24 hours: make the connection permanent before.")
 
-    _sql_constraints = [
-        ('meta_phone_number_unique', 'unique (meta_phone_number_id)', 'A Meta number is the number of one account only.'),
-    ]
+    _meta_phone_number_unique = models.Constraint(
+        'unique (meta_phone_number_id)', 'A Meta number is the number of one account only.')
 
     @api.depends('provider')
     def _compute_capabilities(self):
@@ -122,8 +121,7 @@ class OmWhatsappAccount(models.Model):
         change is checked here. """
         if not self.env.user.has_group('om_whatsapp_base.group_om_whatsapp_manager'):
             raise AccessError(_("Only WhatsApp managers manage the connection to Meta."))
-        self.check_access_rights('write')
-        self.check_access_rule('write')
+        self.check_access('write')
 
     def action_meta_setup(self):
         self.ensure_one()

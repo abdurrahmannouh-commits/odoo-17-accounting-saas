@@ -1,8 +1,8 @@
 =======================
-Odoo 17 Cheque Printing
+Odoo 19 Cheque Printing
 =======================
 
-This module adds configurable cheque formats to Odoo 17 Community Edition, so that vendor payments can
+This module adds configurable cheque formats to Odoo 19 Community Edition, so that vendor payments can
 be printed on the cheques of any bank. Every field is placed in millimetres on the page.
 
 Features
@@ -75,9 +75,9 @@ clicking on the upgrade button.
 Configuration
 =============
 
-Set the cheque layout to "Configurable Cheque Format" in Accounting > Configuration > Settings, then choose
-the cheque format of each bank journal in Accounting > Configuration > Accounting > Journals, on the tab
-where the cheque printing options of the standard Check Printing module are.
+Set the cheque layout to "Configurable Cheque Format" on the company, or on the bank journal in
+Accounting > Configuration > Accounting > Journals, on the tab where the cheque printing options of the
+standard Check Printing module are.
 
 Then go to Accounting > Configuration > Invoicing > Cheque Formats, start from one of the two formats
 installed or create your own, place the fields, print a test and adjust the positions and the offsets
