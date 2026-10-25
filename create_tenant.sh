@@ -50,12 +50,23 @@ docker exec -i odoo_saas_web bash -c "
 
 # 4. Generate new database.uuid
 NEW_UUID=$(cat /proc/sys/kernel/random/uuid 2>/dev/null || python3 -c 'import uuid; print(uuid.uuid4())')
-echo "⏳ Step 4/4: Setting fresh database.uuid ($NEW_UUID)..."
+echo "⏳ Step 4/5: Setting fresh database.uuid ($NEW_UUID)..."
 docker exec -i odoo_saas_db psql -U odoo -d "$TENANT_NAME" -c \
   "UPDATE ir_config_parameter SET value = '$NEW_UUID' WHERE key = 'database.uuid';" > /dev/null 2>&1 || true
+
+# 5. Set tenant admin password
+echo "⏳ Step 5/5: Setting tenant admin credentials..."
+docker exec -i odoo_saas_web odoo shell -d "$TENANT_NAME" --no-http << EOF > /dev/null 2>&1
+admin = env['res.users'].browse(2)
+admin.password = '$TENANT_ADMIN_PASS'
+env.cr.commit()
+EOF
 
 echo ""
 echo "=========================================================="
 echo "✅ Tenant '$TENANT_NAME' provisioned successfully!"
 echo "🔗 Access URL: http://${TENANT_NAME}.localhost (or port 8069)"
+echo "👤 Username: admin"
+echo "🔑 Password: $TENANT_ADMIN_PASS"
 echo "=========================================================="
+
