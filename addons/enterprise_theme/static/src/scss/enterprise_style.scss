@@ -1,0 +1,75 @@
+// ==============================================================================
+// Official Odoo Enterprise Style Rules
+// ==============================================================================
+
+// 1. Enterprise Top Navbar
+.o_main_navbar {
+    background-color: #017e84 !important;
+    border-bottom: 1px solid #016b70 !important;
+
+    .o_menu_brand {
+        font-weight: 600 !important;
+        color: #ffffff !important;
+    }
+
+    .o_nav_entry, .dropdown-toggle {
+        color: rgba(255, 255, 255, 0.9) !important;
+        font-weight: 500 !important;
+
+        &:hover, &:focus, &.show {
+            color: #ffffff !important;
+            background-color: rgba(0, 0, 0, 0.12) !important;
+            border-radius: 4px !important;
+        }
+    }
+
+    .o_menu_systray {
+        .o_nav_entry {
+            color: rgba(255, 255, 255, 0.9) !important;
+            &:hover {
+                color: #ffffff !important;
+            }
+        }
+    }
+}
+
+// 2. Enterprise Action Buttons
+.btn-primary {
+    background-color: #017e84 !important;
+    border-color: #017e84 !important;
+    color: #ffffff !important;
+    border-radius: 6px !important;
+    font-weight: 500 !important;
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out !important;
+
+    &:hover, &:focus, &:active {
+        background-color: #016b70 !important;
+        border-color: #016b70 !important;
+        color: #ffffff !important;
+    }
+}
+
+.btn-secondary {
+    border-radius: 6px !important;
+    font-weight: 500 !important;
+}
+
+// 3. Enterprise Cards & Dashboard
+.o_kanban_view .o_kanban_record,
+.o_dashboard_card,
+.o_account_dashboard_card {
+    border-radius: 8px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+    border: 1px solid #e9ecef !important;
+    transition: box-shadow 0.15s ease !important;
+
+    &:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    }
+}
+
+// 4. Enterprise Search Bar
+.o_control_panel .o_searchview {
+    border-radius: 6px !important;
+    border: 1px solid #ced4da !important;
+}
