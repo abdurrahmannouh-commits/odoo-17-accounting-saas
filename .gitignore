@@ -1,0 +1,8 @@
+# Ignore OS files
+.DS_Store
+*.log
+*.pyc
+__pycache__/
+
+# Ignore cloned git metadata inside addons
+addons/*/.git
