@@ -73,3 +73,38 @@
     border-radius: 6px !important;
     border: 1px solid #ced4da !important;
 }
+
+// 5. Zero-Distraction Clean UI (SaaS Polish)
+// A. Hide Chatter & Bottom Social History
+.o-mail-Chatter,
+.o_ChatterContainer,
+.o_Chatter,
+.o_form_view .o-mail-Chatter,
+.o_form_renderer .o-mail-Chatter {
+    display: none !important;
+}
+
+// B. Center & polish form sheet
+.o_form_view .o_form_sheet_bg {
+    max-width: 100% !important;
+    .o_form_sheet {
+        max-width: 1140px !important;
+        margin: 16px auto !important;
+    }
+}
+
+// C. Hide Top Systray Discuss (Speech Bubble) & Activity icons
+.o_menu_systray .o-mail-DiscussSystray,
+.o_menu_systray .o_MessagingMenu,
+.o_menu_systray .o-mail-ActivitySystray {
+    display: none !important;
+}
+
+// D. Hide Odoo Enterprise Upgrade Ads & Telemetry
+.o_enterprise_label,
+.upgrade_enterprise,
+.o_upgrade_to_enterprise,
+a[href*="odoo.com/pricing"],
+a[href*="odoo.com/trial"] {
+    display: none !important;
+}
