@@ -79,6 +79,12 @@ user.group_ids = [(6, 0, groups)]
 admin = env['res.users'].browse(2)
 admin.password = '$CLIENT_PASS'
 
+# Deactivate distracting root menus (Apps, Discuss, Link Tracker, Tests)
+for xml_id in ['base.menu_management', 'mail.menu_root_discuss', 'utm.menu_link_tracker_root', 'base.menu_tests']:
+    m = env.ref(xml_id, raise_if_not_found=False)
+    if m:
+        m.active = False
+
 env.cr.commit()
 EOF
 
