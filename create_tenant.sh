@@ -63,9 +63,10 @@ if not user:
     })
 user.password = '$CLIENT_PASS'
 
-# 4 Core Business Apps groups
+# Core Business Apps & Product groups
 group_xmlids = [
     'base.group_user',
+    'product.group_product_manager',
     'account.group_account_user',
     'account.group_account_manager',
     'stock.group_stock_manager',
