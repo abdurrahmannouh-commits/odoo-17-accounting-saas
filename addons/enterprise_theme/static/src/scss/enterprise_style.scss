@@ -96,7 +96,13 @@
 // C. Hide Top Systray Discuss (Speech Bubble) & Activity icons
 .o_menu_systray .o-mail-DiscussSystray,
 .o_menu_systray .o_MessagingMenu,
-.o_menu_systray .o-mail-ActivitySystray {
+.o_menu_systray .o-mail-ActivitySystray,
+.o_menu_systray .dropdown:has(.fa-comments),
+.o_menu_systray .dropdown:has(i[aria-label="Messages"]),
+.o_menu_systray .dropdown:has(.fa-clock-o),
+.o_menu_systray .dropdown:has(i[aria-label="Activities"]),
+.o_menu_systray li:has(.fa-comments),
+.o_menu_systray div:has(.fa-comments) {
     display: none !important;
 }
 
